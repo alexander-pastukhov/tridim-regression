@@ -1,2 +1,2 @@
-# tridim-regression
-Package to calculate the bidimensional regression between two 3D configurations.
+# TriDimRegression
+Package to calculate the bidimensional and tridimensional regression between two 3D configurations.
