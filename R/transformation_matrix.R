@@ -53,10 +53,10 @@ tri_transformation_matrix <- function(params, transformation){
   }
   if (!transformation %in% c("euclidean_y", "euclidean_z")){
     if (transformation == "euclidean_x") {
-      transform_matrix <- transform_matrix %*% rotation_x_matrix(params$rotation);
+      transform_matrix <- transform_matrix %*% tri_rotation_x_matrix(params$rotation);
     }
     else {
-      transform_matrix <- transform_matrix %*% rotation_x_matrix(params$rotation.1);
+      transform_matrix <- transform_matrix %*% tri_rotation_x_matrix(params$rotation.1);
     }
   }
 
