@@ -83,7 +83,7 @@ tri_shear_x_matrix <- function(shx_y, shx_z) {
 #' @examples
 #' tri_shear_y_matrix(2, 0.5)
 tri_shear_y_matrix <- function(shy_x, shy_z) {
-  stopifnot(is.finite(shx_x), !is.null(shx_x), is.finite(shx_z), !is.null(shx_z))
+  stopifnot(is.finite(shy_x), !is.null(shy_x), is.finite(shy_z), !is.null(shy_z))
   matrix(c(1, shy_x, 0, 0,
            0, 1, 0, 0,
            0, shy_z, 1, 0,
@@ -102,7 +102,7 @@ tri_shear_y_matrix <- function(shy_x, shy_z) {
 #' @examples
 #'tri_shear_z_matrix(2, 0.5)
 tri_shear_z_matrix <- function(shz_x, shz_y) {
-  stopifnot(is.finite(shx_x), !is.null(shx_x), is.finite(shx_y), !is.null(shx_y))
+  stopifnot(is.finite(shz_x), !is.null(shz_x), is.finite(shz_y), !is.null(shz_y))
   matrix(c(1, 0, shz_x, 0,
            0, 1, shz_y, 0,
            0, 0, 1, 0,
