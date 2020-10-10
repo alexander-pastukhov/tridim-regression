@@ -7,8 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "first.last@example.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Fits 2D and 3D geometric transformations. Provides posterior via Stan.
-Includes computation of LOO and WAIC information criteria, R-squared.
+Description: Fits 2D and 3D geometric transformations. Provides posterior via Stan. Includes computation of LOO and WAIC information criteria, R-squared.
 License: `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
