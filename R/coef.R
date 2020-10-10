@@ -32,7 +32,7 @@ coef.tridim_transform <- function(object, summary=TRUE,  probs=c(0.055, 0.945)){
     coef_names <- c("scale", "shear", "rotation", "tilt", "translation")
   }
   else {
-    coef_names <- c("rotation", "scale", "translation", "shear", "shearX", "shearY", "shearZ")
+    coef_names <- c("rotation", "scale", "translation", "shearX", "shearY", "shearZ")
   }
 
   coef_samples <- rstan::extract(object$stanfit, pars=coef_names)
