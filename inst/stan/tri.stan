@@ -56,8 +56,8 @@ transformed parameters{
                          shear_z_matrix(shearZ[1], shearZ[2]);
     }
     if (rotate_x) transform_matrix = transform_matrix * rotation_x_matrix(rotation[irotate_x]);
-    if (rotate_y) transform_matrix = transform_matrix * rotation_x_matrix(rotation[irotate_y]);
-    if (rotate_z) transform_matrix = transform_matrix * rotation_x_matrix(rotation[irotate_z]);
+    if (rotate_y) transform_matrix = transform_matrix * rotation_y_matrix(rotation[irotate_y]);
+    if (rotate_z) transform_matrix = transform_matrix * rotation_z_matrix(rotation[irotate_z]);
 
     transform_matrix = transform_matrix * translation_matrix(translation[1], translation[2], translation[3]);
 
