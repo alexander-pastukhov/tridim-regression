@@ -16,8 +16,8 @@ transformed data{
   int projective =3;
 
   // selecting which parameters we need to sample
-  int rotationN = transform > euclidean ? 1 : 3;
-  int shearXN = (transform == affine) ? 2 : 0;
+  int rotationN = transform > projective ? 1 : 3;
+  int shearXN = (transform == affine || transform == projective) ? 2 : 0;
   int shearYN = (transform == projective) ? 2 : 0;
   int shearZN = (transform == projective) ? 2 : 0;
 
