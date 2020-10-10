@@ -22,7 +22,7 @@ R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055
   predictions <- predict(object, summary=FALSE)
 
   # computing unadjusted R2
-  total_variance <- sum((object$data$dv-matrix(rep(colMeans(object$data$dv), nrow(object$data$dv)), ncol=2, byrow=TRUE))^2)
+  total_variance <- sum((object$data$dv-matrix(rep(colMeans(object$data$dv), nrow(object$data$dv)), ncol=object$dimN, byrow=TRUE))^2)
   r2s <- purrr::map_dbl(1:nrow(predictions),
                         ~(1 - sum((predictions[., , ] - object$data$dv)^2) / total_variance))
 
