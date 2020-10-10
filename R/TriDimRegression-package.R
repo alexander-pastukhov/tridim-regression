@@ -1,6 +1,7 @@
 #' The 'TriDimRegression' package.
 #'
-#' @description A DESCRIPTION OF THE PACKAGE
+#' @description Fits 2D and 3D geometric transformations. Provides posterior via Stan.
+#' Includes computation of LOO and WAIC information criteria, R-squared.
 #'
 #' @docType package
 #' @name TriDimRegression-package
