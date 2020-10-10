@@ -31,7 +31,7 @@ coef_summary <- function(coef_name, coef_matrix, probs){
     else {
       CIs <- data.frame(apply(as.matrix(coef_matrix), MARGIN=2, FUN=quantile, probs=probs))
     }
-    names(CIs) <- glue::glue("{probs*100}%")
+    names(CIs) <- glue::glue("{probs*100}")
     coef_stats <- cbind(coef_stats, CIs)
   }
 
