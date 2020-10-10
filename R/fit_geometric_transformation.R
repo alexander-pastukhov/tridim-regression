@@ -5,7 +5,6 @@ fit_geometric_transformation <- function(object, ...) { UseMethod("fit_geometric
 
 #' @export
 fit_geometric_transformation.data.frame <- function(dv, iv, transformation, iv_prefix="iv_", dv_prefix="dv_") {
-  print(class(dv))
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
   if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
   if (ncol(dv) != ncol(iv)) stop("Different number of columns in iv and dv")
