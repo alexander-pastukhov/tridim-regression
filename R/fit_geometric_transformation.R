@@ -1,9 +1,42 @@
 library(Formula)
 
+#' @export
+fit_geometric_transformation <- function(...) { UseMethod("fit_geometric_transformation") }
+
+#' @export
+fit_geometric_transformation <- function(dv, iv, transformation, iv_prefix="iv_", dv_prefix="dv_") {
+  if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
+  if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
+  if (ncol(dv) != ncol(iv)) stop("Different number of columns in iv and dv")
+  if (ncol(dv) < 2 || ncol(dv) > 3) stop("Number of columns is data.frames must be either 2 or 3")
+  if (nrow(dv) != nrow(iv)) stop("Different number of rows in iv and dv")
+  if (!is.character(iv_prefix)) stop("Invalid iv_prefix")
+  if (!is.character(dv_prefix)) stop("Invalid dv_prefix")
+  if (!is.numeric(as.matrix(dv))) stop("Non-numeric dv")
+  if (!is.numeric(as.matrix(iv))) stop("Non-numeric iv")
+
+  # adding prefix to column names
+  iv_names <- c(glue::glue("{iv_prefix}{colnames(iv)}"))
+  dv_names <- c(glue::glue("{dv_prefix}{colnames(dv)}"))
+  if (length(intersect(iv_names, dv_names)) > 0) stop("Matching names between iv and dv, despite prefixes")
+  names(iv) <- iv_names
+  names(dv) <- dv_names
+
+  # formula
+  transform_formula <- as.Formula(paste(paste0(dv_names, collapse = " + "),
+                                        paste0(iv_names, collapse = " + "),
+                                        sep = " ~ "))
+
+  # passing data to the main function
+  fit_geometric_transformation.formula(transform_formula, cbind(dv, iv), transformation)
+}
+
+
 #' Fitting Bidimensional or Tridimensional Regression / Geometric Transformation Models
 #'
 #' @usage
 #' fit_geometric_transformation(formula, data, transformation)
+#' fit_geometric_transformation(iv, dv, transformation, iv_prefix="iv_", dv_prefix="dv_")
 #'
 #' @param formula a symbolic description of the model to be fitted in the format \code{Xdep + Ydep ~ Xind + Yind}, where
 #' \code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables
@@ -36,9 +69,6 @@ library(Formula)
 #' # statistical comparison via WAIC criterion
 #' loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 #' }
-fit_geometric_transformation <- function(formula, data, transformation) { UseMethod("fit_geometric_transformation") }
-
-#' @export
 fit_geometric_transformation.formula <-  function(formula, data, transformation, chains=4, cores=NULL, ...){
 
   ## --------------- Check that arguments are present  ---------------
