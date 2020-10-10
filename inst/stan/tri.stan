@@ -16,7 +16,7 @@ transformed data{
   int projective =3;
 
   // selecting which parameters we need to sample
-  int rotationN = transform >= euclidean ? 3 : 1;
+  int rotationN = transform > euclidean ? 1 : 3;
   int shearXN = (transform == affine) ? 2 : 0;
   int shearYN = (transform == projective) ? 2 : 0;
   int shearZN = (transform == projective) ? 2 : 0;
@@ -48,7 +48,7 @@ parameters{
 transformed parameters{
   matrix[rowsN, 3] predicted;
   {
-    matrix[3, 3] transform_matrix = scale_matrix(scale[1], scale[2], scale[3]);
+    matrix[4, 4] transform_matrix = scale_matrix(scale[1], scale[2], scale[3]);
     if (shear_x) transform_matrix = transform_matrix * shear_x_matrix(shearX[1], shearX[2]);
     if (transform == projective) {
       transform_matrix = transform_matrix *
