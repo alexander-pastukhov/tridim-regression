@@ -13,6 +13,7 @@
 #' @importFrom future availableCores
 #' @importFrom glue glue
 #' @importFrom purrr map map_df
+#' @importFrom tidyr pivot_wider
 #' @importFrom rstan sampling
 #'
 #' @references

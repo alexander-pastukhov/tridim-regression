@@ -1,12 +1,9 @@
 Package: TriDimRegression
 Title: The 'TriDimRegression' package.
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R: c(
+  person("Alexander (Sasha)", "Pastukhov", role = c("cre", "ctb"), email ="pastukhov.alexander@gmail.com"),
+  person("Claus-Christian", "Carbon", role = c("aut"), email ="ccc@experimental-psychology.com"))
 Description: Fits 2D and 3D geometric transformations. Provides posterior via Stan. Includes computation of LOO and WAIC information criteria, R-squared.
 License: `use_gpl3_license()`
 Encoding: UTF-8
@@ -26,7 +23,8 @@ Imports:
     future,
     glue,
     purrr,
-    loo
+    loo,
+    tidyr
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
