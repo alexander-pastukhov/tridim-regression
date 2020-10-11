@@ -9,6 +9,7 @@
 #' @useDynLib TriDimRegression, .registration = TRUE
 #' @import methods
 #' @import Rcpp
+#' @import Formula
 #' @importFrom dplyr bind_cols bind_rows
 #' @importFrom future availableCores
 #' @importFrom glue glue
