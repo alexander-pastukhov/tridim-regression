@@ -27,7 +27,7 @@ in full or summarized form.
 }
 \examples{
 \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
                                         data = NakayaData,
                                         transformation = 'euclidean')
 
