@@ -6,9 +6,9 @@
 #'
 #' @examples
 #' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
-#'                                         data = NakayaData,
-#'                                         transformation = 'euclidean')
-#' print(euc2)
+#'                                      data = NakayaData,
+#'                                      transformation = 'euclidean')
+#' euc2
 
 print.tridim_transform <- function(object){
   cat('Call: ')
