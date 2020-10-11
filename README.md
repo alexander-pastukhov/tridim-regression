@@ -16,7 +16,7 @@ whereas the latter is
 ```
 euc3 <- fit_geometric_transformation(female_face_neutral, female_face_neutral, 'euclidean')
 ```
-.
+
 
 For the 2D data, you can fit `"euclidean"` (scale, rotation, and translation), `"affine"` (+shear), or `"projective"` (+tilt). For 3D data, you can fit `"euclidean_x"`, `"euclidean_y"`, `"euclidean_z"` (scale, rotation around the specified axis, and translation), `"euclidean"` (scale, rotation around all three axes, and translation), `"affine"` (`"euclidean"` + shear for x-plane), and `"projective"` (+shear for y and z planes).
 
