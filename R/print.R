@@ -17,8 +17,7 @@ print.tridim_transform <- function(object){
 
   cat(glue::glue('Data dimensions: {object$dimN}\n\n'))
   cat(glue::glue('Transformation: {object$transformation}\n\n'))
-
-  object_coefs <-
+  cat(glue::glue('\n\nCoefficients:\n\n'))
   printCoefmat(tidyr::pivot_wider(coef(object, summary=TRUE, probs = NULL),
                                   names_from="Coef", values_from="Mean"))
 }
