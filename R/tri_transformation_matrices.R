@@ -100,7 +100,7 @@ tri_shear_y_matrix <- function(shy_x, shy_z) {
 #' @export
 #'
 #' @examples
-#'tri_shear_z_matrix(2, 0.5)
+#' tri_shear_z_matrix(2, 0.5)
 tri_shear_z_matrix <- function(shz_x, shz_y) {
   stopifnot(is.finite(shz_x), !is.null(shz_x), is.finite(shz_y), !is.null(shz_y))
   matrix(c(1, 0, shz_x, 0,

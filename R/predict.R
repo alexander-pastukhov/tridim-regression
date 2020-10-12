@@ -36,7 +36,7 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
     iv <- cbind(as.matrix(Formula::model.part(Formula::Formula(euc2$formula), data = newdata, rhs = 1)), 1)
 
     # getting the transformation matrices
-    transform <- transformation_matrix(object, summary=FALSE)
+    transform <- TriDimRegression::transformation_matrix(object, summary=FALSE)
 
     # transforming independent variables to obtain predictions
     prediction_samples <-
@@ -53,6 +53,6 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
 
   # summary
   purrr::map(1:object$dimN,
-             ~variable_summary(colnames(object$data$dv)[.], prediction_samples[, , .], probs=probs)) %>%
+             ~TriDimRegression::variable_summary(colnames(object$data$dv)[.], prediction_samples[, , .], probs=probs)) %>%
     dplyr::bind_cols()
 }

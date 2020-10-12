@@ -75,7 +75,7 @@ fit_geometric_transformation.data.frame <- function(dv, iv, transformation, iv_p
                                         sep = " ~ "))
 
   # passing data to the main function
-  fit_geometric_transformation.formula(transform_formula, cbind(dv, iv), transformation, ...)
+  TriDimRegression::fit_geometric_transformation.formula(transform_formula, cbind(dv, iv), transformation, ...)
 }
 
 

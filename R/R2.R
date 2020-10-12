@@ -19,7 +19,7 @@ R2 <- function(object, ...) { UseMethod("R2") }
 #' }
 R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055, 0.945)){
   # posterior predictions
-  predictions <- predict(object, summary=FALSE)
+  predictions <- TriDimRegression::predict.tridim_transform(object, summary=FALSE)
 
   # computing unadjusted R2
   total_variance <- sum((object$data$dv-matrix(rep(colMeans(object$data$dv), nrow(object$data$dv)), ncol=object$dimN, byrow=TRUE))^2)
@@ -52,5 +52,5 @@ R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055
   if (!summary) {
     r2s
   }
-  variable_summary("R2", as.matrix(r2s), probs)
+  TriDimRegression::variable_summary("R2", as.matrix(r2s), probs)
 }

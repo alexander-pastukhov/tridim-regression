@@ -14,15 +14,15 @@ transformation_matrix <- function(object, ...) { UseMethod("transformation_matri
 #' bi_transformation_matrix(data.frame(rotation=0, scale.1=1, scale.2=2, translation.1=0, translation.2=-5),
 #'                          "euclidean")
 bi_transformation_matrix <- function(params, transformation){
-  transform_matrix <- bi_scale_matrix(params$scale.1, params$scale.2)
+  transform_matrix <- TriDimRegression::bi_scale_matrix(params$scale.1, params$scale.2)
   if (transformation != "euclidean"){
-    transform_matrix <- transform_matrix %*% bi_shear_matrix(0, params$shear)
+    transform_matrix <- transform_matrix %*% TriDimRegression::bi_shear_matrix(0, params$shear)
   }
-  transform_matrix <- transform_matrix %*% bi_rotation_matrix(params$rotation)
+  transform_matrix <- transform_matrix %*% TriDimRegression::bi_rotation_matrix(params$rotation)
   if (transformation == "projective"){
-    transform_matrix <- transform_matrix %*% bi_tilt_matrix(params$tilt.1, params$tilt.2)
+    transform_matrix <- transform_matrix %*% TriDimRegression::bi_tilt_matrix(params$tilt.1, params$tilt.2)
   }
-  transform_matrix %*% bi_translation_matrix(params$translation.1, params$translation.2)
+  transform_matrix %*% TriDimRegression::bi_translation_matrix(params$translation.1, params$translation.2)
 }
 
 
@@ -42,43 +42,43 @@ bi_transformation_matrix <- function(params, transformation){
 #'                                      translation.1=0, translation.2=-5, translation.3=-4),
 #'                          "euclidean_z")
 tri_transformation_matrix <- function(params, transformation){
-  transform_matrix <- tri_scale_matrix(params$scale.1, params$scale.2, params$scale.3)
+  transform_matrix <- TriDimRegression::tri_scale_matrix(params$scale.1, params$scale.2, params$scale.3)
   if (transformation %in% c("affine", "projective")){
-    transform_matrix <- transform_matrix %*% tri_shear_x_matrix(params$shearX.1, params$shearX.2)
+    transform_matrix <- transform_matrix %*% TriDimRegression::tri_shear_x_matrix(params$shearX.1, params$shearX.2)
   }
   if (transformation == "projective") {
     transform_matrix <- transform_matrix %*%
-                        tri_shear_y_matrix(params$shearY.1, params$shearY.2) %*%
-                        tri_shear_z_matrix(params$shearZ.1, params$shearZ.2)
+      TriDimRegression::tri_shear_y_matrix(params$shearY.1, params$shearY.2) %*%
+      TriDimRegression::tri_shear_z_matrix(params$shearZ.1, params$shearZ.2)
   }
   if (!transformation %in% c("euclidean_y", "euclidean_z")){
     if (transformation == "euclidean_x") {
-      transform_matrix <- transform_matrix %*% tri_rotation_x_matrix(params$rotation);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_x_matrix(params$rotation);
     }
     else {
-      transform_matrix <- transform_matrix %*% tri_rotation_x_matrix(params$rotation.1);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_x_matrix(params$rotation.1);
     }
   }
 
   if (!transformation %in% c("euclidean_x", "euclidean_z")){
     if (transformation == "euclidean_y") {
-      transform_matrix <- transform_matrix %*% tri_rotation_y_matrix(params$rotation);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_y_matrix(params$rotation);
     }
     else {
-      transform_matrix <- transform_matrix %*% tri_rotation_y_matrix(params$rotation.2);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_y_matrix(params$rotation.2);
     }
   }
 
   if (!transformation %in% c("euclidean_x", "euclidean_y")){
     if (transformation == "euclidean_z") {
-      transform_matrix <- transform_matrix %*% tri_rotation_z_matrix(params$rotation);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_z_matrix(params$rotation);
     }
     else {
-      transform_matrix <- transform_matrix %*% tri_rotation_z_matrix(params$rotation.3);
+      transform_matrix <- transform_matrix %*% TriDimRegression::tri_rotation_z_matrix(params$rotation.3);
     }
   }
 
-  transform_matrix %*% tri_translation_matrix(params$translation.1, params$translation.2, params$translation.3);
+  transform_matrix %*% TriDimRegression::tri_translation_matrix(params$translation.1, params$translation.2, params$translation.3);
 }
 
 
@@ -104,7 +104,7 @@ transformation_matrix.tridim_transform <- function(object, summary=TRUE){
       data.frame()
 
     matrices <- purrr::map(1:nrow(param_samples),
-                           ~bi_transformation_matrix(param_samples[., ], object$transformation))
+                           ~TriDimRegression::bi_transformation_matrix(param_samples[., ], object$transformation))
   }
   else {
     # 3D transform
@@ -113,7 +113,7 @@ transformation_matrix.tridim_transform <- function(object, summary=TRUE){
       data.frame()
 
     matrices <- purrr::map(1:nrow(param_samples),
-                           ~tri_transformation_matrix(param_samples[., ], object$transformation))
+                           ~TriDimRegression::tri_transformation_matrix(param_samples[., ], object$transformation))
   }
 
   if (!summary) {

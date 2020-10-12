@@ -40,5 +40,5 @@ coef.tridim_transform <- function(object, summary=TRUE,  probs=c(0.055, 0.945)){
     return(coef_samples)
   }
 
-  purrr::map_df(names(coef_samples), ~coef_summary(., coef_samples[[.]], probs))
+  purrr::map_df(names(coef_samples), ~TriDimRegression::coef_summary(., coef_samples[[.]], probs))
 }

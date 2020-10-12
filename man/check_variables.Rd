@@ -21,10 +21,5 @@ and has no missing/infinite data.
 \examples{
 # This should produce no error messages
 check_variables(matrix(c(1, 2, 3, 4), ncol=2), "test matrix")
-# This should produce non-numeric data error message
-check_variables(matrix(as.character(c(1, 2, 3, 4)), ncol=2), "test matrix")
-# These should produce non-finite data error message
-check_variables(matrix(c(1, 2, NA, 4), ncol=2), "test matrix")
-check_variables(matrix(c(1, 2, Inf, 4), ncol=2), "test matrix")
 }
 \keyword{internal}
