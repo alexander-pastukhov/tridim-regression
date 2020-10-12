@@ -1,5 +1,5 @@
 Package: TriDimRegression
-Title: The 'TriDimRegression' package.
+Title: The 'TriDimRegression' package
 Version: 0.0.0.9000
 Authors@R: c(
   person("Alexander (Sasha)", "Pastukhov", role = c("cre", "ctb"), email ="pastukhov.alexander@gmail.com"),
