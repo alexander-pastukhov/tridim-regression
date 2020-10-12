@@ -48,9 +48,12 @@ In the latter case, the two tables must have the same dimenisons (both N x 2 or 
 \examples{
 \dontrun{
 # Geometric transformations of 2D data
-euc2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'euclidean')
-aff2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'affine')
-prj2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'projective')
+euc2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                                     NakayaData, 'euclidean')
+aff2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                                     NakayaData, 'affine')
+prj2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                                     NakayaData, 'projective')
 
 # summary of transformation coefficients
 coef(euc2)
