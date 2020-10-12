@@ -7,7 +7,7 @@
 #' If omitted, the fitted values are used.
 #' @param summary Whether summary statistics should be returned instead of
 #' raw sample values. Defaults to \code{TRUE}
-#' @param probs The percentiles used to compute summary, defaults to 89% credible interval.
+#' @param probs The percentiles used to compute summary, defaults to NULL (no CI).
 #'
 #' @return If summary=FALSE, a numeric matrix [iterationsN, observationsN, variablesN].
 #' If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
@@ -25,7 +25,7 @@
 #' # full posterior prediction samples
 #' prediction_samples <- predict(euc2, summary=FALSE)
 #' }
-predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=c(0.055, 0.945)) {
+predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=NULL) {
   if (is.null(newdata)) {
     # we can reuse already computed predictions
     prediction_samples <- rstan::extract(object$stanfit)
