@@ -4,7 +4,7 @@
 \alias{predict.tridim_transform}
 \title{Computes posterior samples for the posterior predictive distribution.}
 \usage{
-\method{predict}{tridim_transform}(object, newdata = NULL, summary = TRUE, probs = c(0.055, 0.945))
+\method{predict}{tridim_transform}(object, newdata = NULL, summary = TRUE, probs = NULL)
 }
 \arguments{
 \item{object}{An object of class "tridim_transform"}
@@ -15,7 +15,7 @@ If omitted, the fitted values are used.}
 \item{summary}{Whether summary statistics should be returned instead of
 raw sample values. Defaults to \code{TRUE}}
 
-\item{probs}{The percentiles used to compute summary, defaults to 89\% credible interval.}
+\item{probs}{The percentiles used to compute summary, defaults to NULL (no CI).}
 }
 \value{
 If summary=FALSE, a numeric matrix \link{iterationsN, observationsN, variablesN}.
