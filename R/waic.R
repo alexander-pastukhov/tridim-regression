@@ -23,4 +23,3 @@ waic.tridim_transform <- function(object) {
   loo::waic(log_lik)
 }
 
-# waic <- function(x, ...) { UseMethod("waic") }
