@@ -5,7 +5,7 @@
 #' and has no missing/infinite data.
 #'
 #'
-#' @param var Matrix[N, ncol]
+#' @param var Matrix N x ncol
 #' @param var_label Variable label for error messages
 #' @param ncol Expected number of columns
 #' @return NULL
@@ -13,7 +13,6 @@
 #' @export
 #'
 #' @examples
-#' # This should produce no error messages
 #' check_variables(matrix(c(1, 2, 3, 4), ncol=2), "test matrix")
 check_variables <- function(var, var_label){
   if (!is.numeric(var)) stop(sprintf("%s is not a numeric", var_label))
