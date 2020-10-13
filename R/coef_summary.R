@@ -1,14 +1,15 @@
 #' Computes mean and optional quantiles for a coefficient.
 #'
 #' @param coef_name String, name of the coefficient.
-#' @param coef_matrix Numeric matrix [samplesN, 2] or a
-#' numeric vector [samplesN].
+#' @param coef_matrix Numeric matrix \code{samplesN x 2} or a
+#' numeric vector with length \code{samplesN}.
 #' @param probs A numeric vector of quantiles to compute.
 #'
 #' @return data.frame with columns "Coef", "Mean", and a column
 #' for each quantile.
 #' @keywords internal
 #' @export
+#' @examples coef_summary("test", c(1, 2, 3), NULL)
 coef_summary <- function(coef_name, coef_matrix, probs){
   # sanity checks
   stopifnot(is.character(coef_name), !is.na(coef_name))
