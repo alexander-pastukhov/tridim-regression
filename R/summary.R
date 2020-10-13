@@ -5,10 +5,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
 #'                                      data = NakayaData,
 #'                                      transformation = 'euclidean')
 #' summary(euc2)
+#' }
 
 summary.tridim_transform <- function(object){
   cat('Call: ')
@@ -23,5 +25,7 @@ summary.tridim_transform <- function(object){
   cat(glue::glue('Adjusted R2: {theAdjR2[1,1]} [{theAdjR2[1,2]}..{theAdjR2[1,3]}]\n\n'))
 
   cat(glue::glue('\n\nCoefficients:\n\n'))
-  print(TriDimRegression::coef(object, summary=TRUE), row.names = FALSE)
+  print(coef.tridim_transform(object, summary=TRUE), row.names = FALSE)
 }
+
+# setMethod("summary", "tridim_transform", summary.tridim_transform)
