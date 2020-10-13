@@ -74,8 +74,8 @@ tri_shear_x_matrix <- function(shx_y, shx_z) {
 
 #' 3D Shear for y-axis
 #'
-#' @param shx_x Shear for x-axis
-#' @param shx_z Shear for z-axis
+#' @param shy_x Shear for x-axis
+#' @param shy_z Shear for z-axis
 #'
 #' @return matrix 4x4
 #' @export
@@ -93,8 +93,8 @@ tri_shear_y_matrix <- function(shy_x, shy_z) {
 
 #' 3D Shear for z-axis
 #'
-#' @param shx_x Shear for x-axis
-#' @param shx_y Shear for z-axis
+#' @param shz_x Shear for x-axis
+#' @param shz_y Shear for z-axis
 #'
 #' @return matrix 4x4
 #' @export
