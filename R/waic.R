@@ -1,7 +1,3 @@
-#' @export
-waic <- function(object, ...) { UseMethod("waic") }
-
-
 #' Computes widely applicable information criterion
 #' (WAIC).
 #'
@@ -16,11 +12,15 @@ waic <- function(object, ...) { UseMethod("waic") }
 #'
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
-#' aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'affine')
+#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#'   NakayaData, transformation = 'euclidean')
+#' aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#'   NakayaData, transformation = 'affine')
 #' loo::loo_compare(waic(euc2), waic(aff2))
 #' }
-waic.tridim_transform <- function(object, ...) {
+waic.tridim_transform <- function(object) {
   log_lik <- loo::extract_log_lik(object$stanfit, "log_lik", merge_chains = FALSE)
   loo::waic(log_lik)
 }
+
+# waic <- function(x, ...) { UseMethod("waic") }
