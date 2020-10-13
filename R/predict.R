@@ -9,7 +9,7 @@
 #' raw sample values. Defaults to \code{TRUE}
 #' @param probs The percentiles used to compute summary, defaults to NULL (no CI).
 #'
-#' @return If summary=FALSE, a numeric matrix [iterationsN, observationsN, variablesN].
+#' @return If summary=FALSE, a numeric matrix iterationsN x observationsN x variablesN.
 #' If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
 #' variable plus optional quantiles columns with names "dv{index}_{quantile}".
 #' @export
@@ -17,7 +17,8 @@
 #' @seealso \code{\link{fit_geometric_transformation}}
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
+#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#'   NakayaData, transformation = 'euclidean')
 #'
 #' # prediction summary
 #' predictions <- predict(euc2)
@@ -33,7 +34,7 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
   }
   else {
     # let's try getting the data
-    iv <- cbind(as.matrix(Formula::model.part(Formula::Formula(euc2$formula), data = newdata, rhs = 1)), 1)
+    iv <- cbind(as.matrix(Formula::model.part(Formula::Formula(object$formula), data = newdata, rhs = 1)), 1)
 
     # getting the transformation matrices
     transform <- TriDimRegression::transformation_matrix(object, summary=FALSE)
@@ -41,9 +42,11 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
     # transforming independent variables to obtain predictions
     prediction_samples <-
       purrr::map(transform, ~(iv %*% .) %>% t()) %>%
-      simplify2array(.) %>%
-      aperm(.) %>%
-      .[, , 1:object$dimN] # last dimensions is trivially 1
+      simplify2array() %>%
+      aperm()
+
+    # last dimensions is trivially 1
+    prediction_samples <- prediction_samples[, , 1:object$dimN]
   }
 
   if (!summary) {
@@ -56,3 +59,6 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
              ~TriDimRegression::variable_summary(colnames(object$data$dv)[.], prediction_samples[, , .], probs=probs)) %>%
     dplyr::bind_cols()
 }
+
+# setMethod("predict", "tridim_transform", predict.tridim_transform)
+
