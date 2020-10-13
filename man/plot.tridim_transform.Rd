@@ -15,8 +15,10 @@
 Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.
 }
 \examples{
+\dontrun{
 euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
                                         data = NakayaData,
                                         transformation = 'euclidean')
 plot(euc2)
+}
 }

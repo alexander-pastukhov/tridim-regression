@@ -10,7 +10,7 @@ variable_summary(var_name, var_matrix, probs)
 \arguments{
 \item{var_name}{String, name of the dependent variable}
 
-\item{var_matrix}{Numeric matrix \link{samplesN, observationsN}.}
+\item{var_matrix}{Numeric matrix samplesN x observationsN.}
 
 \item{probs}{A numeric vector of quantiles to compute.}
 }
@@ -21,5 +21,8 @@ data.frame with "{var_name}" column for the mean and
 \description{
 Computes mean and optional probabilities for a given
 variable.
+}
+\examples{
+variable_summary("test", matrix(1:1000, ncol = 1), c(0.05, 0.95))
 }
 \keyword{internal}

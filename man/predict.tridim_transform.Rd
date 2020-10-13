@@ -18,7 +18,7 @@ raw sample values. Defaults to \code{TRUE}}
 \item{probs}{The percentiles used to compute summary, defaults to NULL (no CI).}
 }
 \value{
-If summary=FALSE, a numeric matrix \link{iterationsN, observationsN, variablesN}.
+If summary=FALSE, a numeric matrix iterationsN x observationsN x variablesN.
 If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
 variable plus optional quantiles columns with names "dv{index}_{quantile}".
 }
@@ -27,7 +27,8 @@ Predicted values based on the bi/tridimensionsal regressional model object.
 }
 \examples{
 \dontrun{
-euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
+euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'euclidean')
 
 # prediction summary
 predictions <- predict(euc2)

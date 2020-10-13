@@ -5,7 +5,7 @@
 \title{Computes widely applicable information criterion
 (WAIC).}
 \usage{
-\method{waic}{tridim_transform}(object, ...)
+\method{waic}{tridim_transform}(object)
 }
 \arguments{
 \item{object}{A tridim_transform object}
@@ -20,8 +20,10 @@ via \link[=loo-package]{loo} library. It can be used for a model comparison via
 }
 \examples{
 \dontrun{
-euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
-aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'affine')
+euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'euclidean')
+aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'affine')
 loo::loo_compare(waic(euc2), waic(aff2))
 }
 }

@@ -13,8 +13,10 @@
 Prints out tridim_transform object
 }
 \examples{
+\dontrun{
 euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
                                      data = NakayaData,
                                      transformation = 'euclidean')
 euc2
+}
 }

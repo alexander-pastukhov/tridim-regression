@@ -21,8 +21,10 @@ for a model comparison via loo::loo_compare() function.
 }
 \examples{
 \dontrun{
-euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
-aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'affine')
+euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'euclidean')
+aff2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'affine')
 loo::loo_compare(loo(euc2), loo(aff2))
 }
 }

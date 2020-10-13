@@ -5,11 +5,10 @@
 \title{Fitting Bidimensional or Tridimensional Regression / Geometric Transformation Models.}
 \usage{
 fit_geometric_transformation(formula, data, transformation, chains, cores, ...)
-fit_geometric_transformation(iv, dv, transformation, iv_prefix="iv_", dv_prefix="dv_", chains, cores, ...)
+fit_geometric_transformation(iv, dv, transformation,
+  iv_prefix="iv_", dv_prefix="dv_", chains, cores, ...)
 }
 \arguments{
-\item{...}{Additional arguments passed to \link[rstan:stanmodel-method-sampling]{rstan::sampling()} function.}
-
 \item{formula}{a symbolic description of the model to be fitted in the format \code{Xdep + Ydep ~ Xind + Yind}, where
 \code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables}
 
@@ -28,13 +27,15 @@ fit_geometric_transformation(iv, dv, transformation, iv_prefix="iv_", dv_prefix=
 \item{chains}{Number of chains for sampling.}
 
 \item{cores}{Number of CPU cores to use for sampling. If omitted, all available cores are used.}
+
+\item{...}{Additional arguments passed to \href{rstan::sampling}{rstan::sampling()} function.}
 }
 \value{
 returns an object of class "tridim_transform".
 An object of class "tridim_transform" is a list containing at least the following components:
 \item{\code{transformation}}{string with the transformation type}
 \item{\code{Ndim}}{number of dimensions (2 or 3).}
-\item{\code{stanfit}}{\code{\link{rstan::stanfit}} object.}
+\item{\code{stanfit}}{\code{\link[rstan]{stanfit}} object.}
 \item{\code{formula}}{formula, describing input and output columns}
 \item{\code{data}}{data in Stan list, used to fit the model}
 \item{\code{Call}}{function call information, incorporates the \code{formula}, \code{transformation}, and \code{data}.}

@@ -7,7 +7,7 @@
 check_variables(var, var_label)
 }
 \arguments{
-\item{var}{Matrix\link{N, ncol}}
+\item{var}{Matrix N x ncol}
 
 \item{var_label}{Variable label for error messages}
 
@@ -19,7 +19,6 @@ has expected number of columns (\code{ncol}),
 and has no missing/infinite data.
 }
 \examples{
-# This should produce no error messages
 check_variables(matrix(c(1, 2, 3, 4), ncol=2), "test matrix")
 }
 \keyword{internal}

@@ -9,8 +9,8 @@ coef_summary(coef_name, coef_matrix, probs)
 \arguments{
 \item{coef_name}{String, name of the coefficient.}
 
-\item{coef_matrix}{Numeric matrix \link{samplesN, 2} or a
-numeric vector \link{samplesN}.}
+\item{coef_matrix}{Numeric matrix \code{samplesN x 2} or a
+numeric vector with length \code{samplesN}.}
 
 \item{probs}{A numeric vector of quantiles to compute.}
 }
@@ -20,5 +20,8 @@ for each quantile.
 }
 \description{
 Computes mean and optional quantiles for a coefficient.
+}
+\examples{
+coef_summary("test", c(1, 2, 3), NULL)
 }
 \keyword{internal}

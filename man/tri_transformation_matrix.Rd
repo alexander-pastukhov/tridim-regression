@@ -14,7 +14,7 @@ with .X dimension suffix. E.g., scale.1 and scale.2.}
 \code{"euclidean_z"}, \code{"euclidean"}, \code{"affine"}, or \code{"projective"}}
 }
 \value{
-matrix\link{4, 4}
+matrix 4x4
 }
 \description{
 3D transformation matrix, based on transformation type

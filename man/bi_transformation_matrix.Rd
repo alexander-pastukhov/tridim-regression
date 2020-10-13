@@ -13,12 +13,15 @@ with .X dimension suffix. E.g., scale.1 and scale.2.}
 \item{transformation}{string, \code{"euclidean"}, \code{"affine"}, or \code{"projective"}}
 }
 \value{
-matrix\link{3, 3}
+matrix 3x3
 }
 \description{
 2D transformation matrix, based on transformation type
 }
 \examples{
-bi_transformation_matrix(data.frame(rotation=0, scale.1=1, scale.2=2, translation.1=0, translation.2=-5),
-                         "euclidean")
+bi_transformation_matrix(
+  data.frame(rotation=0,
+             scale.1=1, scale.2=2,
+             translation.1=0, translation.2=-5),
+  "euclidean")
 }

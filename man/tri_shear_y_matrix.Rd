@@ -7,9 +7,9 @@
 tri_shear_y_matrix(shy_x, shy_z)
 }
 \arguments{
-\item{shx_x}{Shear for x-axis}
+\item{shy_x}{Shear for x-axis}
 
-\item{shx_z}{Shear for z-axis}
+\item{shy_z}{Shear for z-axis}
 }
 \value{
 matrix 4x4

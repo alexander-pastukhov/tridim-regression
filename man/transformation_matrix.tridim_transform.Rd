@@ -13,14 +13,15 @@
 raw sample values. Defaults to \code{TRUE}}
 }
 \value{
-matrix\link{3,3} for 2D transformation or matrix\link{4,4} for 3D transformation
+matrix 3x3  for 2D transformation or matrix 4x4 for 3D transformation
 }
 \description{
 Transformation matrix, 2D or 3D dependening on data and transformation type
 }
 \examples{
 \dontrun{
-euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
+euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+  NakayaData, transformation = 'euclidean')
 transformation_matrix(euc2)
 }
 }
