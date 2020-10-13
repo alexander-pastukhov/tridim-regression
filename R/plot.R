@@ -6,10 +6,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
 #'                                         data = NakayaData,
 #'                                         transformation = 'euclidean')
 #' plot(euc2)
+#' }
 plot.tridim_transform <- function(object, ...){
   if (object$dimN == 2){
     # bidimensional regression
@@ -21,3 +23,5 @@ plot.tridim_transform <- function(object, ...){
 
   bayesplot::mcmc_intervals(as.matrix(object$stanfit, pars = coef_names))
 }
+
+# setMethod("plot", "tridim_transform", plot.tridim_transform)
