@@ -1,7 +1,6 @@
-#' @export
-R2 <- function(object, ...) { UseMethod("R2") }
-
 #' Computes R-squared or adjusted R-squared
+#'
+#' @name R2
 #'
 #' @param object An object of class "tridim_transform"
 #' @param adjust Whether R-squared should be adjusted, defaults to \code{TRUE}
@@ -14,12 +13,13 @@ R2 <- function(object, ...) { UseMethod("R2") }
 #'
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
+#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#'   NakayaData, transformation = 'euclidean')
 #' R2(euc2)
 #' }
 R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055, 0.945)){
   # posterior predictions
-  predictions <- TriDimRegression::predict.tridim_transform(object, summary=FALSE)
+  predictions <- predict.tridim_transform(object, summary=FALSE)
 
   # computing unadjusted R2
   total_variance <- sum((object$data$dv-matrix(rep(colMeans(object$data$dv), nrow(object$data$dv)), ncol=object$dimN, byrow=TRUE))^2)
@@ -54,3 +54,6 @@ R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055
   }
   TriDimRegression::variable_summary("R2", as.matrix(r2s), probs)
 }
+
+#' @export
+R2 <- function(x, ...) { UseMethod("R2") }
