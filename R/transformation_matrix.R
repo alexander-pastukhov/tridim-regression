@@ -1,18 +1,18 @@
-#' @export
-transformation_matrix <- function(object, ...) { UseMethod("transformation_matrix") }
-
 #' 2D transformation matrix, based on transformation type
 #'
 #' @param params a single row data.frame with parameters. Vector parameters must be name
 #' with .X dimension suffix. E.g., scale.1 and scale.2.
 #' @param transformation string, \code{"euclidean"}, \code{"affine"}, or \code{"projective"}
 #'
-#' @return matrix[3, 3]
+#' @return matrix 3x3
 #' @export
 #'
 #' @examples
-#' bi_transformation_matrix(data.frame(rotation=0, scale.1=1, scale.2=2, translation.1=0, translation.2=-5),
-#'                          "euclidean")
+#' bi_transformation_matrix(
+#'   data.frame(rotation=0,
+#'              scale.1=1, scale.2=2,
+#'              translation.1=0, translation.2=-5),
+#'   "euclidean")
 bi_transformation_matrix <- function(params, transformation){
   transform_matrix <- TriDimRegression::bi_scale_matrix(params$scale.1, params$scale.2)
   if (transformation != "euclidean"){
@@ -33,7 +33,7 @@ bi_transformation_matrix <- function(params, transformation){
 #' @param transformation string, \code{"euclidean_x"}, \code{"euclidean_y"},
 #' \code{"euclidean_z"}, \code{"euclidean"}, \code{"affine"}, or \code{"projective"}
 #'
-#' @return matrix[4, 4]
+#' @return matrix 4x4
 #' @export
 #'
 #' @examples
@@ -81,19 +81,19 @@ tri_transformation_matrix <- function(params, transformation){
   transform_matrix %*% TriDimRegression::tri_translation_matrix(params$translation.1, params$translation.2, params$translation.3);
 }
 
-
 #' Transformation matrix, 2D or 3D dependening on data and transformation type
 #'
 #' @param object tridim_transform object
 #' @param summary Whether summary statistics should be returned instead of
 #' raw sample values. Defaults to \code{TRUE}
 #'
-#' @return matrix[3,3] for 2D transformation or matrix[4,4] for 3D transformation
+#' @return matrix 3x3  for 2D transformation or matrix 4x4 for 3D transformation
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2, NakayaData, transformation = 'euclidean')
+#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#'   NakayaData, transformation = 'euclidean')
 #' transformation_matrix(euc2)
 #' }
 transformation_matrix.tridim_transform <- function(object, summary=TRUE){
@@ -125,3 +125,6 @@ transformation_matrix.tridim_transform <- function(object, summary=TRUE){
     colMeans() %>%
     matrix(ncol=object$dimN+1, byrow = TRUE)
 }
+
+#' @export
+transformation_matrix <- function(x, ...) { UseMethod("transformation_matrix") }
