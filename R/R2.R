@@ -2,11 +2,12 @@
 #'
 #' @name R2
 #'
-#' @param object An object of class "tridim_transform"
+#' @param object An object of class [tridim_transform][tridim_transform-class()]
 #' @param adjust Whether R-squared should be adjusted, defaults to \code{TRUE}
 #' @param summary Whether summary statistics should be returned instead of
 #' raw sample values. Defaults to \code{TRUE}
 #' @param probs The percentiles used to compute summary, defaults to 89% credible interval.
+#' @param ... Current unused.
 #'
 #' @return vector of values or a data.frame with summary
 #' @export
@@ -17,7 +18,7 @@
 #'   NakayaData, transformation = 'euclidean')
 #' R2(euc2)
 #' }
-R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055, 0.945)){
+R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055, 0.945), ...){
   # posterior predictions
   predictions <- predict.tridim_transform(object, summary=FALSE)
 
@@ -56,4 +57,4 @@ R2.tridim_transform <- function(object, adjust=TRUE, summary=TRUE, probs=c(0.055
 }
 
 #' @export
-R2 <- function(x, ...) { UseMethod("R2") }
+R2 <- function(object, ...) { UseMethod("R2") }
