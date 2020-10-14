@@ -21,6 +21,10 @@
 #' @importFrom stats coef predict
 #' @importFrom loo loo waic
 #'
+#' @seealso
+#' \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}}
+#' [tridim_transform][tridim_transform-class()]
+#'
 #' @references
 #' Stan Development Team (2020). RStan: the R interface to Stan. R package version 2.19.3. https://mc-stan.org
 #'
