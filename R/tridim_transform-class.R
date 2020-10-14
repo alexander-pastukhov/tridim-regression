@@ -1,10 +1,9 @@
-#' Class \code{tridim_transform} of geometric transformations
-#' fitted with the \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}} function.
+#' Class \code{tridim_transform}.
 #'
 #' Geometric transformations fitted with the
 #' \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}} function
 #' represented as a \code{tridim_transform} object with information about transformation, data dimension,
-#' call formula, and fitted \code{\link[rstan:stanfit]{stanfit}} object,
+#' call formula, and fitted \code{\link[rstan:stanfit-class]{stanfit}} object,
 #'
 #' @name tridim_transform-class
 #' @aliases tridim_transform
@@ -14,10 +13,11 @@
 #' See \code{methods(class = "tridim_transform")} for an overview of available methods.
 #'
 #' @slot transformation A \code{string} with the transformation name.
-#' @slot formula A \code{\link[Formula:formula]{formula}} object.
+#' @slot formula A \code{\link[Formula:formula.Formula]{formula}} object.
 #' @slot Ndim An \code{integer} with data dimension, either \code{2} or \code{3}.
 #' @slot data A \code{list} containing variables used for the \code{\link[rstan:sampling]{sampling}}.
-#' @slot stanmodel A \code{\link[rstan:stan_model]{stan_model}} used for sampling.
+#' @slot stanmodel A \code{\link[rstan:stanmodel-class]{stanmodel}} used for sampling.
+#' @slot stanfit a \code{\link[rstan:stanfit-class]{stanfit}} object.
 #'
 #' @seealso
 #'   \code{\link{fit_geometric_transformation}}
@@ -81,5 +81,5 @@ tridim_transform <- function(transformation,
 #' @return Logical
 #' @export
 is.tridim_transform <- function(x){
-  inherist(x, "tridim_transform")
+  inherits(x, "tridim_transform")
 }
