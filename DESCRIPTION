@@ -5,11 +5,13 @@ Authors@R: c(
   person("Alexander (Sasha)", "Pastukhov", role = c("cre", "ctb"), email ="pastukhov.alexander@gmail.com"),
   person("Claus-Christian", "Carbon", role = c("aut"), email ="ccc@experimental-psychology.com"))
 Description: Fits 2D and 3D geometric transformations. Provides posterior via Stan. Includes computation of LOO and WAIC information criteria, R-squared.
-License: use_gpl3_license()
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+VignetteBuilder:
+    knitr
 Biarch: true
 Depends: 
     R (>= 3.5.0)
@@ -38,4 +40,5 @@ SystemRequirements: GNU make
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2
