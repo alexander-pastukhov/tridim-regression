@@ -83,7 +83,8 @@ tri_transformation_matrix <- function(params, transformation){
 
 #' Transformation matrix, 2D or 3D dependening on data and transformation type
 #'
-#' @param object tridim_transform object
+#' @name transformation_matrix
+#' @param object [tridim_transform][tridim_transform-class()] object
 #' @param summary Whether summary statistics should be returned instead of
 #' raw sample values. Defaults to \code{TRUE}
 #'
@@ -96,6 +97,9 @@ tri_transformation_matrix <- function(params, transformation){
 #'   NakayaData, transformation = 'euclidean')
 #' transformation_matrix(euc2)
 #' }
+NULL
+
+#' @export
 transformation_matrix.tridim_transform <- function(object, summary=TRUE){
   if (object$dimN == 2) {
     # 2D transform
@@ -127,4 +131,4 @@ transformation_matrix.tridim_transform <- function(object, summary=TRUE){
 }
 
 #' @export
-transformation_matrix <- function(x, ...) { UseMethod("transformation_matrix") }
+transformation_matrix <- function(object, summary) { UseMethod("transformation_matrix") }
