@@ -5,10 +5,10 @@
 \alias{R2.tridim_transform}
 \title{Computes R-squared or adjusted R-squared}
 \usage{
-\method{R2}{tridim_transform}(object, adjust = TRUE, summary = TRUE, probs = c(0.055, 0.945))
+\method{R2}{tridim_transform}(object, adjust = TRUE, summary = TRUE, probs = c(0.055, 0.945), ...)
 }
 \arguments{
-\item{object}{An object of class "tridim_transform"}
+\item{object}{An object of class \link[=tridim_transform-class]{tridim_transform}}
 
 \item{adjust}{Whether R-squared should be adjusted, defaults to \code{TRUE}}
 
@@ -16,6 +16,8 @@
 raw sample values. Defaults to \code{TRUE}}
 
 \item{probs}{The percentiles used to compute summary, defaults to 89\% credible interval.}
+
+\item{...}{Current unused.}
 }
 \value{
 vector of values or a data.frame with summary
