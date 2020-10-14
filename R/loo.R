@@ -2,9 +2,9 @@
 #' cross-validation via loo library. It can be used
 #' for a model comparison via loo::loo_compare() function.
 #'
-#' @param object A tridim_transform object
+#' @param object A [tridim_transform][tridim_transform-class()] object
 #'
-#' @return A named list, see loo::loo() for details.
+#' @return A named list, see [loo::loo()] for details.
 #' @export
 #'
 #' @examples
