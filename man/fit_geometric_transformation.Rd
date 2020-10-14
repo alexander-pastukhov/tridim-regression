@@ -2,43 +2,11 @@
 % Please edit documentation in R/fit_geometric_transformation.R
 \name{fit_geometric_transformation}
 \alias{fit_geometric_transformation}
+\alias{fit_geometric_transformation.default}
+\alias{fit_geometric_transformation.formula}
 \title{Fitting Bidimensional or Tridimensional Regression / Geometric Transformation Models.}
-\usage{
-fit_geometric_transformation(formula, data, transformation, chains, cores, ...)
-fit_geometric_transformation(iv, dv, transformation,
-  iv_prefix="iv_", dv_prefix="dv_", chains, cores, ...)
-}
-\arguments{
-\item{formula}{a symbolic description of the model to be fitted in the format \code{Xdep + Ydep ~ Xind + Yind}, where
-\code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables}
-
-\item{data}{a data frame containing variables for the model.}
-
-\item{transformation}{the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.}
-
-\item{iv}{a data frame containing independent variable, must by numeric only, Nx2 or Nx3.}
-
-\item{dv}{a data frame containing dependent variable, must by numeric only, Nx2 or Nx3.}
-
-\item{iv_prefix}{string used to disambiguate column names for independent variable, defaults to "iv_".}
-
-\item{dv_prefix}{string used to disambiguate column names for dependent variable, defaults to "dv_".}
-
-\item{chains}{Number of chains for sampling.}
-
-\item{cores}{Number of CPU cores to use for sampling. If omitted, all available cores are used.}
-
-\item{...}{Additional arguments passed to \href{rstan::sampling}{rstan::sampling()} function.}
-}
 \value{
-returns an object of class "tridim_transform".
-An object of class "tridim_transform" is a list containing at least the following components:
-\item{\code{transformation}}{string with the transformation type}
-\item{\code{Ndim}}{number of dimensions (2 or 3).}
-\item{\code{stanfit}}{\code{\link[rstan]{stanfit}} object.}
-\item{\code{formula}}{formula, describing input and output columns}
-\item{\code{data}}{data in Stan list, used to fit the model}
-\item{\code{Call}}{function call information, incorporates the \code{formula}, \code{transformation}, and \code{data}.}
+returns an object of class \code{\link[TriDimRegression:tridim_transform-class]{tridim_transform-class}}.
 }
 \description{
 Fits Bidimensional or Tridimensional regression / geometric transformation models using

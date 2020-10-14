@@ -4,13 +4,12 @@
 \name{tridim_transform-class}
 \alias{tridim_transform-class}
 \alias{tridim_transform}
-\title{Class \code{tridim_transform} of geometric transformations
-fitted with the \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}} function.}
+\title{Class \code{tridim_transform}.}
 \description{
 Geometric transformations fitted with the
 \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}} function
 represented as a \code{tridim_transform} object with information about transformation, data dimension,
-call formula, and fitted \code{\link[rstan:stanfit]{stanfit}} object,
+call formula, and fitted \code{\link[rstan:stanfit-class]{stanfit}} object,
 }
 \details{
 See \code{methods(class = "tridim_transform")} for an overview of available methods.
@@ -20,13 +19,15 @@ See \code{methods(class = "tridim_transform")} for an overview of available meth
 \describe{
 \item{\code{transformation}}{A \code{string} with the transformation name.}
 
-\item{\code{formula}}{A \code{\link[Formula:formula]{formula}} object.}
+\item{\code{formula}}{A \code{\link[Formula:formula.Formula]{formula}} object.}
 
 \item{\code{Ndim}}{An \code{integer} with data dimension, either \code{2} or \code{3}.}
 
 \item{\code{data}}{A \code{list} containing variables used for the \code{\link[rstan:sampling]{sampling}}.}
 
-\item{\code{stanmodel}}{A \code{\link[rstan:stan_model]{stan_model}} used for sampling.}
+\item{\code{stanmodel}}{A \code{\link[rstan:stanmodel-class]{stanmodel}} used for sampling.}
+
+\item{\code{stanfit}}{a \code{\link[rstan:stanfit-class]{stanfit}} object.}
 }}
 
 \seealso{

@@ -4,10 +4,10 @@
 \alias{predict.tridim_transform}
 \title{Computes posterior samples for the posterior predictive distribution.}
 \usage{
-\method{predict}{tridim_transform}(object, newdata = NULL, summary = TRUE, probs = NULL)
+\method{predict}{tridim_transform}(object, newdata = NULL, summary = TRUE, probs = NULL, ...)
 }
 \arguments{
-\item{object}{An object of class "tridim_transform"}
+\item{object}{An object of class \link[=tridim_transform-class]{tridim_transform}}
 
 \item{newdata}{An optional two column data frame with independent variables.
 If omitted, the fitted values are used.}
@@ -16,6 +16,8 @@ If omitted, the fitted values are used.}
 raw sample values. Defaults to \code{TRUE}}
 
 \item{probs}{The percentiles used to compute summary, defaults to NULL (no CI).}
+
+\item{...}{Unused}
 }
 \value{
 If summary=FALSE, a numeric matrix iterationsN x observationsN x variablesN.

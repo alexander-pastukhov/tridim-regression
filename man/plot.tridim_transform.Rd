@@ -4,12 +4,12 @@
 \alias{plot.tridim_transform}
 \title{Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.}
 \usage{
-\method{plot}{tridim_transform}(object, ...)
+\method{plot}{tridim_transform}(x, ...)
 }
 \arguments{
-\item{object}{A tridim_transform object}
+\item{x}{A \link[=tridim_transform-class]{tridim_transform} object}
 
-\item{...}{Extra parameters to be passed to bayesplot::mcmc_intervals}
+\item{...}{Extra parameters to be passed to \code{\link[bayesplot:MCMC-intervals]{bayesplot::mcmc_intervals()}}}
 }
 \description{
 Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.

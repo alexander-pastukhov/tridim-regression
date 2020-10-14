@@ -9,10 +9,10 @@ for a model comparison via loo::loo_compare() function.}
 \method{loo}{tridim_transform}(object)
 }
 \arguments{
-\item{object}{A tridim_transform object}
+\item{object}{A \link[=tridim_transform-class]{tridim_transform} object}
 }
 \value{
-A named list, see loo::loo() for details.
+A named list, see \code{\link[loo:loo]{loo::loo()}} for details.
 }
 \description{
 Computes an efficient approximate leave-one-out

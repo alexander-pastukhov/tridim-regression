@@ -12,3 +12,7 @@ Includes computation of LOO and WAIC information criteria, R-squared.
 \references{
 Stan Development Team (2020). RStan: the R interface to Stan. R package version 2.19.3. https://mc-stan.org
 }
+\seealso{
+\code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}}
+\link[=tridim_transform-class]{tridim_transform}
+}

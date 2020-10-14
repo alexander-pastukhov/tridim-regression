@@ -4,10 +4,12 @@
 \alias{summary.tridim_transform}
 \title{Summary for a tridim_transform object}
 \usage{
-\method{summary}{tridim_transform}(object)
+\method{summary}{tridim_transform}(object, ...)
 }
 \arguments{
-\item{object}{A tridim_transform object}
+\item{object}{A \link[=tridim_transform-class]{tridim_transform} object}
+
+\item{...}{Unused}
 }
 \description{
 Summary for a tridim_transform object

@@ -4,10 +4,12 @@
 \alias{print.tridim_transform}
 \title{Prints out tridim_transform object}
 \usage{
-\method{print}{tridim_transform}(object)
+\method{print}{tridim_transform}(x, ...)
 }
 \arguments{
-\item{object}{A tridim_transform object}
+\item{x}{A \link[=tridim_transform-class]{tridim_transform} object}
+
+\item{...}{Unused}
 }
 \description{
 Prints out tridim_transform object

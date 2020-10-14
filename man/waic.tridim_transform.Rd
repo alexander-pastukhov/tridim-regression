@@ -8,7 +8,7 @@
 \method{waic}{tridim_transform}(object)
 }
 \arguments{
-\item{object}{A tridim_transform object}
+\item{object}{A \link[=tridim_transform-class]{tridim_transform} object}
 }
 \value{
 A named list, see \code{\link[loo:waic]{loo::waic()}} for details.

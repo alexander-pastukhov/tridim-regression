@@ -5,15 +5,17 @@
 \title{Posterior distributions for transformation coefficients
 in full or summarized form.}
 \usage{
-\method{coef}{tridim_transform}(object, summary = TRUE, probs = c(0.055, 0.945))
+\method{coef}{tridim_transform}(object, summary = TRUE, probs = c(0.055, 0.945), ...)
 }
 \arguments{
-\item{object}{An object of class "tridim_transform".}
+\item{object}{An object of class \link[=tridim_transform-class]{tridim_transform}.}
 
 \item{summary}{Whether summary statistics should be returned instead of
 raw sample values. Defaults to \code{TRUE}}
 
-\item{probs}{The percentiles used to compute summary, defaults to 89\% credible inteval.}
+\item{probs}{The percentiles used to compute summary, defaults to 89\% credible interval.}
+
+\item{...}{Unused}
 }
 \value{
 If summary=FALSE, a list with matrix iterationsN x dimensionsN for
