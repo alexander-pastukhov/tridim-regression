@@ -5,7 +5,7 @@
 #' via [loo][loo-package] library. It can be used for a model comparison via
 #' [loo::loo_compare()][loo::loo_compare] function.
 #'
-#' @param object A tridim_transform object
+#' @param object A [tridim_transform][tridim_transform-class()] object
 #'
 #' @return A named list, see [loo::waic()] for details.
 #' @export

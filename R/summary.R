@@ -1,6 +1,7 @@
 #' Summary for a tridim_transform object
 #'
-#' @param object A tridim_transform object
+#' @param object A [tridim_transform][tridim_transform-class()] object
+#' @param ... Unused
 #'
 #' @export
 #'
@@ -12,7 +13,7 @@
 #' summary(euc2)
 #' }
 
-summary.tridim_transform <- function(object){
+summary.tridim_transform <- function(object, ...){
   cat('Call: ')
   cat(deparse(object$formula))
   cat('\n')

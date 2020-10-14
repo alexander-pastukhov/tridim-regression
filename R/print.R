@@ -1,6 +1,7 @@
 #' Prints out tridim_transform object
 #'
-#' @param object A tridim_transform object
+#' @param x A [tridim_transform][tridim_transform-class()] object
+#' @param ... Unused
 #'
 #' @export
 #'
@@ -12,15 +13,15 @@
 #' euc2
 #' }
 
-print.tridim_transform <- function(object){
+print.tridim_transform <- function(x, ...){
   cat('Call: ')
-  cat(deparse(object$formula))
+  cat(deparse(x$formula))
   cat('\n')
 
-  cat(glue::glue('Data dimensions: {object$dimN}\n\n'))
-  cat(glue::glue('Transformation: {object$transformation}\n\n'))
+  cat(glue::glue('Data dimensions: {x$dimN}\n\n'))
+  cat(glue::glue('Transformation: {x$transformation}\n\n'))
   cat(glue::glue('\n\nCoefficients:\n\n'))
-  printCoefmat(tidyr::pivot_wider(coef.tridim_transform(object, summary=TRUE, probs = NULL),
+  printCoefmat(tidyr::pivot_wider(coef.tridim_transform(x, summary=TRUE, probs = NULL),
                                   names_from="Coef", values_from="Mean"))
 }
 
