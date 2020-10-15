@@ -37,7 +37,7 @@ bi_translation_matrix <- function(dx, dy){
 #' @param sx numeric, X-scale
 #' @param sy numeric Y-scale
 #'
-#' @return matrix 3x3
+#' @return matrix \[3✕3\]
 #' @export
 #'
 #' @examples
