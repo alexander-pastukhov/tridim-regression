@@ -2,17 +2,43 @@
 % Please edit documentation in R/fit_geometric_transformation.R
 \name{fit_geometric_transformation}
 \alias{fit_geometric_transformation}
-\alias{fit_geometric_transformation.default}
 \alias{fit_geometric_transformation.formula}
-\title{Fitting Bidimensional or Tridimensional Regression / Geometric Transformation Models.}
-\value{
-returns an object of class \code{\link[TriDimRegression:tridim_transform-class]{tridim_transform-class}}.
+\title{Fitting Bidimensional or Tridimensional Regression / Geometric Transformation Models via Formula.}
+\usage{
+\method{fit_geometric_transformation}{formula}(
+  formula,
+  data,
+  transformation,
+  chains = 4,
+  cores = NULL,
+  ...
+)
+}
+\arguments{
+\item{formula}{a symbolic description of the model to be fitted in the format \code{Xdep + Ydep ~ Xind + Yind}, where
+\code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables}
+
+\item{data}{a data frame containing variables for the model.}
+
+\item{transformation}{the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.}
+
+\item{chains}{Number of chains for sampling.}
+
+\item{cores}{Number of CPU cores to use for sampling. If omitted, all available cores are used.}
+
+\item{...}{Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.}
 }
 \description{
 Fits Bidimensional or Tridimensional regression / geometric transformation models using
-Stan engine. Can be used either via a formula interface or by supplying two tables, one
-for an indepdent variable (\code{iv}) and one for the dependent one (\code{dv}).
-In the latter case, the two tables must have the same dimenisons (both N x 2 or N x 3).
+Stan engine. The \code{formula} described dependent and independent numeric variables in the
+\code{data}.
+
+For the 2D data, you can fit \code{"euclidean"} (scale, rotation, and translation),
+\code{"affine"} (+shear), or \code{"projective"} (+tilt) transformations. For 3D data, you can fit
+\code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (scale, rotation around the
+specified axis, and translation), \code{"euclidean"} (scale, rotation around all three axes, and translation),
+\code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
+transformations.
 }
 \examples{
 \dontrun{
@@ -30,4 +56,7 @@ coef(euc2)
 # statistical comparison via WAIC criterion
 loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 }
+}
+\seealso{
+\code{\link{fit_geometric_transformation_df}}
 }

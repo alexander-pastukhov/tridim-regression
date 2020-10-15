@@ -12,7 +12,7 @@ bi_scale_matrix(sx, sy)
 \item{sy}{numeric Y-scale}
 }
 \value{
-matrix 3x3
+matrix [3✕3]
 }
 \description{
 2D Scaling Matrix
