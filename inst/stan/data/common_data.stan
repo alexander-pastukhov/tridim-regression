@@ -1,4 +1,3 @@
-# data only for bidime
 int<lower=1> rowsN;  // number of rows in a table
 int<lower=1> varsN;  // number of variables
 matrix[rowsN, varsN] dv; // dependent variables
