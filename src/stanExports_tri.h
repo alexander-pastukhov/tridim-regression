@@ -39,13 +39,17 @@ stan::io::program_reader prog_reader__() {
     reader.add_event(86, 4, "restart", "model_tri");
     reader.add_event(88, 6, "include", "/data/common_data.stan");
     reader.add_event(88, 0, "start", "/data/common_data.stan");
-    reader.add_event(95, 7, "end", "/data/common_data.stan");
-    reader.add_event(95, 7, "restart", "model_tri");
-    reader.add_event(123, 35, "include", "/transformed_data/add_dimension.stan");
-    reader.add_event(123, 0, "start", "/transformed_data/add_dimension.stan");
-    reader.add_event(132, 9, "end", "/transformed_data/add_dimension.stan");
-    reader.add_event(132, 36, "restart", "model_tri");
-    reader.add_event(188, 90, "end", "model_tri");
+    reader.add_event(94, 6, "end", "/data/common_data.stan");
+    reader.add_event(94, 7, "restart", "model_tri");
+    reader.add_event(94, 7, "include", "/data/common_priors.stan");
+    reader.add_event(94, 0, "start", "/data/common_priors.stan");
+    reader.add_event(103, 9, "end", "/data/common_priors.stan");
+    reader.add_event(103, 8, "restart", "model_tri");
+    reader.add_event(131, 36, "include", "/transformed_data/add_dimension.stan");
+    reader.add_event(131, 0, "start", "/transformed_data/add_dimension.stan");
+    reader.add_event(140, 9, "end", "/transformed_data/add_dimension.stan");
+    reader.add_event(140, 37, "restart", "model_tri");
+    reader.add_event(212, 107, "end", "model_tri");
     return reader;
 }
 template <typename T0__>
@@ -351,6 +355,13 @@ private:
         matrix_d dv;
         matrix_d iv;
         int transform;
+        std::vector<double> scale_prior;
+        std::vector<double> sheer_prior;
+        int normal_rotation_prior;
+        std::vector<double> rotation_prior;
+        std::vector<double> tilt_prior;
+        std::vector<double> translation_prior;
+        double sigma_prior;
         int euclidean_x;
         int euclidean_y;
         int euclidean_z;
@@ -399,21 +410,21 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
         try {
             // initialize data block variables from context__
-            current_statement_begin__ = 90;
+            current_statement_begin__ = 89;
             context__.validate_dims("data initialization", "rowsN", "int", context__.to_vec());
             rowsN = int(0);
             vals_i__ = context__.vals_i("rowsN");
             pos__ = 0;
             rowsN = vals_i__[pos__++];
             check_greater_or_equal(function__, "rowsN", rowsN, 1);
-            current_statement_begin__ = 91;
+            current_statement_begin__ = 90;
             context__.validate_dims("data initialization", "varsN", "int", context__.to_vec());
             varsN = int(0);
             vals_i__ = context__.vals_i("varsN");
             pos__ = 0;
             varsN = vals_i__[pos__++];
             check_greater_or_equal(function__, "varsN", varsN, 1);
-            current_statement_begin__ = 92;
+            current_statement_begin__ = 91;
             validate_non_negative_index("dv", "rowsN", rowsN);
             validate_non_negative_index("dv", "varsN", varsN);
             context__.validate_dims("data initialization", "dv", "matrix_d", context__.to_vec(rowsN,varsN));
@@ -427,7 +438,7 @@ public:
                     dv(j_1__, j_2__) = vals_r__[pos__++];
                 }
             }
-            current_statement_begin__ = 93;
+            current_statement_begin__ = 92;
             validate_non_negative_index("iv", "rowsN", rowsN);
             validate_non_negative_index("iv", "varsN", varsN);
             context__.validate_dims("data initialization", "iv", "matrix_d", context__.to_vec(rowsN,varsN));
@@ -441,99 +452,164 @@ public:
                     iv(j_1__, j_2__) = vals_r__[pos__++];
                 }
             }
-            current_statement_begin__ = 94;
+            current_statement_begin__ = 93;
             context__.validate_dims("data initialization", "transform", "int", context__.to_vec());
             transform = int(0);
             vals_i__ = context__.vals_i("transform");
             pos__ = 0;
             transform = vals_i__[pos__++];
             check_greater_or_equal(function__, "transform", transform, 1);
-            // initialize transformed data variables
+            current_statement_begin__ = 95;
+            validate_non_negative_index("scale_prior", "2", 2);
+            context__.validate_dims("data initialization", "scale_prior", "double", context__.to_vec(2));
+            scale_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("scale_prior");
+            pos__ = 0;
+            size_t scale_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < scale_prior_k_0_max__; ++k_0__) {
+                scale_prior[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 96;
+            validate_non_negative_index("sheer_prior", "2", 2);
+            context__.validate_dims("data initialization", "sheer_prior", "double", context__.to_vec(2));
+            sheer_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("sheer_prior");
+            pos__ = 0;
+            size_t sheer_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < sheer_prior_k_0_max__; ++k_0__) {
+                sheer_prior[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 97;
+            context__.validate_dims("data initialization", "normal_rotation_prior", "int", context__.to_vec());
+            normal_rotation_prior = int(0);
+            vals_i__ = context__.vals_i("normal_rotation_prior");
+            pos__ = 0;
+            normal_rotation_prior = vals_i__[pos__++];
+            check_greater_or_equal(function__, "normal_rotation_prior", normal_rotation_prior, 0);
+            check_less_or_equal(function__, "normal_rotation_prior", normal_rotation_prior, 1);
+            current_statement_begin__ = 98;
+            validate_non_negative_index("rotation_prior", "2", 2);
+            context__.validate_dims("data initialization", "rotation_prior", "double", context__.to_vec(2));
+            rotation_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("rotation_prior");
+            pos__ = 0;
+            size_t rotation_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < rotation_prior_k_0_max__; ++k_0__) {
+                rotation_prior[k_0__] = vals_r__[pos__++];
+            }
             current_statement_begin__ = 99;
+            validate_non_negative_index("tilt_prior", "2", 2);
+            context__.validate_dims("data initialization", "tilt_prior", "double", context__.to_vec(2));
+            tilt_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("tilt_prior");
+            pos__ = 0;
+            size_t tilt_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < tilt_prior_k_0_max__; ++k_0__) {
+                tilt_prior[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 100;
+            validate_non_negative_index("translation_prior", "2", 2);
+            context__.validate_dims("data initialization", "translation_prior", "double", context__.to_vec(2));
+            translation_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("translation_prior");
+            pos__ = 0;
+            size_t translation_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < translation_prior_k_0_max__; ++k_0__) {
+                translation_prior[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 101;
+            context__.validate_dims("data initialization", "sigma_prior", "double", context__.to_vec());
+            sigma_prior = double(0);
+            vals_r__ = context__.vals_r("sigma_prior");
+            pos__ = 0;
+            sigma_prior = vals_r__[pos__++];
+            check_greater_or_equal(function__, "sigma_prior", sigma_prior, 0);
+            // initialize transformed data variables
+            current_statement_begin__ = 107;
             euclidean_x = int(0);
             stan::math::fill(euclidean_x, std::numeric_limits<int>::min());
             stan::math::assign(euclidean_x,4);
-            current_statement_begin__ = 100;
+            current_statement_begin__ = 108;
             euclidean_y = int(0);
             stan::math::fill(euclidean_y, std::numeric_limits<int>::min());
             stan::math::assign(euclidean_y,5);
-            current_statement_begin__ = 101;
+            current_statement_begin__ = 109;
             euclidean_z = int(0);
             stan::math::fill(euclidean_z, std::numeric_limits<int>::min());
             stan::math::assign(euclidean_z,6);
-            current_statement_begin__ = 102;
+            current_statement_begin__ = 110;
             euclidean = int(0);
             stan::math::fill(euclidean, std::numeric_limits<int>::min());
             stan::math::assign(euclidean,1);
-            current_statement_begin__ = 103;
+            current_statement_begin__ = 111;
             affine = int(0);
             stan::math::fill(affine, std::numeric_limits<int>::min());
             stan::math::assign(affine,2);
-            current_statement_begin__ = 104;
+            current_statement_begin__ = 112;
             projective = int(0);
             stan::math::fill(projective, std::numeric_limits<int>::min());
             stan::math::assign(projective,3);
-            current_statement_begin__ = 107;
+            current_statement_begin__ = 115;
             rotationN = int(0);
             stan::math::fill(rotationN, std::numeric_limits<int>::min());
             stan::math::assign(rotationN,(logical_gt(transform, projective) ? 1 : 3 ));
-            current_statement_begin__ = 108;
+            current_statement_begin__ = 116;
             shearXN = int(0);
             stan::math::fill(shearXN, std::numeric_limits<int>::min());
             stan::math::assign(shearXN,((primitive_value(logical_eq(transform, affine)) || primitive_value(logical_eq(transform, projective))) ? 2 : 0 ));
-            current_statement_begin__ = 109;
+            current_statement_begin__ = 117;
             shearYN = int(0);
             stan::math::fill(shearYN, std::numeric_limits<int>::min());
             stan::math::assign(shearYN,(logical_eq(transform, projective) ? 2 : 0 ));
-            current_statement_begin__ = 110;
+            current_statement_begin__ = 118;
             shearZN = int(0);
             stan::math::fill(shearZN, std::numeric_limits<int>::min());
             stan::math::assign(shearZN,(logical_eq(transform, projective) ? 2 : 0 ));
-            current_statement_begin__ = 113;
+            current_statement_begin__ = 121;
             rotate_x = int(0);
             stan::math::fill(rotate_x, std::numeric_limits<int>::min());
             stan::math::assign(rotate_x,(primitive_value(logical_neq(transform, euclidean_y)) && primitive_value(logical_neq(transform, euclidean_z))));
-            current_statement_begin__ = 114;
+            current_statement_begin__ = 122;
             rotate_y = int(0);
             stan::math::fill(rotate_y, std::numeric_limits<int>::min());
             stan::math::assign(rotate_y,(primitive_value(logical_neq(transform, euclidean_x)) && primitive_value(logical_neq(transform, euclidean_z))));
-            current_statement_begin__ = 115;
+            current_statement_begin__ = 123;
             rotate_z = int(0);
             stan::math::fill(rotate_z, std::numeric_limits<int>::min());
             stan::math::assign(rotate_z,(primitive_value(logical_neq(transform, euclidean_x)) && primitive_value(logical_neq(transform, euclidean_y))));
-            current_statement_begin__ = 116;
+            current_statement_begin__ = 124;
             shear_x = int(0);
             stan::math::fill(shear_x, std::numeric_limits<int>::min());
             stan::math::assign(shear_x,(primitive_value(logical_eq(transform, affine)) || primitive_value(logical_eq(transform, projective))));
-            current_statement_begin__ = 119;
+            current_statement_begin__ = 127;
             irotate_x = int(0);
             stan::math::fill(irotate_x, std::numeric_limits<int>::min());
             stan::math::assign(irotate_x,1);
-            current_statement_begin__ = 120;
+            current_statement_begin__ = 128;
             irotate_y = int(0);
             stan::math::fill(irotate_y, std::numeric_limits<int>::min());
             stan::math::assign(irotate_y,(logical_eq(transform, euclidean_y) ? 1 : 2 ));
-            current_statement_begin__ = 121;
+            current_statement_begin__ = 129;
             irotate_z = int(0);
             stan::math::fill(irotate_z, std::numeric_limits<int>::min());
             stan::math::assign(irotate_z,(logical_eq(transform, euclidean_z) ? 1 : 3 ));
-            current_statement_begin__ = 126;
+            current_statement_begin__ = 134;
             validate_non_negative_index("iv3", "rowsN", rowsN);
             validate_non_negative_index("iv3", "(varsN + 1)", (varsN + 1));
             iv3 = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>(rowsN, (varsN + 1));
             stan::math::fill(iv3, DUMMY_VAR__);
             // execute transformed data statements
-            current_statement_begin__ = 127;
+            current_statement_begin__ = 135;
             for (int iR = 1; iR <= rowsN; ++iR) {
-                current_statement_begin__ = 128;
+                current_statement_begin__ = 136;
                 for (int iV = 1; iV <= varsN; ++iV) {
-                    current_statement_begin__ = 129;
+                    current_statement_begin__ = 137;
                     stan::model::assign(iv3, 
                                 stan::model::cons_list(stan::model::index_uni(iR), stan::model::cons_list(stan::model::index_uni(iV), stan::model::nil_index_list())), 
                                 get_base1(iv, iR, iV, "iv", 1), 
                                 "assigning variable iv3");
                 }
-                current_statement_begin__ = 131;
+                current_statement_begin__ = 139;
                 stan::model::assign(iv3, 
                             stan::model::cons_list(stan::model::index_uni(iR), stan::model::cons_list(stan::model::index_uni((varsN + 1)), stan::model::nil_index_list())), 
                             1, 
@@ -543,25 +619,25 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 135;
-            validate_non_negative_index("scale", "3", 3);
+            current_statement_begin__ = 143;
+            validate_non_negative_index("log_scale", "3", 3);
             num_params_r__ += (1 * 3);
-            current_statement_begin__ = 136;
-            validate_non_negative_index("shearX", "shearXN", shearXN);
+            current_statement_begin__ = 144;
+            validate_non_negative_index("log_shearX", "shearXN", shearXN);
             num_params_r__ += (1 * shearXN);
-            current_statement_begin__ = 137;
-            validate_non_negative_index("shearY", "shearYN", shearYN);
+            current_statement_begin__ = 145;
+            validate_non_negative_index("log_shearY", "shearYN", shearYN);
             num_params_r__ += (1 * shearYN);
-            current_statement_begin__ = 138;
-            validate_non_negative_index("shearZ", "shearZN", shearZN);
+            current_statement_begin__ = 146;
+            validate_non_negative_index("log_shearZ", "shearZN", shearZN);
             num_params_r__ += (1 * shearZN);
-            current_statement_begin__ = 139;
+            current_statement_begin__ = 147;
             validate_non_negative_index("rotation", "rotationN", rotationN);
             num_params_r__ += (1 * rotationN);
-            current_statement_begin__ = 140;
+            current_statement_begin__ = 148;
             validate_non_negative_index("translation", "3", 3);
             num_params_r__ += (1 * 3);
-            current_statement_begin__ = 142;
+            current_statement_begin__ = 150;
             validate_non_negative_index("sigma", "3", 3);
             num_params_r__ += (1 * 3);
         } catch (const std::exception& e) {
@@ -581,87 +657,87 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 135;
-        if (!(context__.contains_r("scale")))
-            stan::lang::rethrow_located(std::runtime_error(std::string("Variable scale missing")), current_statement_begin__, prog_reader__());
-        vals_r__ = context__.vals_r("scale");
+        current_statement_begin__ = 143;
+        if (!(context__.contains_r("log_scale")))
+            stan::lang::rethrow_located(std::runtime_error(std::string("Variable log_scale missing")), current_statement_begin__, prog_reader__());
+        vals_r__ = context__.vals_r("log_scale");
         pos__ = 0U;
-        validate_non_negative_index("scale", "3", 3);
-        context__.validate_dims("parameter initialization", "scale", "double", context__.to_vec(3));
-        std::vector<double> scale(3, double(0));
-        size_t scale_k_0_max__ = 3;
-        for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
-            scale[k_0__] = vals_r__[pos__++];
+        validate_non_negative_index("log_scale", "3", 3);
+        context__.validate_dims("parameter initialization", "log_scale", "double", context__.to_vec(3));
+        std::vector<double> log_scale(3, double(0));
+        size_t log_scale_k_0_max__ = 3;
+        for (size_t k_0__ = 0; k_0__ < log_scale_k_0_max__; ++k_0__) {
+            log_scale[k_0__] = vals_r__[pos__++];
         }
-        size_t scale_i_0_max__ = 3;
-        for (size_t i_0__ = 0; i_0__ < scale_i_0_max__; ++i_0__) {
+        size_t log_scale_i_0_max__ = 3;
+        for (size_t i_0__ = 0; i_0__ < log_scale_i_0_max__; ++i_0__) {
             try {
-                writer__.scalar_lb_unconstrain(0, scale[i_0__]);
+                writer__.scalar_lb_unconstrain(0, log_scale[i_0__]);
             } catch (const std::exception& e) {
-                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable scale: ") + e.what()), current_statement_begin__, prog_reader__());
+                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable log_scale: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 136;
-        if (!(context__.contains_r("shearX")))
-            stan::lang::rethrow_located(std::runtime_error(std::string("Variable shearX missing")), current_statement_begin__, prog_reader__());
-        vals_r__ = context__.vals_r("shearX");
+        current_statement_begin__ = 144;
+        if (!(context__.contains_r("log_shearX")))
+            stan::lang::rethrow_located(std::runtime_error(std::string("Variable log_shearX missing")), current_statement_begin__, prog_reader__());
+        vals_r__ = context__.vals_r("log_shearX");
         pos__ = 0U;
-        validate_non_negative_index("shearX", "shearXN", shearXN);
-        context__.validate_dims("parameter initialization", "shearX", "double", context__.to_vec(shearXN));
-        std::vector<double> shearX(shearXN, double(0));
-        size_t shearX_k_0_max__ = shearXN;
-        for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
-            shearX[k_0__] = vals_r__[pos__++];
+        validate_non_negative_index("log_shearX", "shearXN", shearXN);
+        context__.validate_dims("parameter initialization", "log_shearX", "double", context__.to_vec(shearXN));
+        std::vector<double> log_shearX(shearXN, double(0));
+        size_t log_shearX_k_0_max__ = shearXN;
+        for (size_t k_0__ = 0; k_0__ < log_shearX_k_0_max__; ++k_0__) {
+            log_shearX[k_0__] = vals_r__[pos__++];
         }
-        size_t shearX_i_0_max__ = shearXN;
-        for (size_t i_0__ = 0; i_0__ < shearX_i_0_max__; ++i_0__) {
+        size_t log_shearX_i_0_max__ = shearXN;
+        for (size_t i_0__ = 0; i_0__ < log_shearX_i_0_max__; ++i_0__) {
             try {
-                writer__.scalar_lb_unconstrain(0, shearX[i_0__]);
+                writer__.scalar_lb_unconstrain(0, log_shearX[i_0__]);
             } catch (const std::exception& e) {
-                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable shearX: ") + e.what()), current_statement_begin__, prog_reader__());
+                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable log_shearX: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 137;
-        if (!(context__.contains_r("shearY")))
-            stan::lang::rethrow_located(std::runtime_error(std::string("Variable shearY missing")), current_statement_begin__, prog_reader__());
-        vals_r__ = context__.vals_r("shearY");
+        current_statement_begin__ = 145;
+        if (!(context__.contains_r("log_shearY")))
+            stan::lang::rethrow_located(std::runtime_error(std::string("Variable log_shearY missing")), current_statement_begin__, prog_reader__());
+        vals_r__ = context__.vals_r("log_shearY");
         pos__ = 0U;
-        validate_non_negative_index("shearY", "shearYN", shearYN);
-        context__.validate_dims("parameter initialization", "shearY", "double", context__.to_vec(shearYN));
-        std::vector<double> shearY(shearYN, double(0));
-        size_t shearY_k_0_max__ = shearYN;
-        for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
-            shearY[k_0__] = vals_r__[pos__++];
+        validate_non_negative_index("log_shearY", "shearYN", shearYN);
+        context__.validate_dims("parameter initialization", "log_shearY", "double", context__.to_vec(shearYN));
+        std::vector<double> log_shearY(shearYN, double(0));
+        size_t log_shearY_k_0_max__ = shearYN;
+        for (size_t k_0__ = 0; k_0__ < log_shearY_k_0_max__; ++k_0__) {
+            log_shearY[k_0__] = vals_r__[pos__++];
         }
-        size_t shearY_i_0_max__ = shearYN;
-        for (size_t i_0__ = 0; i_0__ < shearY_i_0_max__; ++i_0__) {
+        size_t log_shearY_i_0_max__ = shearYN;
+        for (size_t i_0__ = 0; i_0__ < log_shearY_i_0_max__; ++i_0__) {
             try {
-                writer__.scalar_lb_unconstrain(0, shearY[i_0__]);
+                writer__.scalar_lb_unconstrain(0, log_shearY[i_0__]);
             } catch (const std::exception& e) {
-                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable shearY: ") + e.what()), current_statement_begin__, prog_reader__());
+                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable log_shearY: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 138;
-        if (!(context__.contains_r("shearZ")))
-            stan::lang::rethrow_located(std::runtime_error(std::string("Variable shearZ missing")), current_statement_begin__, prog_reader__());
-        vals_r__ = context__.vals_r("shearZ");
+        current_statement_begin__ = 146;
+        if (!(context__.contains_r("log_shearZ")))
+            stan::lang::rethrow_located(std::runtime_error(std::string("Variable log_shearZ missing")), current_statement_begin__, prog_reader__());
+        vals_r__ = context__.vals_r("log_shearZ");
         pos__ = 0U;
-        validate_non_negative_index("shearZ", "shearZN", shearZN);
-        context__.validate_dims("parameter initialization", "shearZ", "double", context__.to_vec(shearZN));
-        std::vector<double> shearZ(shearZN, double(0));
-        size_t shearZ_k_0_max__ = shearZN;
-        for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
-            shearZ[k_0__] = vals_r__[pos__++];
+        validate_non_negative_index("log_shearZ", "shearZN", shearZN);
+        context__.validate_dims("parameter initialization", "log_shearZ", "double", context__.to_vec(shearZN));
+        std::vector<double> log_shearZ(shearZN, double(0));
+        size_t log_shearZ_k_0_max__ = shearZN;
+        for (size_t k_0__ = 0; k_0__ < log_shearZ_k_0_max__; ++k_0__) {
+            log_shearZ[k_0__] = vals_r__[pos__++];
         }
-        size_t shearZ_i_0_max__ = shearZN;
-        for (size_t i_0__ = 0; i_0__ < shearZ_i_0_max__; ++i_0__) {
+        size_t log_shearZ_i_0_max__ = shearZN;
+        for (size_t i_0__ = 0; i_0__ < log_shearZ_i_0_max__; ++i_0__) {
             try {
-                writer__.scalar_lb_unconstrain(0, shearZ[i_0__]);
+                writer__.scalar_lb_unconstrain(0, log_shearZ[i_0__]);
             } catch (const std::exception& e) {
-                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable shearZ: ") + e.what()), current_statement_begin__, prog_reader__());
+                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable log_shearZ: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 139;
+        current_statement_begin__ = 147;
         if (!(context__.contains_r("rotation")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable rotation missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("rotation");
@@ -681,7 +757,7 @@ public:
                 stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable rotation: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 140;
+        current_statement_begin__ = 148;
         if (!(context__.contains_r("translation")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable translation missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("translation");
@@ -701,7 +777,7 @@ public:
                 stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable translation: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 142;
+        current_statement_begin__ = 150;
         if (!(context__.contains_r("sigma")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable sigma missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("sigma");
@@ -746,47 +822,47 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 135;
-            std::vector<local_scalar_t__> scale;
-            size_t scale_d_0_max__ = 3;
-            scale.reserve(scale_d_0_max__);
-            for (size_t d_0__ = 0; d_0__ < scale_d_0_max__; ++d_0__) {
+            current_statement_begin__ = 143;
+            std::vector<local_scalar_t__> log_scale;
+            size_t log_scale_d_0_max__ = 3;
+            log_scale.reserve(log_scale_d_0_max__);
+            for (size_t d_0__ = 0; d_0__ < log_scale_d_0_max__; ++d_0__) {
                 if (jacobian__)
-                    scale.push_back(in__.scalar_lb_constrain(0, lp__));
+                    log_scale.push_back(in__.scalar_lb_constrain(0, lp__));
                 else
-                    scale.push_back(in__.scalar_lb_constrain(0));
+                    log_scale.push_back(in__.scalar_lb_constrain(0));
             }
-            current_statement_begin__ = 136;
-            std::vector<local_scalar_t__> shearX;
-            size_t shearX_d_0_max__ = shearXN;
-            shearX.reserve(shearX_d_0_max__);
-            for (size_t d_0__ = 0; d_0__ < shearX_d_0_max__; ++d_0__) {
+            current_statement_begin__ = 144;
+            std::vector<local_scalar_t__> log_shearX;
+            size_t log_shearX_d_0_max__ = shearXN;
+            log_shearX.reserve(log_shearX_d_0_max__);
+            for (size_t d_0__ = 0; d_0__ < log_shearX_d_0_max__; ++d_0__) {
                 if (jacobian__)
-                    shearX.push_back(in__.scalar_lb_constrain(0, lp__));
+                    log_shearX.push_back(in__.scalar_lb_constrain(0, lp__));
                 else
-                    shearX.push_back(in__.scalar_lb_constrain(0));
+                    log_shearX.push_back(in__.scalar_lb_constrain(0));
             }
-            current_statement_begin__ = 137;
-            std::vector<local_scalar_t__> shearY;
-            size_t shearY_d_0_max__ = shearYN;
-            shearY.reserve(shearY_d_0_max__);
-            for (size_t d_0__ = 0; d_0__ < shearY_d_0_max__; ++d_0__) {
+            current_statement_begin__ = 145;
+            std::vector<local_scalar_t__> log_shearY;
+            size_t log_shearY_d_0_max__ = shearYN;
+            log_shearY.reserve(log_shearY_d_0_max__);
+            for (size_t d_0__ = 0; d_0__ < log_shearY_d_0_max__; ++d_0__) {
                 if (jacobian__)
-                    shearY.push_back(in__.scalar_lb_constrain(0, lp__));
+                    log_shearY.push_back(in__.scalar_lb_constrain(0, lp__));
                 else
-                    shearY.push_back(in__.scalar_lb_constrain(0));
+                    log_shearY.push_back(in__.scalar_lb_constrain(0));
             }
-            current_statement_begin__ = 138;
-            std::vector<local_scalar_t__> shearZ;
-            size_t shearZ_d_0_max__ = shearZN;
-            shearZ.reserve(shearZ_d_0_max__);
-            for (size_t d_0__ = 0; d_0__ < shearZ_d_0_max__; ++d_0__) {
+            current_statement_begin__ = 146;
+            std::vector<local_scalar_t__> log_shearZ;
+            size_t log_shearZ_d_0_max__ = shearZN;
+            log_shearZ.reserve(log_shearZ_d_0_max__);
+            for (size_t d_0__ = 0; d_0__ < log_shearZ_d_0_max__; ++d_0__) {
                 if (jacobian__)
-                    shearZ.push_back(in__.scalar_lb_constrain(0, lp__));
+                    log_shearZ.push_back(in__.scalar_lb_constrain(0, lp__));
                 else
-                    shearZ.push_back(in__.scalar_lb_constrain(0));
+                    log_shearZ.push_back(in__.scalar_lb_constrain(0));
             }
-            current_statement_begin__ = 139;
+            current_statement_begin__ = 147;
             std::vector<local_scalar_t__> rotation;
             size_t rotation_d_0_max__ = rotationN;
             rotation.reserve(rotation_d_0_max__);
@@ -796,7 +872,7 @@ public:
                 else
                     rotation.push_back(in__.scalar_constrain());
             }
-            current_statement_begin__ = 140;
+            current_statement_begin__ = 148;
             std::vector<local_scalar_t__> translation;
             size_t translation_d_0_max__ = 3;
             translation.reserve(translation_d_0_max__);
@@ -806,7 +882,7 @@ public:
                 else
                     translation.push_back(in__.scalar_constrain());
             }
-            current_statement_begin__ = 142;
+            current_statement_begin__ = 150;
             std::vector<local_scalar_t__> sigma;
             size_t sigma_d_0_max__ = 3;
             sigma.reserve(sigma_d_0_max__);
@@ -817,7 +893,28 @@ public:
                     sigma.push_back(in__.scalar_lb_constrain(0));
             }
             // transformed parameters
-            current_statement_begin__ = 145;
+            current_statement_begin__ = 153;
+            validate_non_negative_index("scale", "3", 3);
+            std::vector<local_scalar_t__> scale(3, local_scalar_t__(0));
+            stan::math::initialize(scale, DUMMY_VAR__);
+            stan::math::fill(scale, DUMMY_VAR__);
+            stan::math::assign(scale,stan::math::exp(log_scale));
+            current_statement_begin__ = 154;
+            validate_non_negative_index("shearX", "shearXN", shearXN);
+            std::vector<local_scalar_t__> shearX(shearXN, local_scalar_t__(0));
+            stan::math::initialize(shearX, DUMMY_VAR__);
+            stan::math::fill(shearX, DUMMY_VAR__);
+            current_statement_begin__ = 155;
+            validate_non_negative_index("shearY", "shearYN", shearYN);
+            std::vector<local_scalar_t__> shearY(shearYN, local_scalar_t__(0));
+            stan::math::initialize(shearY, DUMMY_VAR__);
+            stan::math::fill(shearY, DUMMY_VAR__);
+            current_statement_begin__ = 156;
+            validate_non_negative_index("shearZ", "shearZN", shearZN);
+            std::vector<local_scalar_t__> shearZ(shearZN, local_scalar_t__(0));
+            stan::math::initialize(shearZ, DUMMY_VAR__);
+            stan::math::fill(shearZ, DUMMY_VAR__);
+            current_statement_begin__ = 158;
             validate_non_negative_index("predicted", "rowsN", rowsN);
             validate_non_negative_index("predicted", "3", 3);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> predicted(rowsN, 3);
@@ -825,47 +922,89 @@ public:
             stan::math::fill(predicted, DUMMY_VAR__);
             // transformed parameters block statements
             {
-            current_statement_begin__ = 147;
+            current_statement_begin__ = 160;
             validate_non_negative_index("transform_matrix", "4", 4);
             validate_non_negative_index("transform_matrix", "4", 4);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> transform_matrix(4, 4);
             stan::math::initialize(transform_matrix, DUMMY_VAR__);
             stan::math::fill(transform_matrix, DUMMY_VAR__);
             stan::math::assign(transform_matrix,scale_matrix(get_base1(scale, 1, "scale", 1), get_base1(scale, 2, "scale", 1), get_base1(scale, 3, "scale", 1), pstream__));
-            current_statement_begin__ = 148;
+            current_statement_begin__ = 161;
             if (as_bool(shear_x)) {
-                current_statement_begin__ = 148;
+                current_statement_begin__ = 162;
+                stan::math::assign(shearX, stan::math::exp(log_shearX));
+                current_statement_begin__ = 163;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, shear_x_matrix(get_base1(shearX, 1, "shearX", 1), get_base1(shearX, 2, "shearX", 1), pstream__)));
             }
-            current_statement_begin__ = 149;
+            current_statement_begin__ = 165;
             if (as_bool(logical_eq(transform, projective))) {
-                current_statement_begin__ = 150;
+                current_statement_begin__ = 166;
+                stan::math::assign(shearY, stan::math::exp(log_shearY));
+                current_statement_begin__ = 167;
+                stan::math::assign(shearZ, stan::math::exp(log_shearZ));
+                current_statement_begin__ = 168;
                 stan::math::assign(transform_matrix, multiply(multiply(transform_matrix, shear_y_matrix(get_base1(shearY, 1, "shearY", 1), get_base1(shearY, 2, "shearY", 1), pstream__)), shear_z_matrix(get_base1(shearZ, 1, "shearZ", 1), get_base1(shearZ, 2, "shearZ", 1), pstream__)));
             }
-            current_statement_begin__ = 154;
+            current_statement_begin__ = 172;
             if (as_bool(rotate_x)) {
-                current_statement_begin__ = 154;
+                current_statement_begin__ = 172;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_x_matrix(get_base1(rotation, irotate_x, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 155;
+            current_statement_begin__ = 173;
             if (as_bool(rotate_y)) {
-                current_statement_begin__ = 155;
+                current_statement_begin__ = 173;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_y_matrix(get_base1(rotation, irotate_y, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 156;
+            current_statement_begin__ = 174;
             if (as_bool(rotate_z)) {
-                current_statement_begin__ = 156;
+                current_statement_begin__ = 174;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_z_matrix(get_base1(rotation, irotate_z, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 158;
+            current_statement_begin__ = 176;
             stan::math::assign(transform_matrix, multiply(transform_matrix, translation_matrix(get_base1(translation, 1, "translation", 1), get_base1(translation, 2, "translation", 1), get_base1(translation, 3, "translation", 1), pstream__)));
-            current_statement_begin__ = 160;
+            current_statement_begin__ = 178;
             stan::math::assign(predicted, block(multiply(iv3, transform_matrix), 1, 1, rowsN, 3));
             }
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 145;
+            current_statement_begin__ = 153;
+            size_t scale_k_0_max__ = 3;
+            for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+                if (stan::math::is_uninitialized(scale[k_0__])) {
+                    std::stringstream msg__;
+                    msg__ << "Undefined transformed parameter: scale" << "[" << k_0__ << "]";
+                    stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable scale: ") + msg__.str()), current_statement_begin__, prog_reader__());
+                }
+            }
+            current_statement_begin__ = 154;
+            size_t shearX_k_0_max__ = shearXN;
+            for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+                if (stan::math::is_uninitialized(shearX[k_0__])) {
+                    std::stringstream msg__;
+                    msg__ << "Undefined transformed parameter: shearX" << "[" << k_0__ << "]";
+                    stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable shearX: ") + msg__.str()), current_statement_begin__, prog_reader__());
+                }
+            }
+            current_statement_begin__ = 155;
+            size_t shearY_k_0_max__ = shearYN;
+            for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+                if (stan::math::is_uninitialized(shearY[k_0__])) {
+                    std::stringstream msg__;
+                    msg__ << "Undefined transformed parameter: shearY" << "[" << k_0__ << "]";
+                    stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable shearY: ") + msg__.str()), current_statement_begin__, prog_reader__());
+                }
+            }
+            current_statement_begin__ = 156;
+            size_t shearZ_k_0_max__ = shearZN;
+            for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+                if (stan::math::is_uninitialized(shearZ[k_0__])) {
+                    std::stringstream msg__;
+                    msg__ << "Undefined transformed parameter: shearZ" << "[" << k_0__ << "]";
+                    stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable shearZ: ") + msg__.str()), current_statement_begin__, prog_reader__());
+                }
+            }
+            current_statement_begin__ = 158;
             size_t predicted_j_1_max__ = rowsN;
             size_t predicted_j_2_max__ = 3;
             for (size_t j_1__ = 0; j_1__ < predicted_j_1_max__; ++j_1__) {
@@ -878,36 +1017,42 @@ public:
                 }
             }
             // model body
-            current_statement_begin__ = 164;
-            lp_accum__.add(lognormal_log<propto__>(scale, 1, 1));
-            current_statement_begin__ = 165;
+            current_statement_begin__ = 182;
+            lp_accum__.add(normal_log<propto__>(log_scale, get_base1(scale_prior, 1, "scale_prior", 1), get_base1(scale_prior, 2, "scale_prior", 1)));
+            current_statement_begin__ = 183;
             if (as_bool(logical_gt(shearXN, 0))) {
-                current_statement_begin__ = 165;
-                lp_accum__.add(lognormal_log<propto__>(shearX, 1, 1));
+                current_statement_begin__ = 183;
+                lp_accum__.add(normal_log<propto__>(log_shearX, get_base1(sheer_prior, 1, "sheer_prior", 1), get_base1(sheer_prior, 1, "sheer_prior", 1)));
             }
-            current_statement_begin__ = 166;
+            current_statement_begin__ = 184;
             if (as_bool(logical_gt(shearYN, 0))) {
-                current_statement_begin__ = 166;
-                lp_accum__.add(lognormal_log<propto__>(shearY, 1, 1));
+                current_statement_begin__ = 184;
+                lp_accum__.add(normal_log<propto__>(log_shearY, get_base1(sheer_prior, 1, "sheer_prior", 1), get_base1(sheer_prior, 1, "sheer_prior", 1)));
             }
-            current_statement_begin__ = 167;
+            current_statement_begin__ = 185;
             if (as_bool(logical_gt(shearZN, 0))) {
-                current_statement_begin__ = 167;
-                lp_accum__.add(lognormal_log<propto__>(shearZ, 1, 1));
+                current_statement_begin__ = 185;
+                lp_accum__.add(normal_log<propto__>(log_shearZ, get_base1(sheer_prior, 1, "sheer_prior", 1), get_base1(sheer_prior, 1, "sheer_prior", 1)));
             }
-            current_statement_begin__ = 168;
-            lp_accum__.add(normal_log<propto__>(rotation, 0, 10));
-            current_statement_begin__ = 169;
-            lp_accum__.add(normal_log<propto__>(translation, 0, 10));
-            current_statement_begin__ = 171;
-            lp_accum__.add(cauchy_log<propto__>(sigma, 0, 1));
-            current_statement_begin__ = 173;
+            current_statement_begin__ = 186;
+            if (as_bool(logical_eq(normal_rotation_prior, 1))) {
+                current_statement_begin__ = 187;
+                lp_accum__.add(normal_log<propto__>(rotation, get_base1(rotation_prior, 1, "rotation_prior", 1), get_base1(rotation_prior, 2, "rotation_prior", 1)));
+            } else {
+                current_statement_begin__ = 190;
+                lp_accum__.add(uniform_log<propto__>(rotation, -(stan::math::pi()), stan::math::pi()));
+            }
+            current_statement_begin__ = 193;
+            lp_accum__.add(normal_log<propto__>(translation, get_base1(translation_prior, 1, "translation_prior", 1), get_base1(translation_prior, 2, "translation_prior", 1)));
+            current_statement_begin__ = 195;
+            lp_accum__.add(exponential_log<propto__>(sigma, sigma_prior));
+            current_statement_begin__ = 197;
             for (int iR = 1; iR <= rowsN; ++iR) {
-                current_statement_begin__ = 174;
+                current_statement_begin__ = 198;
                 lp_accum__.add(normal_log<propto__>(get_base1(dv, iR, 1, "dv", 1), get_base1(predicted, iR, 1, "predicted", 1), get_base1(sigma, 1, "sigma", 1)));
-                current_statement_begin__ = 175;
+                current_statement_begin__ = 199;
                 lp_accum__.add(normal_log<propto__>(get_base1(dv, iR, 2, "dv", 1), get_base1(predicted, iR, 2, "predicted", 1), get_base1(sigma, 2, "sigma", 1)));
-                current_statement_begin__ = 176;
+                current_statement_begin__ = 200;
                 lp_accum__.add(normal_log<propto__>(get_base1(dv, iR, 3, "dv", 1), get_base1(predicted, iR, 3, "predicted", 1), get_base1(sigma, 3, "sigma", 1)));
             }
         } catch (const std::exception& e) {
@@ -930,13 +1075,17 @@ public:
     }
     void get_param_names(std::vector<std::string>& names__) const {
         names__.resize(0);
+        names__.push_back("log_scale");
+        names__.push_back("log_shearX");
+        names__.push_back("log_shearY");
+        names__.push_back("log_shearZ");
+        names__.push_back("rotation");
+        names__.push_back("translation");
+        names__.push_back("sigma");
         names__.push_back("scale");
         names__.push_back("shearX");
         names__.push_back("shearY");
         names__.push_back("shearZ");
-        names__.push_back("rotation");
-        names__.push_back("translation");
-        names__.push_back("sigma");
         names__.push_back("predicted");
         names__.push_back("log_lik");
     }
@@ -965,6 +1114,18 @@ public:
         dims__.push_back(3);
         dimss__.push_back(dims__);
         dims__.resize(0);
+        dims__.push_back(3);
+        dimss__.push_back(dims__);
+        dims__.resize(0);
+        dims__.push_back(shearXN);
+        dimss__.push_back(dims__);
+        dims__.resize(0);
+        dims__.push_back(shearYN);
+        dimss__.push_back(dims__);
+        dims__.resize(0);
+        dims__.push_back(shearZN);
+        dimss__.push_back(dims__);
+        dims__.resize(0);
         dims__.push_back(rowsN);
         dims__.push_back(3);
         dimss__.push_back(dims__);
@@ -986,45 +1147,45 @@ public:
         static const char* function__ = "model_tri_namespace::write_array";
         (void) function__;  // dummy to suppress unused var warning
         // read-transform, write parameters
-        std::vector<double> scale;
-        size_t scale_d_0_max__ = 3;
-        scale.reserve(scale_d_0_max__);
-        for (size_t d_0__ = 0; d_0__ < scale_d_0_max__; ++d_0__) {
-            scale.push_back(in__.scalar_lb_constrain(0));
+        std::vector<double> log_scale;
+        size_t log_scale_d_0_max__ = 3;
+        log_scale.reserve(log_scale_d_0_max__);
+        for (size_t d_0__ = 0; d_0__ < log_scale_d_0_max__; ++d_0__) {
+            log_scale.push_back(in__.scalar_lb_constrain(0));
         }
-        size_t scale_k_0_max__ = 3;
-        for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
-            vars__.push_back(scale[k_0__]);
+        size_t log_scale_k_0_max__ = 3;
+        for (size_t k_0__ = 0; k_0__ < log_scale_k_0_max__; ++k_0__) {
+            vars__.push_back(log_scale[k_0__]);
         }
-        std::vector<double> shearX;
-        size_t shearX_d_0_max__ = shearXN;
-        shearX.reserve(shearX_d_0_max__);
-        for (size_t d_0__ = 0; d_0__ < shearX_d_0_max__; ++d_0__) {
-            shearX.push_back(in__.scalar_lb_constrain(0));
+        std::vector<double> log_shearX;
+        size_t log_shearX_d_0_max__ = shearXN;
+        log_shearX.reserve(log_shearX_d_0_max__);
+        for (size_t d_0__ = 0; d_0__ < log_shearX_d_0_max__; ++d_0__) {
+            log_shearX.push_back(in__.scalar_lb_constrain(0));
         }
-        size_t shearX_k_0_max__ = shearXN;
-        for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
-            vars__.push_back(shearX[k_0__]);
+        size_t log_shearX_k_0_max__ = shearXN;
+        for (size_t k_0__ = 0; k_0__ < log_shearX_k_0_max__; ++k_0__) {
+            vars__.push_back(log_shearX[k_0__]);
         }
-        std::vector<double> shearY;
-        size_t shearY_d_0_max__ = shearYN;
-        shearY.reserve(shearY_d_0_max__);
-        for (size_t d_0__ = 0; d_0__ < shearY_d_0_max__; ++d_0__) {
-            shearY.push_back(in__.scalar_lb_constrain(0));
+        std::vector<double> log_shearY;
+        size_t log_shearY_d_0_max__ = shearYN;
+        log_shearY.reserve(log_shearY_d_0_max__);
+        for (size_t d_0__ = 0; d_0__ < log_shearY_d_0_max__; ++d_0__) {
+            log_shearY.push_back(in__.scalar_lb_constrain(0));
         }
-        size_t shearY_k_0_max__ = shearYN;
-        for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
-            vars__.push_back(shearY[k_0__]);
+        size_t log_shearY_k_0_max__ = shearYN;
+        for (size_t k_0__ = 0; k_0__ < log_shearY_k_0_max__; ++k_0__) {
+            vars__.push_back(log_shearY[k_0__]);
         }
-        std::vector<double> shearZ;
-        size_t shearZ_d_0_max__ = shearZN;
-        shearZ.reserve(shearZ_d_0_max__);
-        for (size_t d_0__ = 0; d_0__ < shearZ_d_0_max__; ++d_0__) {
-            shearZ.push_back(in__.scalar_lb_constrain(0));
+        std::vector<double> log_shearZ;
+        size_t log_shearZ_d_0_max__ = shearZN;
+        log_shearZ.reserve(log_shearZ_d_0_max__);
+        for (size_t d_0__ = 0; d_0__ < log_shearZ_d_0_max__; ++d_0__) {
+            log_shearZ.push_back(in__.scalar_lb_constrain(0));
         }
-        size_t shearZ_k_0_max__ = shearZN;
-        for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
-            vars__.push_back(shearZ[k_0__]);
+        size_t log_shearZ_k_0_max__ = shearZN;
+        for (size_t k_0__ = 0; k_0__ < log_shearZ_k_0_max__; ++k_0__) {
+            vars__.push_back(log_shearZ[k_0__]);
         }
         std::vector<double> rotation;
         size_t rotation_d_0_max__ = rotationN;
@@ -1064,7 +1225,28 @@ public:
         if (!include_tparams__ && !include_gqs__) return;
         try {
             // declare and define transformed parameters
-            current_statement_begin__ = 145;
+            current_statement_begin__ = 153;
+            validate_non_negative_index("scale", "3", 3);
+            std::vector<double> scale(3, double(0));
+            stan::math::initialize(scale, DUMMY_VAR__);
+            stan::math::fill(scale, DUMMY_VAR__);
+            stan::math::assign(scale,stan::math::exp(log_scale));
+            current_statement_begin__ = 154;
+            validate_non_negative_index("shearX", "shearXN", shearXN);
+            std::vector<double> shearX(shearXN, double(0));
+            stan::math::initialize(shearX, DUMMY_VAR__);
+            stan::math::fill(shearX, DUMMY_VAR__);
+            current_statement_begin__ = 155;
+            validate_non_negative_index("shearY", "shearYN", shearYN);
+            std::vector<double> shearY(shearYN, double(0));
+            stan::math::initialize(shearY, DUMMY_VAR__);
+            stan::math::fill(shearY, DUMMY_VAR__);
+            current_statement_begin__ = 156;
+            validate_non_negative_index("shearZ", "shearZN", shearZN);
+            std::vector<double> shearZ(shearZN, double(0));
+            stan::math::initialize(shearZ, DUMMY_VAR__);
+            stan::math::fill(shearZ, DUMMY_VAR__);
+            current_statement_begin__ = 158;
             validate_non_negative_index("predicted", "rowsN", rowsN);
             validate_non_negative_index("predicted", "3", 3);
             Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> predicted(rowsN, 3);
@@ -1072,41 +1254,47 @@ public:
             stan::math::fill(predicted, DUMMY_VAR__);
             // do transformed parameters statements
             {
-            current_statement_begin__ = 147;
+            current_statement_begin__ = 160;
             validate_non_negative_index("transform_matrix", "4", 4);
             validate_non_negative_index("transform_matrix", "4", 4);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> transform_matrix(4, 4);
             stan::math::initialize(transform_matrix, DUMMY_VAR__);
             stan::math::fill(transform_matrix, DUMMY_VAR__);
             stan::math::assign(transform_matrix,scale_matrix(get_base1(scale, 1, "scale", 1), get_base1(scale, 2, "scale", 1), get_base1(scale, 3, "scale", 1), pstream__));
-            current_statement_begin__ = 148;
+            current_statement_begin__ = 161;
             if (as_bool(shear_x)) {
-                current_statement_begin__ = 148;
+                current_statement_begin__ = 162;
+                stan::math::assign(shearX, stan::math::exp(log_shearX));
+                current_statement_begin__ = 163;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, shear_x_matrix(get_base1(shearX, 1, "shearX", 1), get_base1(shearX, 2, "shearX", 1), pstream__)));
             }
-            current_statement_begin__ = 149;
+            current_statement_begin__ = 165;
             if (as_bool(logical_eq(transform, projective))) {
-                current_statement_begin__ = 150;
+                current_statement_begin__ = 166;
+                stan::math::assign(shearY, stan::math::exp(log_shearY));
+                current_statement_begin__ = 167;
+                stan::math::assign(shearZ, stan::math::exp(log_shearZ));
+                current_statement_begin__ = 168;
                 stan::math::assign(transform_matrix, multiply(multiply(transform_matrix, shear_y_matrix(get_base1(shearY, 1, "shearY", 1), get_base1(shearY, 2, "shearY", 1), pstream__)), shear_z_matrix(get_base1(shearZ, 1, "shearZ", 1), get_base1(shearZ, 2, "shearZ", 1), pstream__)));
             }
-            current_statement_begin__ = 154;
+            current_statement_begin__ = 172;
             if (as_bool(rotate_x)) {
-                current_statement_begin__ = 154;
+                current_statement_begin__ = 172;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_x_matrix(get_base1(rotation, irotate_x, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 155;
+            current_statement_begin__ = 173;
             if (as_bool(rotate_y)) {
-                current_statement_begin__ = 155;
+                current_statement_begin__ = 173;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_y_matrix(get_base1(rotation, irotate_y, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 156;
+            current_statement_begin__ = 174;
             if (as_bool(rotate_z)) {
-                current_statement_begin__ = 156;
+                current_statement_begin__ = 174;
                 stan::math::assign(transform_matrix, multiply(transform_matrix, rotation_z_matrix(get_base1(rotation, irotate_z, "rotation", 1), pstream__)));
             }
-            current_statement_begin__ = 158;
+            current_statement_begin__ = 176;
             stan::math::assign(transform_matrix, multiply(transform_matrix, translation_matrix(get_base1(translation, 1, "translation", 1), get_base1(translation, 2, "translation", 1), get_base1(translation, 3, "translation", 1), pstream__)));
-            current_statement_begin__ = 160;
+            current_statement_begin__ = 178;
             stan::math::assign(predicted, block(multiply(iv3, transform_matrix), 1, 1, rowsN, 3));
             }
             if (!include_gqs__ && !include_tparams__) return;
@@ -1115,6 +1303,22 @@ public:
             (void) function__;  // dummy to suppress unused var warning
             // write transformed parameters
             if (include_tparams__) {
+                size_t scale_k_0_max__ = 3;
+                for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+                    vars__.push_back(scale[k_0__]);
+                }
+                size_t shearX_k_0_max__ = shearXN;
+                for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+                    vars__.push_back(shearX[k_0__]);
+                }
+                size_t shearY_k_0_max__ = shearYN;
+                for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+                    vars__.push_back(shearY[k_0__]);
+                }
+                size_t shearZ_k_0_max__ = shearZN;
+                for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+                    vars__.push_back(shearZ[k_0__]);
+                }
                 size_t predicted_j_2_max__ = 3;
                 size_t predicted_j_1_max__ = rowsN;
                 for (size_t j_2__ = 0; j_2__ < predicted_j_2_max__; ++j_2__) {
@@ -1125,32 +1329,32 @@ public:
             }
             if (!include_gqs__) return;
             // declare and define generated quantities
-            current_statement_begin__ = 180;
+            current_statement_begin__ = 204;
             validate_non_negative_index("log_lik", "(3 * rowsN)", (3 * rowsN));
             std::vector<double> log_lik((3 * rowsN), double(0));
             stan::math::initialize(log_lik, DUMMY_VAR__);
             stan::math::fill(log_lik, DUMMY_VAR__);
             // generated quantities statements
-            current_statement_begin__ = 181;
+            current_statement_begin__ = 205;
             for (int iR = 1; iR <= rowsN; ++iR) {
-                current_statement_begin__ = 182;
+                current_statement_begin__ = 206;
                 stan::model::assign(log_lik, 
                             stan::model::cons_list(stan::model::index_uni(iR), stan::model::nil_index_list()), 
                             normal_log(get_base1(dv, iR, 1, "dv", 1), get_base1(predicted, iR, 1, "predicted", 1), get_base1(sigma, 1, "sigma", 1)), 
                             "assigning variable log_lik");
-                current_statement_begin__ = 183;
+                current_statement_begin__ = 207;
                 stan::model::assign(log_lik, 
                             stan::model::cons_list(stan::model::index_uni((iR + rowsN)), stan::model::nil_index_list()), 
                             normal_log(get_base1(dv, iR, 2, "dv", 1), get_base1(predicted, iR, 2, "predicted", 1), get_base1(sigma, 2, "sigma", 1)), 
                             "assigning variable log_lik");
-                current_statement_begin__ = 184;
+                current_statement_begin__ = 208;
                 stan::model::assign(log_lik, 
                             stan::model::cons_list(stan::model::index_uni((iR + (2 * rowsN))), stan::model::nil_index_list()), 
                             normal_log(get_base1(dv, iR, 3, "dv", 1), get_base1(predicted, iR, 3, "predicted", 1), get_base1(sigma, 3, "sigma", 1)), 
                             "assigning variable log_lik");
             }
             // validate, write generated quantities
-            current_statement_begin__ = 180;
+            current_statement_begin__ = 204;
             size_t log_lik_k_0_max__ = (3 * rowsN);
             for (size_t k_0__ = 0; k_0__ < log_lik_k_0_max__; ++k_0__) {
                 vars__.push_back(log_lik[k_0__]);
@@ -1185,28 +1389,28 @@ public:
                                  bool include_tparams__ = true,
                                  bool include_gqs__ = true) const {
         std::stringstream param_name_stream__;
-        size_t scale_k_0_max__ = 3;
-        for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+        size_t log_scale_k_0_max__ = 3;
+        for (size_t k_0__ = 0; k_0__ < log_scale_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "scale" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_scale" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearX_k_0_max__ = shearXN;
-        for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+        size_t log_shearX_k_0_max__ = shearXN;
+        for (size_t k_0__ = 0; k_0__ < log_shearX_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearX" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearX" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearY_k_0_max__ = shearYN;
-        for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+        size_t log_shearY_k_0_max__ = shearYN;
+        for (size_t k_0__ = 0; k_0__ < log_shearY_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearY" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearY" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearZ_k_0_max__ = shearZN;
-        for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+        size_t log_shearZ_k_0_max__ = shearZN;
+        for (size_t k_0__ = 0; k_0__ < log_shearZ_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearZ" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearZ" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
         size_t rotation_k_0_max__ = rotationN;
@@ -1229,6 +1433,30 @@ public:
         }
         if (!include_gqs__ && !include_tparams__) return;
         if (include_tparams__) {
+            size_t scale_k_0_max__ = 3;
+            for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "scale" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearX_k_0_max__ = shearXN;
+            for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearX" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearY_k_0_max__ = shearYN;
+            for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearY" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearZ_k_0_max__ = shearZN;
+            for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearZ" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
             size_t predicted_j_2_max__ = 3;
             size_t predicted_j_1_max__ = rowsN;
             for (size_t j_2__ = 0; j_2__ < predicted_j_2_max__; ++j_2__) {
@@ -1251,28 +1479,28 @@ public:
                                    bool include_tparams__ = true,
                                    bool include_gqs__ = true) const {
         std::stringstream param_name_stream__;
-        size_t scale_k_0_max__ = 3;
-        for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+        size_t log_scale_k_0_max__ = 3;
+        for (size_t k_0__ = 0; k_0__ < log_scale_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "scale" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_scale" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearX_k_0_max__ = shearXN;
-        for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+        size_t log_shearX_k_0_max__ = shearXN;
+        for (size_t k_0__ = 0; k_0__ < log_shearX_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearX" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearX" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearY_k_0_max__ = shearYN;
-        for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+        size_t log_shearY_k_0_max__ = shearYN;
+        for (size_t k_0__ = 0; k_0__ < log_shearY_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearY" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearY" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t shearZ_k_0_max__ = shearZN;
-        for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+        size_t log_shearZ_k_0_max__ = shearZN;
+        for (size_t k_0__ = 0; k_0__ < log_shearZ_k_0_max__; ++k_0__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "shearZ" << '.' << k_0__ + 1;
+            param_name_stream__ << "log_shearZ" << '.' << k_0__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
         size_t rotation_k_0_max__ = rotationN;
@@ -1295,6 +1523,30 @@ public:
         }
         if (!include_gqs__ && !include_tparams__) return;
         if (include_tparams__) {
+            size_t scale_k_0_max__ = 3;
+            for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "scale" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearX_k_0_max__ = shearXN;
+            for (size_t k_0__ = 0; k_0__ < shearX_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearX" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearY_k_0_max__ = shearYN;
+            for (size_t k_0__ = 0; k_0__ < shearY_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearY" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
+            size_t shearZ_k_0_max__ = shearZN;
+            for (size_t k_0__ = 0; k_0__ < shearZ_k_0_max__; ++k_0__) {
+                param_name_stream__.str(std::string());
+                param_name_stream__ << "shearZ" << '.' << k_0__ + 1;
+                param_names__.push_back(param_name_stream__.str());
+            }
             size_t predicted_j_2_max__ = 3;
             size_t predicted_j_1_max__ = rowsN;
             for (size_t j_2__ = 0; j_2__ < predicted_j_2_max__; ++j_2__) {
