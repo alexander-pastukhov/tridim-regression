@@ -87,10 +87,10 @@ tridim_transform <- function(transformation,
   for(param_prior_name in names(prior_defaults)){
     if (param_prior_name %in% names(priors)) {
       check_normal_prior(priors[param_prior_name], param_prior_name)
-      object$data[[sprintf('%s_prior', param_prior_name)]] <- priors[param_prior_name]
+      object$data[[sprintf('%s_prior', param_prior_name)]] <- unname(priors[[param_prior_name]])
     }
     else {
-      object$data[[sprintf('%s_prior', param_prior_name)]] <- prior_defaults[param_prior_name]
+      object$data[[sprintf('%s_prior', param_prior_name)]] <- unname(prior_defaults[[param_prior_name]])
     }
   }
 
@@ -98,7 +98,7 @@ tridim_transform <- function(transformation,
   object$data[["normal_rotation_prior"]] <- as.integer("rotation" %in% names(priors))
   if ("sigma" %in% names(priors)) {
     check_exponential_prior(priors["sigma"], "sigma")
-    object$data[["sigma_prior"]] <- priors["sigma"]
+    object$data[["sigma_prior"]] <- unname(priors[["sigma"]])
   }
   else {
     object$data[["sigma_prior"]] <- 1

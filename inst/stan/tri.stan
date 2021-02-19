@@ -5,6 +5,7 @@ functions{
 }
 data{
 #include /data/common_data.stan
+#include /data/common_priors.stan
 }
 transformed data{
   // symbolic constants for transforms
@@ -36,21 +37,31 @@ transformed data{
 #include /transformed_data/add_dimension.stan
 }
 parameters{
-  real<lower=0> scale[3];
-  real<lower=0> shearX[shearXN];
-  real<lower=0> shearY[shearYN];
-  real<lower=0> shearZ[shearZN];
+  real<lower=0> log_scale[3];
+  real<lower=0> log_shearX[shearXN];
+  real<lower=0> log_shearY[shearYN];
+  real<lower=0> log_shearZ[shearZN];
   real rotation[rotationN];
   real translation[3];
 
   real<lower=0> sigma[3];
 }
 transformed parameters{
+  real scale[3] = exp(log_scale);
+  real shearX[shearXN];
+  real shearY[shearYN];
+  real shearZ[shearZN];
+
   matrix[rowsN, 3] predicted;
   {
     matrix[4, 4] transform_matrix = scale_matrix(scale[1], scale[2], scale[3]);
-    if (shear_x) transform_matrix = transform_matrix * shear_x_matrix(shearX[1], shearX[2]);
+    if (shear_x) {
+      shearX = exp(log_shearX);
+      transform_matrix = transform_matrix * shear_x_matrix(shearX[1], shearX[2]);
+    }
     if (transform == projective) {
+      shearY = exp(log_shearY);
+      shearZ = exp(log_shearZ);
       transform_matrix = transform_matrix *
                          shear_y_matrix(shearY[1], shearY[2]) *
                          shear_z_matrix(shearZ[1], shearZ[2]);
@@ -65,14 +76,20 @@ transformed parameters{
   }
 }
 model{
-  scale ~ lognormal(1, 1);
-  if (shearXN > 0) shearX ~ lognormal(1, 1);
-  if (shearYN > 0) shearY ~ lognormal(1, 1);
-  if (shearZN > 0) shearZ ~ lognormal(1, 1);
-  rotation ~ normal(0, 10);
-  translation ~ normal(0, 10);
+  log_scale ~ normal(scale_prior[1], scale_prior[2]);
+  if (shearXN > 0) log_shearX ~ normal(sheer_prior[1], sheer_prior[1]);
+  if (shearYN > 0) log_shearY ~ normal(sheer_prior[1], sheer_prior[1]);
+  if (shearZN > 0) log_shearZ ~ normal(sheer_prior[1], sheer_prior[1]);
+  if (normal_rotation_prior == 1){
+    rotation ~ normal(rotation_prior[1], rotation_prior[2]);
+  }
+  else {
+    rotation ~ uniform(-pi(), +pi());
+  }
 
-  sigma ~ cauchy(0, 1);
+  translation ~ normal(translation_prior[1], translation_prior[2]);
+
+  sigma ~ exponential(sigma_prior);
 
   for(iR in 1:rowsN){
     dv[iR, 1] ~ normal(predicted[iR, 1], sigma[1]);

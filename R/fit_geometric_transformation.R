@@ -16,6 +16,9 @@
 #' \code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables
 #' @param data a data frame containing variables for the model.
 #' @param transformation the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.
+#' @param priors named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
+#' all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
+#' \code{list("translation" = c(0, 10), "sigma"=1)}.
 #' @param chains Number of chains for sampling.
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
@@ -39,7 +42,7 @@
 #' loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 #' }
 #' @export
-fit_geometric_transformation.formula <-  function(formula, data, transformation, chains=4, cores=NULL, ...){
+fit_geometric_transformation.formula <-  function(formula, data, transformation, priors=NULL, chains=4, cores=NULL, ...){
   ## --------------- Check that dependent and independent variables are valid  ---------------
   if (!is.data.frame(data)) stop("data parameter is not a data.frame")
 
@@ -47,7 +50,8 @@ fit_geometric_transformation.formula <-  function(formula, data, transformation,
   tridim <- tridim_transform(transformation,
                              iv=as.matrix(Formula::model.part(model_formula, data = data, rhs = 1)),
                              dv=as.matrix(Formula::model.part(model_formula, data = data, lhs = 1)),
-                             formula=model_formula)
+                             formula=model_formula,
+                             priors=priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,

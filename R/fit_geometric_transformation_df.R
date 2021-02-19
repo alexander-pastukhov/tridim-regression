@@ -13,9 +13,14 @@
 #' \code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
 #' transformations.
 #'
+#' For all rotation transformations, priors are uniform distribution within -π..π range.
+#'
 #' @param iv a data frame containing independent variable, must by numeric only, N×2 or N×3.
 #' @param dv a data frame containing dependent variable, must by numeric only, N×2 or N×3.
 #' @param transformation the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.
+#' @param priors named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
+#' all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
+#' \code{list("translation" = c(0, 10), "sigma"=1)}.
 #' @param chains Number of chains for sampling.
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
@@ -30,11 +35,11 @@
 #'   female_face_happy, "euclidean_x")
 #' }
 
-fit_geometric_transformation_df <- function(iv, dv, transformation, chains=4, cores=NULL, ...) {
+fit_geometric_transformation_df <- function(iv, dv, transformation, priors=NULL, chains=4, cores=NULL, ...) {
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
   if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
 
-  tridim <- tridim_transform(transformation, iv, dv)
+  tridim <- tridim_transform(transformation, iv, dv, NULL, priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,
