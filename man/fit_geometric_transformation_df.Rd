@@ -8,6 +8,7 @@ fit_geometric_transformation_df(
   iv,
   dv,
   transformation,
+  priors = NULL,
   chains = 4,
   cores = NULL,
   ...
@@ -19,6 +20,10 @@ fit_geometric_transformation_df(
 \item{dv}{a data frame containing dependent variable, must by numeric only, N×2 or N×3.}
 
 \item{transformation}{the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.}
+
+\item{priors}{named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
+all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
+\code{list("translation" = c(0, 10), "sigma"=1)}.}
 
 \item{chains}{Number of chains for sampling.}
 
@@ -38,6 +43,8 @@ For the 2D data, you can fit \code{"euclidean"} (scale, rotation, and translatio
 specified axis, and translation), \code{"euclidean"} (scale, rotation around all three axes, and translation),
 \code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
 transformations.
+
+For all rotation transformations, priors are uniform distribution within -π..π range.
 }
 \examples{
 \dontrun{

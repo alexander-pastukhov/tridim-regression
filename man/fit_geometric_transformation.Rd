@@ -9,6 +9,7 @@
   formula,
   data,
   transformation,
+  priors = NULL,
   chains = 4,
   cores = NULL,
   ...
@@ -21,6 +22,10 @@
 \item{data}{a data frame containing variables for the model.}
 
 \item{transformation}{the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.}
+
+\item{priors}{named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
+all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
+\code{list("translation" = c(0, 10), "sigma"=1)}.}
 
 \item{chains}{Number of chains for sampling.}
 
