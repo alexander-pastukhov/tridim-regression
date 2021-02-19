@@ -26,7 +26,8 @@ NULL
 # tridim_transform class
 tridim_transform <- function(transformation,
                              iv, dv,
-                             formula=NULL) {
+                             formula=NULL,
+                             priors) {
 
   # data dimensions consistency
   if (ncol(dv) != ncol(iv)) stop("Different number of columns in iv and dv")
@@ -68,6 +69,40 @@ tridim_transform <- function(transformation,
                       varsN = ncol(dv),
                       dv = dv,
                       iv = iv)
+
+  # computing means as guidance priors
+  iv_means = rep(apply(iv, FUN=mean, MARGIN=2), times = ncol(iv))
+  dv_means = rep(apply(dv, FUN=mean, MARGIN=2), each=ncol(iv))
+
+  # default priors
+  prior_defaults <- list(
+    "scale" =  c(0, max(abs(dv_means/iv_means)) / 4),
+    "sheer" = c(0, max(abs(dv_means/iv_means)) / 4),
+    "rotation" = c(0, pi/2), # overwritten by uniform in reality
+    "tilt" = c(0, 10),
+    "translation" = c(0, max(abs(dv_means- iv_means)) / 2)
+  )
+
+  # checking all available priors for validity
+  for(param_prior_name in names(prior_defaults)){
+    if (param_prior_name %in% names(priors)) {
+      check_normal_prior(priors[param_prior_name], param_prior_name)
+      object$data[[sprintf('%s_prior', param_prior_name)]] <- priors[param_prior_name]
+    }
+    else {
+      object$data[[sprintf('%s_prior', param_prior_name)]] <- prior_defaults[param_prior_name]
+    }
+  }
+
+  # special cases
+  object$data[["normal_rotation_prior"]] <- as.integer("rotation" %in% names(priors))
+  if ("sigma" %in% names(priors)) {
+    check_exponential_prior(priors["sigma"], "sigma")
+    object$data[["sigma_prior"]] <- priors["sigma"]
+  }
+  else {
+    object$data[["sigma_prior"]] <- 1
+  }
 
   class(object) <- "tridim_transform"
   object
