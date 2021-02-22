@@ -85,6 +85,12 @@ tridim_transform <- function(transformation,
 
   # checking all available priors for validity
   for(param_prior_name in names(prior_defaults)){
+    # checking that defaults make sense, that sigma is
+    if ((prior_defaults[[param_prior_name]][2] < 1e-5) ||
+        is.nan(prior_defaults[[param_prior_name]][2])){
+      prior_defaults[[param_prior_name]][2] <- 1e-5
+    }
+
     if (param_prior_name %in% names(priors)) {
       check_normal_prior(priors[param_prior_name], param_prior_name)
       object$data[[sprintf('%s_prior', param_prior_name)]] <- unname(priors[[param_prior_name]])
