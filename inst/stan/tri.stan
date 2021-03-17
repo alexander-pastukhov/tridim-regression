@@ -33,8 +33,8 @@ transformed data{
   int irotate_y = transform == euclidean_y ? 1 : 2;
   int irotate_z = transform == euclidean_z ? 1 : 3;
 
-// We need a +1 dimension in the original data
-#include /transformed_data/add_dimension.stan
+// transform to homogenous coordinates
+#include /transformed_data/transform_to_homogenous.stan
 }
 parameters{
   real<lower=0> log_scale[3];

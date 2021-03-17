@@ -13,8 +13,8 @@ transformed data{
   int affine = 2;
   int projective = 3;
 
-// We need a +1 dimension in the original data
-#include /transformed_data/add_dimension.stan
+// transform to homogenous coordinates
+#include /transformed_data/transform_to_homogenous.stan
 }
 parameters{
   real<lower=0> log_scale[2];

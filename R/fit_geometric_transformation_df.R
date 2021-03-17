@@ -39,7 +39,7 @@ fit_geometric_transformation_df <- function(iv, dv, transformation, priors=NULL,
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
   if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
 
-  tridim <- tridim_transform(transformation, iv, dv, NULL, priors)
+  tridim <- tridim_transform(transformation, iv, dv, formula=NULL, prior=priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,

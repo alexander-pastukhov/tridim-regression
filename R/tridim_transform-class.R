@@ -27,7 +27,7 @@ NULL
 tridim_transform <- function(transformation,
                              iv, dv,
                              formula=NULL,
-                             priors) {
+                             priors=NULL) {
 
   # data dimensions consistency
   if (ncol(dv) != ncol(iv)) stop("Different number of columns in iv and dv")
@@ -51,6 +51,9 @@ tridim_transform <- function(transformation,
 
   # if formula is given, we deduce it from data.frame names
   if (is.null(formula)) {
+    if (is.null(colnames(dv))) colnames(dv) <- c("xd", "yd", "zd")[1:ncol(transformed_face)]
+    if (is.null(colnames(iv))) colnames(iv) <- c("xi", "yi", "zi")[1:ncol(transformed_face)]
+
     formula <- as.Formula(paste(paste0(colnames(dv), collapse = " + "),
                                 paste0(colnames(iv), collapse = " + "),
                                 sep = " ~ "))
@@ -76,11 +79,11 @@ tridim_transform <- function(transformation,
 
   # default priors
   prior_defaults <- list(
-    "scale" =  c(0, max(abs(dv_means/iv_means)) / 4),
-    "sheer" = c(0, max(abs(dv_means/iv_means)) / 4),
+    "scale" =  c(0, max(abs(dv_means/iv_means)) / 2),
+    "sheer" = c(0, max(abs(dv_means/iv_means)) / 2),
     "rotation" = c(0, pi/2), # overwritten by uniform in reality
     "tilt" = c(0, 10),
-    "translation" = c(0, max(abs(dv_means- iv_means)) / 2)
+    "translation" = c(0, max(abs(dv_means- iv_means)))
   )
 
   # checking all available priors for validity
