@@ -1,153 +1,124 @@
-#' 3D Rotation around x-axis
+#' 3D Translation Matrix
 #'
-#' @param theta Rotation angle
-#'
-#' @return matrix 4x4
-#' @export
-#'
-#' @examples
-#' tri_rotation_x_matrix(pi/4)
-tri_rotation_x_matrix <- function(theta) {
-  stopifnot(is.finite(theta), !is.null(theta))
-  matrix(c(1, 0, 0, 0,
-           0, cos(theta), sin(theta), 0,
-           0, -sin(theta), cos(theta), 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
-}
-
-#' 3D Rotation around y-axis
-#'
-#' @param theta Rotation angle
+#' @param a numeric, coefficients a1, a2, a3
 #'
 #' @return matrix 4x4
 #' @export
 #'
 #' @examples
-#' tri_rotation_y_matrix(pi/4)
-tri_rotation_y_matrix <- function(theta) {
-  stopifnot(is.finite(theta), !is.null(theta))
-  matrix(c(cos(theta), 0, -sin(theta), 0,
-           0, 1, 0, 0,
-           sin(theta), 0, cos(theta), 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
+#' m3_translation(c(2, 3, 1))
+m3_translation <- function(a){
+  matrix(c(1,    0,    0,    0,
+           0,    1,    0,    0,
+           0,    0,    1,    0,
+           a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
 }
 
-#' 3D Rotation around z-axis
+#' 3D Euclidean, rotation about x
 #'
-#' @param theta Rotation angle
+#' @param a numeric, coefficients a1, a2, a3, b1, b2
 #'
 #' @return matrix 4x4
 #' @export
-#'
 #' @examples
-#' tri_rotation_z_matrix(pi/4)
-tri_rotation_z_matrix <- function(theta) {
-  stopifnot(is.finite(theta), !is.null(theta))
-  matrix(c(cos(theta), sin(theta), 0, 0,
-           -sin(theta), cos(theta), 0, 0,
-           0, 0, 1, 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
+#' m3_euclidean_x(c(2, 3, 1, 0.5, 0.2))
+m3_euclidean_x <- function(a){
+  b <- a[c(-1, -2, -3)]
+
+  # scaling
+  phi <- sqrt(b[1]^2 + b[2]^2)
+
+  matrix(c(phi,  0,    0,    0,
+           0,    b[1], b[2], 0,
+           0,   -b[2], b[1], 0,
+           a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
 }
 
-
-#' 3D Shear for x-axis
+#' 3D Euclidean, rotation about y
 #'
-#' @param shx_y Shear for y-axis
-#' @param shx_z Shear for z-axis
+#' @param a numeric, coefficients a1, a2, a3, b1, b2
 #'
 #' @return matrix 4x4
 #' @export
-#'
 #' @examples
-#' tri_shear_x_matrix(2, 0.5)
-tri_shear_x_matrix <- function(shx_y, shx_z) {
-  stopifnot(is.finite(shx_y), !is.null(shx_y), is.finite(shx_z), !is.null(shx_z))
-  matrix(c(1, 0, 0, 0,
-           shx_y, 1, 0, 0,
-           shx_z, 0, 1, 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
+#' m3_euclidean_y(c(2, 3, 1, 0.5, 0.2))
+m3_euclidean_y <- function(a){
+  b <- a[c(-1, -2, -3)]
+
+  # scaling
+  phi <- sqrt(b[1]^2 + b[2]^2)
+
+  matrix(c(b[1], 0,   -b[2], 0,
+           0,    phi,  0,    0,
+           b[2], 0,    b[1], 0,
+           a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
 }
 
-#' 3D Shear for y-axis
+#' 3D Euclidean, rotation about z
 #'
-#' @param shy_x Shear for x-axis
-#' @param shy_z Shear for z-axis
+#' @param a numeric, coefficients a1, a2, a3, b1, b2
 #'
 #' @return matrix 4x4
 #' @export
-#'
 #' @examples
-#' tri_shear_y_matrix(2, 0.5)
-tri_shear_y_matrix <- function(shy_x, shy_z) {
-  stopifnot(is.finite(shy_x), !is.null(shy_x), is.finite(shy_z), !is.null(shy_z))
-  matrix(c(1, shy_x, 0, 0,
-           0, 1, 0, 0,
-           0, shy_z, 1, 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
+#' m3_euclidean_z(c(2, 3, 1, 0.5, 0.2))
+m3_euclidean_z <- function(a){
+  b <- a[c(-1, -2, -3)]
+
+  # scaling
+  phi <- sqrt(b[1]^2 + b[2]^2)
+
+  matrix(c( b[1], b[2], 0,    0,
+           -b[2], b[1], 0,    0,
+            0,    0,    phi,  0,
+            a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
 }
 
-#' 3D Shear for z-axis
+
+#' 3D Affine
 #'
-#' @param shz_x Shear for x-axis
-#' @param shz_y Shear for z-axis
+#' @param a numeric, coefficients a1, a2, a3, b1-b9
 #'
 #' @return matrix 4x4
 #' @export
-#'
 #' @examples
-#' tri_shear_z_matrix(2, 0.5)
-tri_shear_z_matrix <- function(shz_x, shz_y) {
-  stopifnot(is.finite(shz_x), !is.null(shz_x), is.finite(shz_y), !is.null(shz_y))
-  matrix(c(1, 0, shz_x, 0,
-           0, 1, shz_y, 0,
-           0, 0, 1, 0,
-           0, 0, 0, 1),
-         ncol=4, byrow=TRUE)
+#' m3_affine(c(2, 3, 1, 0.5, 0.2, 4, 2, 6, 3, 2, 5, 1))
+m3_affine <- function(a){
+  b <- a[c(-1, -2, -3)]
+
+  # scaling
+  phi <- sqrt(b[1]^2 + b[2]^2)
+
+  matrix(c(b[1], b[4], b[7], 0,
+           b[2], b[5], b[8], 0,
+           b[3], b[6], b[9], 0,
+           a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
+
 }
 
-
-#' 3D Translation
+#' 3D Projective
 #'
-#' @param dx x translation
-#' @param dy y translation
-#' @param dz z translation
+#' @param a numeric, coefficients a1, a2, a3, b1-b12
 #'
 #' @return matrix 4x4
 #' @export
-#'
 #' @examples
-#' tri_translation_matrix(0, 10, 1)
-tri_translation_matrix <- function(dx, dy, dz){
-  stopifnot(is.finite(dx), !is.null(dx), is.finite(dy), !is.null(dy), is.finite(dz), !is.null(dz))
-  matrix(c(1, 0, 0, 0,
-           0, 1, 0, 0,
-           0, 0, 1, 0,
-           dx, dy, dz, 1),
-         ncol=4, byrow=TRUE)
-}
+#' m3_projective(c(2, 3, 1, 0.5, 0.2, 4, 2, 6, 3, 2, 5, 1, 6, 8, 9))
+m3_projective <- function(a){
+  b <- a[c(-1, -2, -3)]
 
-#' 3D scale matrix
-#'
-#' @param sx x scaling
-#' @param sy y scaling
-#' @param sz z scaling
-#'
-#' @return matrix 4x4
-#' @export
-#'
-#' @examples
-#' tri_scale_matrix(1, 2, 0.5)
-tri_scale_matrix <- function(sx, sy, sz){
-  stopifnot(is.finite(sx), !is.null(sx), is.finite(sy), !is.null(sy), is.finite(sz), !is.null(sz))
-  matrix(c(sx, 0,  0,  0,
-           0,  sy, 0,  0,
-           0,  0,  sz, 0,
-           0,  0,  0,  1),
-         ncol=4, byrow=TRUE)
-}
+  # scaling
+  phi <- sqrt(b[1]^2 + b[2]^2)
 
+  matrix(c(b[1], b[4], b[7], b[10],
+           b[2], b[5], b[8], b[11],
+           b[3], b[6], b[9], b[12],
+           a[1], a[2], a[3], 1),
+         ncol=4, byrow=FALSE)
+
+}
