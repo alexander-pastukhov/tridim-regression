@@ -11,7 +11,7 @@ m2_translation <- function(a){
   matrix(c(1,    0,    0,
            0,    1,    0,
            a[1], a[2], 1),
-         ncol=3, byrow=TRUE)
+         ncol=3, byrow=FALSE)
 }
 
 #' 2D Euclidean
@@ -27,7 +27,7 @@ m2_euclidean <- function(a){
   matrix(c(b[1],-b[2], 0,
            b[2], b[1], 0,
            a[1], a[2], 1),
-         ncol=3, byrow=TRUE)
+         ncol=3, byrow=FALSE)
 }
 
 #' 2D Affine
@@ -43,7 +43,7 @@ m2_affine <- function(a){
   matrix(c(b[1], b[3], 0,
            b[2], b[4], 0,
            a[1], a[2], 1),
-         ncol=3, byrow=TRUE)
+         ncol=3, byrow=FALSE)
 }
 
 
@@ -60,5 +60,5 @@ m2_projective <- function(a){
   matrix(c(b[1], b[3], b[5],
            b[2], b[4], b[6],
            a[1], a[2], 1),
-         ncol=3, byrow=TRUE)
+         ncol=3, byrow=FALSE)
 }
