@@ -67,71 +67,71 @@ parameters{
 transformed parameters{
   vector[longN] predicted = iv_long;
 
-  // building transformation matrix
-  matrix[varsN + 1, varsN + 1] M;
-  if (varsN == 2){
-    // 2D transformations
-    if (transform == euclidean){
-      M = [[ b[1],-b[2], 0],
-           [ b[2], b[1], 0],
-           [ a[1], a[2], 1]];
-    }
-    else if (transform == affine) {
-      M = [[ b[1], b[3], 0],
-           [ b[2], b[4], 0],
-           [ a[1], a[2], 1]];
-    }
-    else if (transform == projective) {
-      M = [[ b[1], b[3], b[5]],
-           [ b[2], b[4], b[6]],
-           [ a[1], a[2], 1   ]];
-    }
-  }
-  else {
-    // 3D transformations
-   if (transform == euclidean_x){
-      real phi; // scaling for 3D single axis Eucledian
-      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
-
-      M = [[ phi,  0,    0,    0],
-           [ 0,    b[1], b[2], 0],
-           [ 0,   -b[2], b[1], 0],
-           [ a[1], a[2], a[3], 0]];
-   }
-   else if (transform == euclidean_y){
-      real phi; // scaling for 3D single axis Eucledian
-      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
-
-      M = [[ b[1], 0,   -b[2], 0],
-           [ 0,    phi,  0   , 0],
-           [ b[2], 0,    b[1], 0],
-           [ a[1], a[2], a[3], 0]];
-   }
-   else if (transform == euclidean_z){
-      real phi; // scaling for 3D single axis Eucledian
-      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
-
-      M = [[ b[1], b[2], 0,    0],
-           [-b[2], b[1], 0,    0],
-           [ 0,    0,    phi,  0],
-           [ a[1], a[2], a[3], 0]];
-   }
-   else if (transform == affine){
-      M = [[ b[1], b[4], b[7], 0],
-           [ b[2], b[5], b[8], 0],
-           [ b[3], b[6], b[9], 0],
-           [ a[1], a[2], a[3], 0]];
-   }
-   else if (transform == projective) {
-      M = [[ b[1], b[4], b[7], b[10]],
-           [ b[2], b[5], b[8], b[11]],
-           [ b[3], b[6], b[9], b[12]],
-           [ a[1], a[2], a[3], 0    ]];
-   }
- }
-
-  // generating prediction, discarding extra dimension
   if (transform != identity){
+    // building transformation matrix
+    matrix[varsN + 1, varsN + 1] M;
+    if (varsN == 2){
+      // 2D transformations
+      if (transform == euclidean){
+        M = [[ b[1],-b[2], 0],
+             [ b[2], b[1], 0],
+             [ a[1], a[2], 1]];
+      }
+      else if (transform == affine) {
+        M = [[ b[1], b[3], 0],
+             [ b[2], b[4], 0],
+             [ a[1], a[2], 1]];
+      }
+      else if (transform == projective) {
+        M = [[ b[1], b[3], b[5]],
+             [ b[2], b[4], b[6]],
+             [ a[1], a[2], 1   ]];
+      }
+    }
+    else {
+      // 3D transformations
+      if (transform == euclidean_x){
+        real phi; // scaling for 3D single axis Eucledian
+        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+
+        M = [[ phi,  0,    0,    0],
+             [ 0,    b[1], b[2], 0],
+             [ 0,   -b[2], b[1], 0],
+             [ a[1], a[2], a[3], 0]];
+      }
+      else if (transform == euclidean_y){
+        real phi; // scaling for 3D single axis Eucledian
+        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+
+        M = [[ b[1], 0,   -b[2], 0],
+             [ 0,    phi,  0   , 0],
+             [ b[2], 0,    b[1], 0],
+             [ a[1], a[2], a[3], 0]];
+      }
+      else if (transform == euclidean_z){
+        real phi; // scaling for 3D single axis Eucledian
+        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+
+        M = [[ b[1], b[2], 0,    0],
+             [-b[2], b[1], 0,    0],
+             [ 0,    0,    phi,  0],
+             [ a[1], a[2], a[3], 0]];
+      }
+      else if (transform == affine){
+        M = [[ b[1], b[4], b[7], 0],
+             [ b[2], b[5], b[8], 0],
+             [ b[3], b[6], b[9], 0],
+             [ a[1], a[2], a[3], 0]];
+      }
+      else if (transform == projective) {
+        M = [[ b[1], b[4], b[7], b[10]],
+             [ b[2], b[5], b[8], b[11]],
+             [ b[3], b[6], b[9], b[12]],
+             [ a[1], a[2], a[3], 0    ]];
+      }
+    }
+
+    // generating prediction, discarding extra dimension
     predicted = to_vector(block(ivH * M, 1, 1, rowsN, varsN));
   }
 }
