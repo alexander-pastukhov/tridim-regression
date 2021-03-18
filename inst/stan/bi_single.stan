@@ -17,17 +17,13 @@ transformed data{
   int longN = rowsN * varsN;
 
   // symbolic constants for transforms
-  int identity = 0;
-  int euclidean = 1;
-  int affine = 2;
-  int projective = 3;
-  int euclidean_x = 4;
+  int TRANSLATION = 0;
+  int EUCLIDEAN = 1;
+  int AFFINE = 2;
+  int PROJECTIVE = 3;
+  int EUCLIDEAN_X = 4;
   int euclidean_y = 5;
   int euclidean_z = 6;
-
-  // Zero are defaults for no transformation / identity matrix
-  int aN = (transform == identity) ? 0 : varsN;
-
 
   // dependent variable values and standard deviations
   vector[longN] dv_long;
@@ -58,77 +54,86 @@ transformed data{
 }
 parameters{
   // transformation
-  real a[aN];
+  real a[varsN];
   real b[betaN];
 
   // loss function parameter
   real<lower=0> sigma;
 }
 transformed parameters{
-  vector[longN] predicted = iv_long;
+  vector[longN] predicted;
 
-  if (transform != identity){
-    // building transformation matrix
-    matrix[varsN + 1, varsN + 1] M;
-    if (varsN == 2){
-      // 2D transformations
-      if (transform == euclidean){
-        M = [[ b[1],-b[2], 0],
-             [ b[2], b[1], 0],
-             [ a[1], a[2], 1]];
-      }
-      else if (transform == affine) {
-        M = [[ b[1], b[3], 0],
-             [ b[2], b[4], 0],
-             [ a[1], a[2], 1]];
-      }
-      else if (transform == projective) {
-        M = [[ b[1], b[3], b[5]],
-             [ b[2], b[4], b[6]],
-             [ a[1], a[2], 1   ]];
-      }
+  // building transformation matrix
+  matrix[varsN + 1, varsN + 1] M;
+  if (varsN == 2){
+    // 2D transformations
+    if (transform == TRANSLATION){
+      M = [[ 1,    0,    0],
+           [ 0,    1,    0],
+           [ a[1], a[2], 1]];
     }
-    else {
-      // 3D transformations
-      if (transform == euclidean_x){
-        real phi; // scaling for 3D single axis Eucledian
-        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+    else if (transform == EUCLIDEAN){
+      M = [[ b[1],-b[2], 0],
+           [ b[2], b[1], 0],
+           [ a[1], a[2], 1]];
+    }
+    else if (transform == AFFINE) {
+      M = [[ b[1], b[3], 0],
+           [ b[2], b[4], 0],
+           [ a[1], a[2], 1]];
+    }
+    else if (transform == PROJECTIVE) {
+      M = [[ b[1], b[3], b[5]],
+           [ b[2], b[4], b[6]],
+           [ a[1], a[2], 1   ]];
+    }
+  }
+  else {
+    // 3D transformations
+    if (transform == TRANSLATION){
+      M = [[ 1,    0,    0,    0],
+           [ 0,    1,    0,    0],
+           [ 0,    0,    1,    0],
+           [ a[1], a[2], a[3], 0]];
+    }
+    else if (transform == EUCLIDEAN_X){
+      real phi; // scaling for 3D single axis Eucledian
+      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
 
-        M = [[ phi,  0,    0,    0],
-             [ 0,    b[1], b[2], 0],
-             [ 0,   -b[2], b[1], 0],
-             [ a[1], a[2], a[3], 0]];
-      }
-      else if (transform == euclidean_y){
-        real phi; // scaling for 3D single axis Eucledian
-        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+      M = [[ phi,  0,    0,    0],
+           [ 0,    b[1], b[2], 0],
+           [ 0,   -b[2], b[1], 0],
+           [ a[1], a[2], a[3], 0]];
+    }
+    else if (transform == euclidean_y){
+      real phi; // scaling for 3D single axis Eucledian
+      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
 
-        M = [[ b[1], 0,   -b[2], 0],
-             [ 0,    phi,  0   , 0],
-             [ b[2], 0,    b[1], 0],
-             [ a[1], a[2], a[3], 0]];
-      }
-      else if (transform == euclidean_z){
-        real phi; // scaling for 3D single axis Eucledian
-        phi = sqrt(b[1] * b[1] + b[2] * b[2]);
+      M = [[ b[1], 0,   -b[2], 0],
+           [ 0,    phi,  0   , 0],
+           [ b[2], 0,    b[1], 0],
+           [ a[1], a[2], a[3], 0]];
+    }
+    else if (transform == euclidean_z){
+      real phi; // scaling for 3D single axis Eucledian
+      phi = sqrt(b[1] * b[1] + b[2] * b[2]);
 
-        M = [[ b[1], b[2], 0,    0],
-             [-b[2], b[1], 0,    0],
-             [ 0,    0,    phi,  0],
-             [ a[1], a[2], a[3], 0]];
-      }
-      else if (transform == affine){
-        M = [[ b[1], b[4], b[7], 0],
-             [ b[2], b[5], b[8], 0],
-             [ b[3], b[6], b[9], 0],
-             [ a[1], a[2], a[3], 0]];
-      }
-      else if (transform == projective) {
-        M = [[ b[1], b[4], b[7], b[10]],
-             [ b[2], b[5], b[8], b[11]],
-             [ b[3], b[6], b[9], b[12]],
-             [ a[1], a[2], a[3], 0    ]];
-      }
+      M = [[ b[1], b[2], 0,    0],
+           [-b[2], b[1], 0,    0],
+           [ 0,    0,    phi,  0],
+           [ a[1], a[2], a[3], 0]];
+    }
+    else if (transform == AFFINE){
+      M = [[ b[1], b[4], b[7], 0],
+           [ b[2], b[5], b[8], 0],
+           [ b[3], b[6], b[9], 0],
+           [ a[1], a[2], a[3], 0]];
+    }
+    else if (transform == PROJECTIVE) {
+      M = [[ b[1], b[4], b[7], b[10]],
+           [ b[2], b[5], b[8], b[11]],
+           [ b[3], b[6], b[9], b[12]],
+           [ a[1], a[2], a[3], 0    ]];
     }
 
     // generating prediction, discarding extra dimension
@@ -141,8 +146,8 @@ model{
 
   // priors
   sigma ~ exponential(sigma_prior);
-  if (transform != identity){
-    a ~ normal(translation_prior[1], translation_prior[2]);
+  a ~ normal(translation_prior[1], translation_prior[2]);
+  if (transform != TRANSLATION){
     b ~ normal(beta_prior[1], beta_prior[2]);
   }
 }
