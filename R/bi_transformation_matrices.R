@@ -1,88 +1,61 @@
-#' 2D Rotation Matrix
-#'
-#' @param theta numeric, rotation angle
-#'
-#' @return matrix 3x3
-#' @export
-#' @examples
-#' bi_rotation_matrix(pi/4)
-bi_rotation_matrix <- function(theta){
-  stopifnot(is.finite(theta), !is.null(theta))
-  matrix(c(cos(theta), sin(theta), 0,
-          -sin(theta), cos(theta), 0,
-          0, 0, 1),
-         ncol=3, byrow=TRUE)
-}
-
 #' 2D Translation Matrix
 #'
-#' @param dx numeric, horizontal component
-#' @param dy numeric, vertical component
+#' @param params numeric, coefficients a1 and a2
 #'
 #' @return matrix 3x3
 #' @export
 #'
 #' @examples
-#' bi_translation_matrix(1, -1)
-bi_translation_matrix <- function(dx, dy){
-  stopifnot(is.finite(dx), !is.null(dx), is.finite(dy), !is.null(dy))
-  matrix(c(1, 0, 0,
-           0, 1, 0,
-           dx, dy, 1),
+#' m2_translation(c(2, 3))
+m2_translation <- function(a){
+  matrix(c(1,    0,    0,
+           0,    1,    0,
+           a[1], a[2], 1),
          ncol=3, byrow=TRUE)
 }
 
-#' 2D Scaling Matrix
+#' 2D Euclidean
 #'
-#' @param sx numeric, X-scale
-#' @param sy numeric Y-scale
-#'
-#' @return matrix \[3✕3\]
-#' @export
-#'
-#' @examples
-#' bi_scale_matrix(2, 0.5)
-bi_scale_matrix <- function(sx, sy){
-  stopifnot(is.finite(sx), !is.null(sx), is.finite(sy), !is.null(sy))
-  matrix(c(sx, 0, 0,
-           0, sy, 0,
-           0,  0, 1),
-         ncol=3, byrow=TRUE)
-}
-
-#' 2D Shearing Matrix
-#'
-#' @param shx numeric, x-shear
-#' @param shy numeric, y-shear
+#' @param params numeric, coefficients a1, a2, b1, b2
 #'
 #' @return matrix 3x3
 #' @export
-#'
 #' @examples
-#' bi_shear_matrix(0, 2)
-bi_shear_matrix <- function(shx, shy){
-  stopifnot(is.finite(shx), !is.null(shx), is.finite(shy), !is.null(shy))
-  matrix(c(1, shy, 0,
-           shx, 1, 0,
-           0, 0, 1),
+#' m2_euclidean(c(2, 3, 1, 0.5))
+m2_euclidean <- function(p){
+  matrix(c(p[2 + 1],-p[2 + 2], 0,
+           p[2 + 2], p[2 + 1], 0,
+           p[1],     p[2],     1),
+         ncol=3, byrow=TRUE)
+}
+
+#' 2D Affine
+#'
+#' @param params numeric, coefficients a1, a2, b1...b4
+#'
+#' @return matrix 3x3
+#' @export
+#' @examples
+#' m2_affine(c(2, 3, 1, 0.5, 1, 5))
+m2_affine <- function(p){
+  matrix(c(p[2 + 1], p[2 + 3], 0,
+           p[2 + 2], p[2 + 4], 0,
+           p[1],     p[2],     1),
          ncol=3, byrow=TRUE)
 }
 
 
-#' 2D Tilt Matrix
+#' 2D Projective
 #'
-#' @param e tilt parameter
-#' @param f tilt parameter
+#' @param params numeric, coefficients a1, a2, b1...b6
 #'
 #' @return matrix 3x3
 #' @export
-#'
 #' @examples
-#' bi_tilt_matrix(0, 1)
-bi_tilt_matrix <- function(e, f){
-  stopifnot(is.finite(e), !is.null(e), is.finite(f), !is.null(f))
-  matrix(c(1, 0, e,
-           0, 1, f,
-           0, 0, 1),
+#' m2_projective(c(2, 3, 1, 0.5, 1, 5, 2, 4))
+m2_projective <- function(p){
+  matrix(c(p[2 + 1], p[2 + 3], p[2 + 5],
+           p[2 + 2], p[2 + 4], p[2 + 6],
+           p[1],     p[2],     1),
          ncol=3, byrow=TRUE)
 }
