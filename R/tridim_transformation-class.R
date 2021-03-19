@@ -1,16 +1,16 @@
-#' Class \code{tridim_transform}.
+#' Class \code{tridim_transformation}.
 #'
 #' Geometric transformations fitted with the
-#' \code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}} function
-#' represented as a \code{tridim_transform} object with information about transformation, data dimension,
+#' \code{\link[TriDimRegression:fit_transformation]{fit_transformation}} function
+#' represented as a \code{tridim_transformation} object with information about transformation, data dimension,
 #' call formula, and fitted \code{\link[rstan:stanfit-class]{stanfit}} object,
 #'
-#' @name tridim_transform-class
-#' @aliases tridim_transform
+#' @name tridim_transformation-class
+#' @aliases tridim_transformation
 #' @docType class
 #'
 #' @details
-#' See \code{methods(class = "tridim_transform")} for an overview of available methods.
+#' See \code{methods(class = "tridim_transformation")} for an overview of available methods.
 #'
 #' @slot transformation A \code{string} with the transformation name.
 #' @slot formula A \code{\link[Formula:formula.Formula]{formula}} object.
@@ -24,10 +24,10 @@
 NULL
 
 # tridim_transform class
-tridim_transform <- function(transformation,
-                             iv, dv,
-                             formula=NULL,
-                             priors=NULL) {
+tridim_transformation <- function(transformation,
+                                  iv, dv,
+                                  formula=NULL,
+                                  priors=NULL) {
 
   # data dimensions consistency
   if (ncol(dv) != ncol(iv)) stop("Different number of columns in iv and dv")
@@ -43,9 +43,11 @@ tridim_transform <- function(transformation,
   if (sum(!is.finite(as.matrix(iv))) > 0) stop("iv has non-finite elements")
 
   # transformation must match data dimensions
-  valid_transformations <- c("euclidean"=1, "affine"=2, "projective"=3)
-  if (ncol(dv) == 3){
-    valid_transformations <-c(valid_transformations, "euclidean_x"= 4, "euclidean_y" = 5, "euclidean_z" = 6)
+  if (ncol(dv) == 2){
+    valid_transformations <- c("translation"=0, "euclidean"=1, "affine"=2, "projective"=3)
+  }
+  else {
+    valid_transformations <-c("translation"=0, "affine"=2, "projective"=3, "euclidean_x"= 4, "euclidean_y" = 5, "euclidean_z" = 6)
   }
   if (!transformation %in% names(valid_transformations)) stop(sprintf("Unknown or inapplicable transformation '%s'", transformation))
 
@@ -60,29 +62,35 @@ tridim_transform <- function(transformation,
   }
 
   # object without data
-  stanmodel_names <- c(NA, "bi", "tri")
   object <- list(transformation = transformation,
                  dimN = ncol(dv),
                  formula = formula,
-                 stanmodel = stanmodels[[stanmodel_names[ncol(dv)]]])
+                 stanmodel = stanmodels$tridim_transformation)
 
   # creating stan data list
   object$data <- list(transform = valid_transformations[transformation],
                       rowsN = nrow(dv),
                       varsN = ncol(dv),
                       dv = dv,
-                      iv = iv)
+                      iv = iv,
+                      dv_sd = apply(NakayaData[, 3:4], MARGIN=2, FUN=sd))
+
+  # figuring out the number of parameters IN ADDITION to translation
+  if (ncol(dv) == 2){
+    param_n <- c("translation"=0, "euclidean"=2, "affine"=4, "projective"=6)
+  }
+  else {
+    param_n <- -c("translation"=0, "euclidean_x"= 2, "euclidean_y" = 2, "euclidean_z" = 2, "affine"=9, "projective"=12)
+  }
+  object$data[["betaN"]] <- get_beta_n(ncol(dv), transformation)
 
   # computing means as guidance priors
-  iv_means = rep(apply(iv, FUN=mean, MARGIN=2), times = ncol(iv))
-  dv_means = rep(apply(dv, FUN=mean, MARGIN=2), each=ncol(iv))
+  iv_means <- rep(apply(iv, FUN=mean, MARGIN=2), times=ncol(iv))
+  dv_means <- rep(apply(dv, FUN=mean, MARGIN=2), each=ncol(iv))
 
   # default priors
   prior_defaults <- list(
-    "scale" =  c(0, max(abs(dv_means/iv_means)) / 2),
-    "sheer" = c(0, max(abs(dv_means/iv_means)) / 2),
-    "rotation" = c(0, pi/2), # overwritten by uniform in reality
-    "tilt" = c(0, 10),
+    "beta" =  c(0, max(abs(dv_means/iv_means)) / 2),
     "translation" = c(0, max(abs(dv_means- iv_means)))
   )
 
@@ -113,7 +121,7 @@ tridim_transform <- function(transformation,
     object$data[["sigma_prior"]] <- 1
   }
 
-  class(object) <- "tridim_transform"
+  class(object) <- "tridim_transformation"
   object
 }
 
