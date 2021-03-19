@@ -20,7 +20,7 @@
 #' @slot stanfit a \code{\link[rstan:stanfit-class]{stanfit}} object.
 #'
 #' @seealso
-#'   \code{\link{fit_geometric_transformation}}
+#'   \code{\link{fit_transformation}}
 NULL
 
 # tridim_transform class
@@ -126,12 +126,12 @@ tridim_transformation <- function(transformation,
 }
 
 
-#' Checks if argument is a \code{tridim_transform} object
+#' Checks if argument is a \code{tridim_transformation} object
 #'
 #' @param x An \R object
 #'
 #' @return Logical
 #' @export
-is.tridim_transform <- function(x){
-  inherits(x, "tridim_transform")
+is.tridim_transformation <- function(x){
+  inherits(x, "tridim_transformation")
 }

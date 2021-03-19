@@ -25,4 +25,4 @@ print.tridim_transformation <- function(x, ...){
                                   names_from="Coef", values_from="Mean"))
 }
 
-# setMethod("print", "tridim_transform", print.tridim_transform)
+# setMethod("print", "tridim_transformation", print.tridim_transformation)

@@ -27,4 +27,4 @@ summary.tridim_transformation <- function(object, ...){
   print(coef.tridim_transformation(object, summary=TRUE), row.names = FALSE)
 }
 
-# setMethod("summary", "tridim_transform", summary.tridim_transform)
+# setMethod("summary", "tridim_transformation", summary.tridim_transformation)

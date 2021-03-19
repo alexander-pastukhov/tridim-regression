@@ -62,5 +62,5 @@ predict.tridim_transformation <-  function(object, newdata=NULL, summary=TRUE, p
     dplyr::bind_cols()
 }
 
-# setMethod("predict", "tridim_transform", predict.tridim_transform)
+# setMethod("predict", "tridim_transformation", predict.tridim_transformation)
 
