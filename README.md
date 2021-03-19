@@ -10,11 +10,11 @@ library("devtools"); install_github("alexander-pastukhov/tridim-regression",depe
 
 You can call the main function either via a formula that specifies dependent and independent variables with the `data` table or by supplying two tables one containing all independent variables and one containing all dependent variables. The former call is
 ```
-euc2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'euclidean')
+euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'euclidean')
 ```
 whereas the latter is 
 ```
-euc3 <- fit_geometric_transformation_df(female_face_neutral, female_face_neutral, 'euclidean')
+euc3 <- fit_transformation_df(female_face_neutral, female_face_neutral, 'euclidean')
 ```
 
 For the 2D data, you can fit `"euclidean"` (scale, rotation, and translation), `"affine"` (+shear), or `"projective"` (+tilt). For 3D data, you can fit `"euclidean_x"`, `"euclidean_y"`, `"euclidean_z"` (scale, rotation around the specified axis, and translation), `"euclidean"` (scale, rotation around all three axes, and translation), `"affine"` (`"euclidean"` + shear for x-plane), and `"projective"` (+shear for y and z planes).
