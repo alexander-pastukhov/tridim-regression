@@ -26,6 +26,9 @@
 #'
 #' # coefficients' summary with 89% CI
 #' coef(euc2)
+#'
+#' # scale and rotation coefficients
+#' coef(euc2, convert_euclidean=TRUE)
 #' }
 coef.tridim_transformation <- function(object,
                                        summary=TRUE,
