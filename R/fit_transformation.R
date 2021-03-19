@@ -5,12 +5,19 @@
 #' Stan engine. The \code{formula} described dependent and independent numeric variables in the
 #' \code{data}.
 #'
-#' For the 2D data, you can fit \code{"euclidean"} (scale, rotation, and translation),
-#' \code{"affine"} (+shear), or \code{"projective"} (+tilt) transformations. For 3D data, you can fit
-#' \code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (scale, rotation around the
-#' specified axis, and translation), \code{"euclidean"} (scale, rotation around all three axes, and translation),
-#' \code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
+#' For the 2D data, you can fit \code{"translation"} (2 for translation only), \code{"euclidean"}
+#' (4 parameters: 2 for translation, 1 for scaling, and 1 for rotation),
+#' \code{"affine"} (6 parameters: 2 for translation and 4 that jointly describe scaling, rotation and sheer),
+#' or \code{"projective"} (8 parameters: affine plus 2 additional parameters to account for projection).
+#'
+#' For 3D data, you can fit \code{"translation"} (3 for translation only), \code{"euclidean_x"}, \code{"euclidean_y"},
+#' \code{"euclidean_z"} (5 parameters: 3 for translation scale, 1 for rotation, and 1 for scaling),
+#' \code{"affine"} (12 parameters: 3 for translation and 9 to account for scaling, rotation, and sheer),
+#' and \code{"projective"} (15 parameters: affine plus 3 additional parameters to account for projection).
 #' transformations.
+#'
+#' For details on transformation matrices and computation of scale and rotation parameters please
+#' see \code{vignette("transformation_matrices", package = "TriDimRegression")}
 #'
 #' @param formula a symbolic description of the model to be fitted in the format \code{Xdep + Ydep ~ Xind + Yind}, where
 #' \code{Xdep} and \code{Ydep} are dependent and \code{Xind} and \code{Yind} are independent variables
@@ -23,16 +30,16 @@
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
 #'
-#' @name fit_geometric_transformation
-#' @seealso \code{\link{fit_geometric_transformation_df}}
+#' @name fit_transformation
+#' @seealso \code{\link{fit_transformation_df}}
 #' @examples
 #' \dontrun{
 #' # Geometric transformations of 2D data
-#' euc2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+#' euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                                      NakayaData, 'euclidean')
-#' aff2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+#' aff2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                                      NakayaData, 'affine')
-#' prj2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+#' prj2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                                      NakayaData, 'projective')
 #'
 #' # summary of transformation coefficients
@@ -42,16 +49,16 @@
 #' loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 #' }
 #' @export
-fit_geometric_transformation.formula <-  function(formula, data, transformation, priors=NULL, chains=4, cores=NULL, ...){
+fit_transformation.formula <-  function(formula, data, transformation, priors=NULL, chains=1, cores=NULL, ...){
   ## --------------- Check that dependent and independent variables are valid  ---------------
   if (!is.data.frame(data)) stop("data parameter is not a data.frame")
 
   model_formula <- Formula::Formula(formula)
-  tridim <- tridim_transform(transformation,
-                             iv=as.matrix(Formula::model.part(model_formula, data = data, rhs = 1)),
-                             dv=as.matrix(Formula::model.part(model_formula, data = data, lhs = 1)),
-                             formula=model_formula,
-                             priors=priors)
+  tridim <- tridim_transformation(transformation,
+                                  iv=as.matrix(Formula::model.part(model_formula, data = data, rhs = 1)),
+                                  dv=as.matrix(Formula::model.part(model_formula, data = data, lhs = 1)),
+                                  formula=model_formula,
+                                  priors=priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,
@@ -63,4 +70,4 @@ fit_geometric_transformation.formula <-  function(formula, data, transformation,
 }
 
 #' @export
-fit_geometric_transformation <- function(formula, ...) {UseMethod("fit_geometric_transformation")}
+fit_transformation <- function(formula, ...) {UseMethod("fit_transformation")}
