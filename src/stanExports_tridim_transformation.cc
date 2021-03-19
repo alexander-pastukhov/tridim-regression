@@ -2,12 +2,12 @@
 
 #include <Rcpp.h>
 using namespace Rcpp ;
-#include "stanExports_tri.h"
+#include "stanExports_tridim_transformation.h"
 
-RCPP_MODULE(stan_fit4tri_mod) {
+RCPP_MODULE(stan_fit4tridim_transformation_mod) {
 
 
-    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("model_tri")
+    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("model_tridim_transformation")
 
     .constructor<SEXP,SEXP,SEXP>()
 
