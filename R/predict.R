@@ -2,7 +2,7 @@
 #'
 #' Predicted values based on the bi/tridimensionsal regressional model object.
 #'
-#' @param object An object of class [tridim_transform][tridim_transform-class()]
+#' @param object An object of class [tridim_transformation][tridim_transformation-class()]
 #' @param newdata An optional two column data frame with independent variables.
 #' If omitted, the fitted values are used.
 #' @param summary Whether summary statistics should be returned instead of
@@ -15,23 +15,23 @@
 #' variable plus optional quantiles columns with names "dv{index}_{quantile}".
 #' @export
 #'
-#' @seealso \code{\link{fit_geometric_transformation}}
+#' @seealso \code{\link{fit_transformation}}
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
+#' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'euclidean')
 #'
 #' # prediction summary
 #' predictions <- predict(euc2)
 #'
 #' # full posterior prediction samples
-#' prediction_samples <- predict(euc2, summary=FALSE)
+#' predictions <- predict(euc2, summary=FALSE)
 #' }
-predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=NULL, ...) {
+predict.tridim_transformation <-  function(object, newdata=NULL, summary=TRUE, probs=NULL, ...) {
   if (is.null(newdata)) {
     # we can reuse already computed predictions
-    prediction_samples <- rstan::extract(object$stanfit)
-    prediction_samples <- rstan::extract(object$stanfit)$predicted[, , 1:object$dimN]
+    predictions <- rstan::extract(object$stanfit, pars="predicted")$predicted
+    predictions <- array(predictions, c(nrow(predictions), object$data$rowsN, object$data$varsN))
   }
   else {
     # let's try getting the data
@@ -41,23 +41,24 @@ predict.tridim_transform <-  function(object, newdata=NULL, summary=TRUE, probs=
     transform <- TriDimRegression::transformation_matrix(object, summary=FALSE)
 
     # transforming independent variables to obtain predictions
-    prediction_samples <-
+    predictions <-
       purrr::map(transform, ~(iv %*% .) %>% t()) %>%
       simplify2array() %>%
       aperm()
 
-    # last dimensions is trivially 1
-    prediction_samples <- prediction_samples[, , 1:object$dimN]
+
+    # last dimensions is 1 due to homogeneous coordinates
+    predictions <- predictions[, , 1:object$dimN]
   }
 
   if (!summary) {
     # raw samples
-    return(prediction_samples)
+    return(predictions)
   }
 
   # summary
   purrr::map(1:object$dimN,
-             ~TriDimRegression::variable_summary(colnames(object$data$dv)[.], prediction_samples[, , .], probs=probs)) %>%
+             ~TriDimRegression::variable_summary(colnames(object$data$dv)[.], predictions[, , .], probs=probs)) %>%
     dplyr::bind_cols()
 }
 
