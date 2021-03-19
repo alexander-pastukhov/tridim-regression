@@ -93,33 +93,68 @@
 #' }
 "CarbonExample3Data"
 
-
-#' Female face, neutral expression
+#' Face landmarks, female, #070
 #'
-#' @description Facial landmarks for a female face with neutral expression.
-#'
-#' @format A data frame with 64 observations on the following 3 variables:
+#' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
-#'   \item{x, y, z}{numeric vectors, 3D coordinates of factial landmarks.}
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
 #' }
-"female_face_neutral"
+"Face3D_W070"
 
-#' Female face, happy expression
+#' Face landmarks, female, #097
 #'
-#' @description Facial landmarks for a female face with happoy expression.
-#'
-#' @format A data frame with 64 observations on the following 3 variables:
+#' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
-#'   \item{x, y, z}{numeric vectors, 3D coordinates of factial landmarks.}
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
 #' }
-"female_face_happy"
+"Face3D_W097"
 
-#' Male face, neutral expression
+#' Face landmarks, female, #182
 #'
-#' @description Facial landmarks for a male face with neutral expression.
-#'
-#' @format A data frame with 64 observations on the following 3 variables:
+#' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
-#'   \item{x, y, z}{numeric vectors, 3D coordinates of factial landmarks.}
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
 #' }
-"male_face_neutral"
+"Face3D_W182"
+
+
+#' Face landmarks, female, #243
+#'
+#' @format A data frame with 64 landmarks on the following 3 variables:
+#' \describe{
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
+#' }
+"Face3D_W243"
+
+
+#' Face landmarks, male, #010
+#'
+#' @format A data frame with 64 landmarks on the following 3 variables:
+#' \describe{
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
+#' }
+"Face3D_M010"
+
+#' Face landmarks, male, #092
+#'
+#' @format A data frame with 64 landmarks on the following 3 variables:
+#' \describe{
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
+#' }
+"Face3D_M92"
+
+#' Face landmarks, male, #101
+#'
+#' @format A data frame with 64 landmarks on the following 3 variables:
+#' \describe{
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
+#' }
+"Face3D_M101"
+
+#' Face landmarks, male, #244
+#'
+#' @format A data frame with 64 landmarks on the following 3 variables:
+#' \describe{
+#'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
+#' }
+"Face3D_M244"
