@@ -1,0 +1,188 @@
+---
+title: "Transformation matrices"
+author: "Alexander (Sasha) Pastukhov"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Transformation matrices}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+````
+
+For most transformation, we assume that we can compute only the translation coefficients ($a_i$). The only exception are Euclidean transformation around a _single_ axis of rotation that allow to compute a single scaling and a single rotation coefficient. In all other cases, values of computed coefficients would depend on the assumed order of individual transformation, making them no more than a potentially misleading guesses.
+
+## Bidimensional regression
+
+### Translation
+
+Number of parameters: 2
+
+* translation: $a_1$, $a_2$
+
+$$
+\begin{vmatrix}
+ 1 & 0 & a_1 \\
+ 0 & 1 & a_2 \\
+ 0 & 0 & 1
+\end{vmatrix}
+$$
+
+### Euclidean
+
+Number of parameters: 4
+
+* translation: $a_1$, $a_2$
+* scaling: $\phi$
+* rotation: $\theta$
+
+$$
+\begin{vmatrix}
+ b_1 & b_2 & a_1 \\
+-b_2 & b_1 & a_2 \\
+ 0   & 0   & 1
+\end{vmatrix}
+$$
+
+The Euclidean transformation is a special case, where we can compute rotation ($\theta$) and the single scaling ($\phi$) coefficients, as follows:
+$$
+\phi = \sqrt{b_1^2 + b_2^2}\\
+\theta = tan^{-1}(\frac{b_2}{b_1})
+$$
+
+### Affine
+
+Number of parameters: 6
+
+* translation: $a_1$, $a_2$
+* scaling · rotation · sheer: $b_1$, $b_2$, $b_3$, $b_4$
+
+$$
+\begin{vmatrix}
+ b_1 & b_2 & a_1 \\
+ b_3 & b_4 & a_2 \\
+ 0   & 0   & 1
+\end{vmatrix}
+$$
+
+### Projective
+
+Number of parameters: 8
+
+* translation: $a_1$, $a_2$
+* scaling · rotation · sheer · projection: $b_1$...$b_6$
+
+$$
+\begin{vmatrix}
+ b_1 & b_2 & a_1 \\
+ b_3 & b_4 & a_2 \\
+ b_5 & b_6 & 1
+\end{vmatrix}
+$$
+
+## Tridimensional regression
+
+### Translation
+
+Number of parameters: 3
+
+* translation: $a_1$, $a_2$, $a_3$
+
+$$
+\begin{vmatrix}
+ 1 & 0 & 0 & a_1 \\
+ 0 & 1 & 0 & a_2 \\
+ 0 & 0 & 1 & a_3 \\
+ 0 & 0 & 0 & 1
+\end{vmatrix}
+$$
+
+### Euclidean
+
+Number of parameters: 5
+
+* translation: $a_1$, $a_2$, $a_3$
+* scaling: $\phi$
+* rotation: $\theta$
+
+For all Euclidean rotations, we opted to use coefficient $b_3$ to code scaling ($\phi$), whereas $b_2 = sin(\theta)$ and $b_1=\phi~  cos(\theta)$. The coefficients are computed as follows:
+$$
+\phi = \sqrt{b_1^2 + b_2^2}\\
+\theta = tan^{-1}(\frac{b_2}{b_1})
+$$
+
+#### Euclidean, rotation about x axis
+
+Note that during fitting $\phi$ is computed from $b_1$ and $b_2$ on the fly.
+$$
+\begin{vmatrix}
+ \phi & 0   & 0   & a_1 \\
+ 0    & b_1 &-b_2 & a_2 \\
+ 0    & b_2 & b_1 & a_3 \\
+ 0    & 0   & 0   & 1
+\end{vmatrix}
+$$
+
+
+#### Euclidean, rotation about y axis
+
+$$
+\begin{vmatrix}
+ b_1 & 0    & b_2 & a_1 \\
+ 0   & \phi & 0   & a_2 \\
+-b_2 & 0    & b_1 & a_3 \\
+ 0   & 0    &  0   & 1
+\end{vmatrix}
+$$
+
+#### Euclidean, rotation about z axis
+
+$$
+\begin{vmatrix}
+ b_1 &-b_2 & 0    & a_1 \\
+ b_2 & b_1 & 0    & a_2 \\
+ 0   & 0   & \phi & a_3 \\
+ 0   & 0   &  0   & 1
+\end{vmatrix}
+$$
+
+### Affine
+
+Number of parameters: 12
+
+* translation: $a_1$, $a_2$,  $a_3$
+* scaling · rotation · sheer: $b_1$...$b_9$
+
+
+$$
+\begin{vmatrix}
+ b_1 & b_2 & b_3 & a_1 \\
+ b_4 & b_5 & b_6 & a_2 \\
+ b_7 & b_8 & b_9 & a_3 \\
+ 0   & 0   &  0   & 1
+\end{vmatrix}
+$$
+
+### Projective
+
+Number of parameters: 15
+
+* translation: $a_1$, $a_2$,  $a_3$
+* scaling · rotation · sheer · projection: $b_1$...$b_12$
+
+
+$$
+\begin{vmatrix}
+ b_1    & b_2    & b_3    & a_1 \\
+ b_4    & b_5    & b_6    & a_2 \\
+ b_7    & b_8    & b_9    & a_3 \\
+ b_{10} & b_{11} & b_{12} & 1
+\end{vmatrix}
+$$
+
