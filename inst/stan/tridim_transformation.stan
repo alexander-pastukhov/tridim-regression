@@ -22,8 +22,8 @@ transformed data{
   int AFFINE = 2;
   int PROJECTIVE = 3;
   int EUCLIDEAN_X = 4;
-  int euclidean_y = 5;
-  int euclidean_z = 6;
+  int EUCLIDEAN_y = 5;
+  int EUCLIDEAN_z = 6;
 
   // dependent variable values and standard deviations
   vector[longN] dv_long;
@@ -37,12 +37,6 @@ transformed data{
   dv_long = to_vector(dv);
   iv_long = to_vector(iv);
   dv_sd_long = to_vector(rep_matrix(dv_sd, rowsN));
-  for(iR in 1:rowsN){
-    for(iV in 1:varsN) {
-      // dv_sd_long[(iR-1) * varsN + iV] = dv_sd[iV];
-      print(iv_long[(iR-1) * varsN + iV], dv_sd_long[(iR-1) * varsN + iV]);
-    }
-  }
 
   // transform to homogenous coordinates
   for(iR in 1:rowsN){
@@ -65,6 +59,7 @@ transformed parameters{
 
   // building transformation matrix
   matrix[varsN + 1, varsN + 1] M;
+
   if (varsN == 2){
     // 2D transformations
     if (transform == TRANSLATION){
@@ -94,7 +89,7 @@ transformed parameters{
       M = [[ 1,    0,    0,    0],
            [ 0,    1,    0,    0],
            [ 0,    0,    1,    0],
-           [ a[1], a[2], a[3], 0]];
+           [ a[1], a[2], a[3], 1]];
     }
     else if (transform == EUCLIDEAN_X){
       real phi; // scaling for 3D single axis Eucledian
@@ -103,42 +98,42 @@ transformed parameters{
       M = [[ phi,  0,    0,    0],
            [ 0,    b[1], b[2], 0],
            [ 0,   -b[2], b[1], 0],
-           [ a[1], a[2], a[3], 0]];
+           [ a[1], a[2], a[3], 1]];
     }
-    else if (transform == euclidean_y){
+    else if (transform == EUCLIDEAN_y){
       real phi; // scaling for 3D single axis Eucledian
       phi = sqrt(b[1] * b[1] + b[2] * b[2]);
 
       M = [[ b[1], 0,   -b[2], 0],
            [ 0,    phi,  0   , 0],
            [ b[2], 0,    b[1], 0],
-           [ a[1], a[2], a[3], 0]];
+           [ a[1], a[2], a[3], 1]];
     }
-    else if (transform == euclidean_z){
+    else if (transform == EUCLIDEAN_z){
       real phi; // scaling for 3D single axis Eucledian
       phi = sqrt(b[1] * b[1] + b[2] * b[2]);
 
       M = [[ b[1], b[2], 0,    0],
            [-b[2], b[1], 0,    0],
            [ 0,    0,    phi,  0],
-           [ a[1], a[2], a[3], 0]];
+           [ a[1], a[2], a[3], 1]];
     }
     else if (transform == AFFINE){
       M = [[ b[1], b[4], b[7], 0],
            [ b[2], b[5], b[8], 0],
            [ b[3], b[6], b[9], 0],
-           [ a[1], a[2], a[3], 0]];
+           [ a[1], a[2], a[3], 1]];
     }
     else if (transform == PROJECTIVE) {
       M = [[ b[1], b[4], b[7], b[10]],
            [ b[2], b[5], b[8], b[11]],
            [ b[3], b[6], b[9], b[12]],
-           [ a[1], a[2], a[3], 0    ]];
+           [ a[1], a[2], a[3], 1    ]];
     }
-
-    // generating prediction, discarding extra dimension
-    predicted = to_vector(block(ivH * M, 1, 1, rowsN, varsN));
   }
+
+  // generating prediction, discarding extra dimension
+  predicted = to_vector(block(ivH * M, 1, 1, rowsN, varsN));
 }
 model{
   // sampling, vectorized as we pivoted data to long
