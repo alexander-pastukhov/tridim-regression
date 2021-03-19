@@ -6,14 +6,19 @@
 #' and \code{dv} (for the dependent one). The two tables must have the same dimensions
 #' (both N×2 or N×3).
 #'
-#' For the 2D data, you can fit \code{"euclidean"} (scale, rotation, and translation),
-#' \code{"affine"} (+shear), or \code{"projective"} (+tilt) transformations. For 3D data, you can fit
-#' \code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (scale, rotation around the
-#' specified axis, and translation), \code{"euclidean"} (scale, rotation around all three axes, and translation),
-#' \code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
+#' For the 2D data, you can fit \code{"translation"} (2 for translation only), \code{"euclidean"}
+#' (4 parameters: 2 for translation, 1 for scaling, and 1 for rotation),
+#' \code{"affine"} (6 parameters: 2 for translation and 4 that jointly describe scaling, rotation and sheer),
+#' or \code{"projective"} (8 parameters: affine plus 2 additional parameters to account for projection).
+#'
+#' For 3D data, you can fit \code{"translation"} (3 for translation only), \code{"euclidean_x"}, \code{"euclidean_y"},
+#' \code{"euclidean_z"} (5 parameters: 3 for translation scale, 1 for rotation, and 1 for scaling),
+#' \code{"affine"} (12 parameters: 3 for translation and 9 to account for scaling, rotation, and sheer),
+#' and \code{"projective"} (15 parameters: affine plus 3 additional parameters to account for projection).
 #' transformations.
 #'
-#' For all rotation transformations, priors are uniform distribution within -π..π range.
+#' For details on transformation matrices and computation of scale and rotation parameters please
+#' see \code{vignette("transformation_matrices", package = "TriDimRegression")}
 #'
 #' @param iv a data frame containing independent variable, must by numeric only, N×2 or N×3.
 #' @param dv a data frame containing dependent variable, must by numeric only, N×2 or N×3.
@@ -25,21 +30,21 @@
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
 #' @export
-#' @seealso \code{\link{fit_geometric_transformation}}
+#' @seealso \code{\link{fit_transformation}}
 #' @examples
 #' \dontrun{
 #' # Geometric transformations of 2D data
-#' euc2 <- fit_geometric_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
+#' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
 #'   'euclidean')
-#' euc3x <- fit_geometric_transformation_df(female_face_neutral,
+#' euc3x <- fit_transformation_df(female_face_neutral,
 #'   female_face_happy, "euclidean_x")
 #' }
 
-fit_geometric_transformation_df <- function(iv, dv, transformation, priors=NULL, chains=4, cores=NULL, ...) {
+fit_transformation_df <- function(iv, dv, transformation, priors=NULL, chains=1, cores=NULL, ...) {
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
   if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
 
-  tridim <- tridim_transform(transformation, iv, dv, formula=NULL, prior=priors)
+  tridim <- tridim_transformation(transformation, as.matrix(iv), as.matrix(dv), formula=NULL, prior=priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,
