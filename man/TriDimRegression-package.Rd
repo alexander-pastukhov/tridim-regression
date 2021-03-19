@@ -23,12 +23,12 @@ transformations.
 \examples{
 \dontrun{
 # Fitting via formula
-euc2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
-                                     NakayaData, 'euclidean')
-aff2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
-                                     NakayaData, 'affine')
-prj2 <- fit_geometric_transformation(depV1 + depV2 ~ indepV1 + indepV2,
-                                     NakayaData, 'projective')
+euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                           NakayaData, 'euclidean')
+aff2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                           NakayaData, 'affine')
+prj2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
+                           NakayaData, 'projective')
 
 # summary of transformation coefficients
 coef(euc2)
@@ -37,9 +37,9 @@ coef(euc2)
 loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 
 # Fitting via two tables
-euc2 <- fit_geometric_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
+euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
   'euclidean')
-euc3x <- fit_geometric_transformation_df(female_face_neutral,
+euc3x <- fit_transformation_df(female_face_neutral,
   female_face_happy, "euclidean_x")
 }
 }
@@ -47,7 +47,7 @@ euc3x <- fit_geometric_transformation_df(female_face_neutral,
 Stan Development Team (2020). RStan: the R interface to Stan. R package version 2.19.3. https://mc-stan.org
 }
 \seealso{
-\code{\link[TriDimRegression:fit_geometric_transformation]{fit_geometric_transformation}}
-\code{\link[TriDimRegression:fit_geometric_transformation_df]{fit_geometric_transformation_df}}
-\code{\link[TriDimRegression:tridim_transform-class]{tridim_transform}}
+\code{\link[TriDimRegression:fit_transformation]{fit_transformation}}
+\code{\link[TriDimRegression:fit_transformation_df]{fit_transformation_df}}
+\code{\link[TriDimRegression:tridim_transformation-class]{tridim_transformation}}
 }
