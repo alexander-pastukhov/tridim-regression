@@ -1,10 +1,11 @@
 #' Posterior distributions for transformation coefficients
 #' in full or summarized form.
 #'
-#' @param object An object of class [tridim_transform][tridim_transform-class()].
+#' @param object An object of class [tridim_transformation][tridim_transformation-class()].
 #' @param summary Whether summary statistics should be returned instead of
 #' raw sample values. Defaults to \code{TRUE}
 #' @param probs The percentiles used to compute summary, defaults to 89% credible interval.
+#' @param convert_euclidean Whether to convert matrix coefficients to scale(phi) and rotation(theta). Defaults to \code{FALSE}.
 #' @param ... Unused
 #'
 #' @return If summary=FALSE, a list with matrix iterationsN x dimensionsN for
@@ -16,9 +17,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' euc2 <- fit_geometric_transformation(depV1+depV2~indepV1+indepV2,
-#'                                         data = NakayaData,
-#'                                         transformation = 'euclidean')
+#' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
+#'                            data = NakayaData,
+#'                            transformation = 'euclidean')
 #'
 #' # full posterior distribution
 #' transform_posterior <- coef(euc2, summary=FALSE)
@@ -26,16 +27,40 @@
 #' # coefficients' summary with 89% CI
 #' coef(euc2)
 #' }
-coef.tridim_transform <- function(object, summary=TRUE,  probs=c(0.055, 0.945), ...){
-  if (object$dimN == 2){
-    # bidimensional regression
-    coef_names <- c("scale", "shear", "rotation", "tilt", "translation")
+coef.tridim_transformation <- function(object,
+                                       summary=TRUE,
+                                       probs=c(0.055, 0.945),
+                                       convert_euclidean=FALSE, ...){
+
+  # coefficient names for the columns
+  As <- 1:object$dimN
+  names(As) <- paste0("a", 1:object$dimN)
+  if (object$data$betaN > 0){
+    Bs <- 1:object$data$betaN
+    names(Bs) <- paste0("b", 1:object$data$betaN)
+    new_names <- list(As, Bs)
   }
   else {
-    coef_names <- c("rotation", "scale", "translation", "shearX", "shearY", "shearZ")
+    new_names <- list(As)
   }
 
-  coef_samples <- rstan::extract(object$stanfit, pars=coef_names)
+
+  # getting samples and converting to a single data.frame
+  coef_samples <-
+    purrr::map2(rstan::extract(object$stanfit, pars=c("a", "b")),
+                new_names,
+                ~data.frame(.x) %>% dplyr::rename(.y)) %>%
+    dplyr::bind_cols()
+
+  # A special case of Eucledean transformation
+  if (startsWith(object$transformation, "euclidean") && convert_euclidean){
+    coef_samples <-
+      coef_samples %>%
+      dplyr::mutate(scale = sqrt(b1^2 + b2^2),
+                    rotation = atan2(b2, b1)) %>%
+      dplyr::select(!c(b1, b2))
+  }
+
   if (summary==FALSE){
     return(coef_samples)
   }
