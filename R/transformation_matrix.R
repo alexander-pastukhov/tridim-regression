@@ -102,33 +102,33 @@ NULL
 #' @export
 transformation_matrix.tridim_transformation <- function(object, summary=TRUE){
   # getting parameter samples
-  param_samples <-
-    rstan::extract(object$stanfit,
-                   pars=c(paste0("a", object$dimN), paste0("b", 1:get_beta_n(object$dimN, object$transform)))) %>%
-    data.frame()
+  param_samples <- rstan::extract(object$stanfit, pars=c("a", "b"))
 
   # setting up a list of matrix functions
   if (object$dimN == 2 ){
-    mfun <- c("translation" = m2_translation,
-              "euclidean" =   m2_euclidean,
-              "affine" =      m2_affine,
-              "projective" =  m2_projective)
+    mfun <- list("translation" = m2_translation,
+                 "euclidean" =   m2_euclidean,
+                 "affine" =      m2_affine,
+                 "projective" =  m2_projective)
   }
   else if (object$dimN == 3){
-    mfun <- c("translation" = m3_translation,
-              "euclidean_x" = m3_euclidean_x,
-              "euclidean_y" = m3_euclidean_y,
-              "euclidean_z" = m3_euclidean_z,
-              "affine" =      m3_affine,
-              "projective" =  m3_projective)
+    mfun <- list("translation" = m3_translation,
+                 "euclidean_x" = m3_euclidean_x,
+                 "euclidean_y" = m3_euclidean_y,
+                 "euclidean_z" = m3_euclidean_z,
+                 "affine" =      m3_affine,
+                 "projective" =  m3_projective)
 
   }
   else stop("Number of dimensions must be either 2 or 3")
   if (!object$transformation %in% names(mfun)) stop(sprintf("Unknown transformation %s", object$transformation))
 
+  testf <<- mfun[object$transformation]
+
   # generate matrices for each sample
-  matrices <- purrr::map(1:nrow(param_samples),
-                         ~mfun[object$transformation](param_samples[., ]))
+  matrices <- purrr::map(1:nrow(param_samples$a),
+                         ~mfun[[object$transformation]](param_samples$a[., ],
+                                                        param_samples$b[., ]))
 
   if (!summary) {
     return(matrices)
