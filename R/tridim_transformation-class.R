@@ -73,7 +73,7 @@ tridim_transformation <- function(transformation,
                       varsN = ncol(dv),
                       dv = dv,
                       iv = iv,
-                      dv_sd = apply(NakayaData[, 3:4], MARGIN=2, FUN=sd))
+                      dv_sd = apply(dv, MARGIN=2, FUN=sd))
 
   # figuring out the number of parameters IN ADDITION to translation
   if (ncol(dv) == 2){
