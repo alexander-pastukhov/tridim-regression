@@ -1,84 +1,57 @@
 test_that("multiplication works", {
-  testthat::expect_is(tri_rotation_x_matrix(1), "matrix")
-  testthat::expect_type(tri_rotation_x_matrix(1), "double")
-  testthat::expect_equal(dim(tri_rotation_x_matrix(1)), c(4,4))
-  testthat::expect_error(tri_rotation_x_matrix("1"))
-  testthat::expect_error(tri_rotation_x_matrix(NA))
-  testthat::expect_error(tri_rotation_x_matrix(NULL))
-
-  testthat::expect_is(tri_rotation_y_matrix(1), "matrix")
-  testthat::expect_type(tri_rotation_y_matrix(1), "double")
-  testthat::expect_equal(dim(tri_rotation_y_matrix(1)), c(4,4))
-  testthat::expect_error(tri_rotation_y_matrix("1"))
-  testthat::expect_error(tri_rotation_y_matrix(NA))
-  testthat::expect_error(tri_rotation_y_matrix(NULL))
-
-  testthat::expect_is(tri_rotation_z_matrix(1), "matrix")
-  testthat::expect_type(tri_rotation_z_matrix(1), "double")
-  testthat::expect_equal(dim(tri_rotation_z_matrix(1)), c(4,4))
-  testthat::expect_error(tri_rotation_z_matrix("1"))
-  testthat::expect_error(tri_rotation_z_matrix(NA))
-  testthat::expect_error(tri_rotation_z_matrix(NULL))
-
-  testthat::expect_is(tri_shear_x_matrix(0, 1), "matrix")
-  testthat::expect_type(tri_shear_x_matrix(0, 1), "double")
-  testthat::expect_equal(dim(tri_shear_x_matrix(0, 1)), c(4,4))
-
-  testthat::expect_is(tri_shear_y_matrix(0, 1), "matrix")
-  testthat::expect_type(tri_shear_y_matrix(0, 1), "double")
-  testthat::expect_equal(dim(tri_shear_y_matrix(0, 1)), c(4,4))
-
-  testthat::expect_is(tri_shear_z_matrix(0, 1), "matrix")
-  testthat::expect_type(tri_shear_z_matrix(0, 1), "double")
-  testthat::expect_equal(dim(tri_shear_z_matrix(0, 1)), c(4,4))
-
-  valid <- c(0, 1)
-  bad_values <- c("1", NA)
-  testthat::expect_is(tri_shear_x_matrix(valid[1], valid[2]), "matrix")
-  for(bad_value in bad_values) {
-    for(iN in 1:length(valid)){
-
-      invalid <- valid
-      invalid[iN] <- bad_value
-      testthat::expect_error(tri_shear_x_matrix(invalid[1], invalid[2]))
-      testthat::expect_error(tri_shear_y_matrix(invalid[1], invalid[2]))
-      testthat::expect_error(tri_shear_z_matrix(invalid[1], invalid[2]))
-    }
-  }
-
-  testthat::expect_error(tri_shear_x_matrix(1, NULL))
-  testthat::expect_error(tri_shear_y_matrix(1, NULL))
-  testthat::expect_error(tri_shear_z_matrix(1, NULL))
-  testthat::expect_error(tri_shear_x_matrix(NULL, 1))
-  testthat::expect_error(tri_shear_y_matrix(NULL, 1))
-  testthat::expect_error(tri_shear_z_matrix(NULL, 1))
+  testthat::expect_is(m3_translation(c(1, 1, 1)), "matrix")
+  testthat::expect_type(m3_translation(c(1, 1, 1)), "double")
+  testthat::expect_equal(dim(m3_translation(c(1, 1, 1))), c(4, 4))
+  testthat::expect_error(m3_translation(NA))
+  testthat::expect_error(m3_translation(NULL))
+  testthat::expect_error(m3_translation("1"))
+  testthat::expect_error(m3_translation(1))
+  testthat::expect_error(m3_translation(c(1, 2, 3, 4)))
 
 
-  testthat::expect_is(tri_translation_matrix(0, 1, 2), "matrix")
-  testthat::expect_type(tri_translation_matrix(0, 1, 2), "double")
-  testthat::expect_equal(dim(tri_translation_matrix(0, 1, 2)), c(4,4))
+  testthat::expect_is(m3_euclidean_x(c(2, 2, 2), c(1, 1)), "matrix")
+  testthat::expect_type(m3_euclidean_x(c(2, 2, 2), c(1, 1)), "double")
+  testthat::expect_equal(dim(m3_euclidean_x(c(2, 2, 2), c(1, 1))), c(4, 4))
+  testthat::expect_error(m3_euclidean_x(NA))
+  testthat::expect_error(m3_euclidean_x(NULL))
+  testthat::expect_error(m3_euclidean_x("1"))
+  testthat::expect_error(m3_euclidean_x(1))
+  testthat::expect_error(m3_euclidean_x(c(1, 2), c(1, 2, 5)))
 
-  testthat::expect_is(tri_scale_matrix(0, 1, 2), "matrix")
-  testthat::expect_type(tri_scale_matrix(0, 1, 2), "double")
-  testthat::expect_equal(dim(tri_scale_matrix(0, 1, 2)), c(4,4))
+  testthat::expect_is(m3_euclidean_y(c(2, 2, 2), c(1, 1)), "matrix")
+  testthat::expect_type(m3_euclidean_y(c(2, 2, 2), c(1, 1)), "double")
+  testthat::expect_equal(dim(m3_euclidean_y(c(2, 2, 2), c(1, 1))), c(4, 4))
+  testthat::expect_error(m3_euclidean_y(NA))
+  testthat::expect_error(m3_euclidean_y(NULL))
+  testthat::expect_error(m3_euclidean_y("1"))
+  testthat::expect_error(m3_euclidean_y(1))
+  testthat::expect_error(m3_euclidean_y(c(1, 2), c(1, 2, 5)))
 
-  valid <- c(0, 1, 2)
-  bad_values <- c("1", NA)
-  testthat::expect_is(tri_translation_matrix(valid[1], valid[2], valid[3]), "matrix")
-  for(bad_value in bad_values) {
-    for(iN in 1:length(valid)){
 
-      invalid <- valid
-      invalid[iN] <- bad_value
-      testthat::expect_error(tri_translation_matrix(invalid[1], invalid[2], invalid[3]))
-      testthat::expect_error(tri_scale_matrix(invalid[1], invalid[2], invalid[3]))
-    }
-  }
-  testthat::expect_error(tri_translation_matrix(NULL, 1, 2))
-  testthat::expect_error(tri_translation_matrix(1, NULL, 2))
-  testthat::expect_error(tri_translation_matrix(1, 2, NULL))
+  testthat::expect_is(m3_euclidean_z(c(2, 2, 2), c(1, 1)), "matrix")
+  testthat::expect_type(m3_euclidean_z(c(2, 2, 2), c(1, 1)), "double")
+  testthat::expect_equal(dim(m3_euclidean_z(c(2, 2, 2), c(1, 1))), c(4, 4))
+  testthat::expect_error(m3_euclidean_z(NA))
+  testthat::expect_error(m3_euclidean_z(NULL))
+  testthat::expect_error(m3_euclidean_z("1"))
+  testthat::expect_error(m3_euclidean_z(1))
+  testthat::expect_error(m3_euclidean_z(c(1, 2), c(1, 2, 5)))
 
-  testthat::expect_error(tri_scale_matrix(NULL, 1, 2))
-  testthat::expect_error(tri_scale_matrix(1, NULL, 2))
-  testthat::expect_error(tri_scale_matrix(1, 2, NULL))
+  testthat::expect_is(m3_affine(c(2, 2, 2), runif(9)), "matrix")
+  testthat::expect_type(m3_affine(c(2, 2, 2), runif(9)), "double")
+  testthat::expect_equal(dim(m3_affine(c(2, 2, 2), runif(9))), c(4, 4))
+  testthat::expect_error(m3_affine(NA))
+  testthat::expect_error(m3_affine(NULL))
+  testthat::expect_error(m3_affine("1"))
+  testthat::expect_error(m3_affine(1))
+  testthat::expect_error(m3_affine(c(1, 2), c(1, 2, 5)))
+
+  testthat::expect_is(m3_projective(c(2, 2, 2), runif(12)), "matrix")
+  testthat::expect_type(m3_projective(c(2, 2, 2), runif(12)), "double")
+  testthat::expect_equal(dim(m3_projective(c(2, 2, 2), runif(12))), c(4, 4))
+  testthat::expect_error(m3_projective(NA))
+  testthat::expect_error(m3_projective(NULL))
+  testthat::expect_error(m3_projective("1"))
+  testthat::expect_error(m3_projective(1))
+  testthat::expect_error(m3_projective(c(1, 2), c(1, 2, 5)))
 })
