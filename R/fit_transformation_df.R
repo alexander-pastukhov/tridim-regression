@@ -22,10 +22,14 @@
 #'
 #' @param iv a data frame containing independent variable, must by numeric only, N×2 or N×3.
 #' @param dv a data frame containing dependent variable, must by numeric only, N×2 or N×3.
-#' @param transformation the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.
-#' @param priors named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
-#' all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
-#' \code{list("translation" = c(0, 10), "sigma"=1)}.
+#' @param transformation the transformation to be used: \code{"translation"} (both 2D and 3D), \code{"euclidean"} (2D),
+#'   \code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (3D, rotation about, respectively, x, y, and z axis),
+#'   \code{"affine"} (2D and 3D), or \code{"projective"} (2D and 3D).
+#' @param priors named list of parameters for prior distributions of parameters \code{a}
+#'   (translation, normal distribution), \code{b} (all other parameters, normal distribution),
+#'   and \code{sigma} (residual variance, exponential). E.g., \code{list("a" = c(0, 10), "b"= c(0, 1), "sigma"=1)}.
+#'   Default priors are \code{"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2)},
+#'   \code{"b" = c(0, max_absolute_difference_in_means(d, iv)) / 2)}, \code{"sigma" = 1 * sd(dv)}.
 #' @param chains Number of chains for sampling.
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
