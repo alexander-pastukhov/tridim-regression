@@ -7,9 +7,9 @@
 m3_translation(a, b)
 }
 \arguments{
-\item{a}{numeric, translation}
+\item{a}{numeric, 3: translation}
 
-\item{b}{numeric, all other coefficients}
+\item{b}{numeric, ignored}
 }
 \value{
 matrix 4x4

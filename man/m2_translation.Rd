@@ -4,12 +4,12 @@
 \alias{m2_translation}
 \title{2D Translation Matrix}
 \usage{
-m2_translation(a, b)
+m2_translation(a, b = NULL)
 }
 \arguments{
-\item{a}{numeric, translation}
+\item{a}{numeric, 2: translation}
 
-\item{b}{numeric, all other coefficients}
+\item{b}{numeric, ignored}
 }
 \value{
 matrix 3x3

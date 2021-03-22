@@ -7,9 +7,9 @@
 m2_projective(a, b)
 }
 \arguments{
-\item{a}{numeric, translation}
+\item{a}{numeric, 2: translation}
 
-\item{b}{numeric, all other coefficients}
+\item{b}{numeric, 6: all other coefficients}
 }
 \value{
 matrix 3x3

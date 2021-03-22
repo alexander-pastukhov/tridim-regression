@@ -7,9 +7,9 @@
 m3_affine(a, b)
 }
 \arguments{
-\item{a}{numeric, translation}
+\item{a}{numeric, 3: translation}
 
-\item{b}{numeric, all other coefficients}
+\item{b}{numeric, 9: all other coefficients}
 }
 \value{
 matrix 4x4
