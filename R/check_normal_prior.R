@@ -8,6 +8,7 @@
 #'
 #' @return NULL
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' check_normal_prior(c(0, 1), "scale")

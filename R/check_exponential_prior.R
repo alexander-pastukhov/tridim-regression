@@ -8,6 +8,7 @@
 #'
 #' @return NULL
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' check_exponential_prior(1, "sigma")
