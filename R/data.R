@@ -95,6 +95,7 @@
 
 #' Face landmarks, female, #070
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -103,6 +104,7 @@
 
 #' Face landmarks, female, #097
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -111,6 +113,7 @@
 
 #' Face landmarks, female, #182
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -120,6 +123,7 @@
 
 #' Face landmarks, female, #243
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -129,6 +133,7 @@
 
 #' Face landmarks, male, #010
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -137,6 +142,7 @@
 
 #' Face landmarks, male, #092
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -145,6 +151,7 @@
 
 #' Face landmarks, male, #101
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
@@ -153,6 +160,7 @@
 
 #' Face landmarks, male, #244
 #'
+#' @source Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
 #' @format A data frame with 64 landmarks on the following 3 variables:
 #' \describe{
 #'   \item{x, y, z}{numeric vectors, coordinates of face landmarks}
