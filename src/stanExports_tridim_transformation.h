@@ -47,8 +47,8 @@ private:
         matrix_d dv;
         matrix_d iv;
         vector_d dv_sd;
-        std::vector<double> translation_prior;
-        std::vector<double> beta_prior;
+        std::vector<double> a_prior;
+        std::vector<double> b_prior;
         double sigma_prior;
         int longN;
         int TRANSLATION;
@@ -161,24 +161,24 @@ public:
             }
             check_greater_or_equal(function__, "dv_sd", dv_sd, 0);
             current_statement_begin__ = 12;
-            validate_non_negative_index("translation_prior", "2", 2);
-            context__.validate_dims("data initialization", "translation_prior", "double", context__.to_vec(2));
-            translation_prior = std::vector<double>(2, double(0));
-            vals_r__ = context__.vals_r("translation_prior");
+            validate_non_negative_index("a_prior", "2", 2);
+            context__.validate_dims("data initialization", "a_prior", "double", context__.to_vec(2));
+            a_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("a_prior");
             pos__ = 0;
-            size_t translation_prior_k_0_max__ = 2;
-            for (size_t k_0__ = 0; k_0__ < translation_prior_k_0_max__; ++k_0__) {
-                translation_prior[k_0__] = vals_r__[pos__++];
+            size_t a_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < a_prior_k_0_max__; ++k_0__) {
+                a_prior[k_0__] = vals_r__[pos__++];
             }
             current_statement_begin__ = 13;
-            validate_non_negative_index("beta_prior", "2", 2);
-            context__.validate_dims("data initialization", "beta_prior", "double", context__.to_vec(2));
-            beta_prior = std::vector<double>(2, double(0));
-            vals_r__ = context__.vals_r("beta_prior");
+            validate_non_negative_index("b_prior", "2", 2);
+            context__.validate_dims("data initialization", "b_prior", "double", context__.to_vec(2));
+            b_prior = std::vector<double>(2, double(0));
+            vals_r__ = context__.vals_r("b_prior");
             pos__ = 0;
-            size_t beta_prior_k_0_max__ = 2;
-            for (size_t k_0__ = 0; k_0__ < beta_prior_k_0_max__; ++k_0__) {
-                beta_prior[k_0__] = vals_r__[pos__++];
+            size_t b_prior_k_0_max__ = 2;
+            for (size_t k_0__ = 0; k_0__ < b_prior_k_0_max__; ++k_0__) {
+                b_prior[k_0__] = vals_r__[pos__++];
             }
             current_statement_begin__ = 14;
             context__.validate_dims("data initialization", "sigma_prior", "double", context__.to_vec());
@@ -504,11 +504,11 @@ public:
             current_statement_begin__ = 143;
             lp_accum__.add(exponential_log<propto__>(sigma, sigma_prior));
             current_statement_begin__ = 144;
-            lp_accum__.add(normal_log<propto__>(a, get_base1(translation_prior, 1, "translation_prior", 1), get_base1(translation_prior, 2, "translation_prior", 1)));
+            lp_accum__.add(normal_log<propto__>(a, get_base1(a_prior, 1, "a_prior", 1), get_base1(a_prior, 2, "a_prior", 1)));
             current_statement_begin__ = 145;
             if (as_bool(logical_neq(transform, TRANSLATION))) {
                 current_statement_begin__ = 146;
-                lp_accum__.add(normal_log<propto__>(b, get_base1(beta_prior, 1, "beta_prior", 1), get_base1(beta_prior, 2, "beta_prior", 1)));
+                lp_accum__.add(normal_log<propto__>(b, get_base1(b_prior, 1, "b_prior", 1), get_base1(b_prior, 2, "b_prior", 1)));
             }
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
