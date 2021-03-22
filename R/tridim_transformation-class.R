@@ -24,6 +24,7 @@
 NULL
 
 # tridim_transform class
+#' @keywords internal
 tridim_transformation <- function(transformation,
                                   iv, dv,
                                   formula=NULL,
@@ -76,12 +77,6 @@ tridim_transformation <- function(transformation,
                       dv_sd = apply(dv, MARGIN=2, FUN=sd))
 
   # figuring out the number of parameters IN ADDITION to translation
-  if (ncol(dv) == 2){
-    param_n <- c("translation"=0, "euclidean"=2, "affine"=4, "projective"=6)
-  }
-  else {
-    param_n <- -c("translation"=0, "euclidean_x"= 2, "euclidean_y" = 2, "euclidean_z" = 2, "affine"=9, "projective"=12)
-  }
   object$data[["betaN"]] <- get_beta_n(ncol(dv), transformation)
 
   # computing means as guidance priors
@@ -90,9 +85,8 @@ tridim_transformation <- function(transformation,
 
   # default priors
   prior_defaults <- list(
-    "beta" =  c(0, max(abs(dv_means/iv_means)) / 2),
-    "translation" = c(0, max(abs(dv_means- iv_means)))
-  )
+    "a" = c(0, max(abs(dv_means- iv_means)) / 2),
+    "b" =  c(0, max(abs(dv_means/iv_means)) / 2))
 
   # checking all available priors for validity
   for(param_prior_name in names(prior_defaults)){
@@ -111,8 +105,7 @@ tridim_transformation <- function(transformation,
     }
   }
 
-  # special cases
-  object$data[["normal_rotation_prior"]] <- as.integer("rotation" %in% names(priors))
+  # special case of exponential prior
   if ("sigma" %in% names(priors)) {
     check_exponential_prior(priors["sigma"], "sigma")
     object$data[["sigma_prior"]] <- unname(priors[["sigma"]])
