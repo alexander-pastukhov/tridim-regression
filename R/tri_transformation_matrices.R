@@ -4,6 +4,7 @@
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 4x4
+#' @keywords internal
 #' @export
 #'
 #' @examples
@@ -22,6 +23,7 @@ m3_translation <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 4x4
+#' @keywords internal
 #' @export
 #' @examples
 #' m3_euclidean_x(c(2, 3, 1), c(0.5, 0.2))
@@ -42,6 +44,7 @@ m3_euclidean_x <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 4x4
+#' @keywords internal
 #' @export
 #' @examples
 #' m3_euclidean_y(c(2, 3, 1), c(0.5, 0.2))
@@ -62,6 +65,7 @@ m3_euclidean_y <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 4x4
+#' @keywords internal
 #' @export
 #' @examples
 #' m3_euclidean_z(c(2, 3, 1), c(0.5, 0.2))
@@ -84,6 +88,7 @@ m3_euclidean_z <- function(a, b){
 #'
 #' @return matrix 4x4
 #' @export
+#' @keywords internal
 #' @examples
 #' m3_affine(c(2, 3, 1), c(0.5, 0.2, 4, 2, 6, 3, 2, 5, 1))
 m3_affine <- function(a, b){
@@ -105,6 +110,7 @@ m3_affine <- function(a, b){
 #'
 #' @return matrix 4x4
 #' @export
+#' @keywords internal
 #' @examples
 #' m3_projective(c(2, 3, 1), c(0.5, 0.2, 4, 2, 6, 3, 2, 5, 1, 6, 8, 9))
 m3_projective <- function(a, b){

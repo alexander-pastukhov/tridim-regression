@@ -7,6 +7,7 @@
 #'
 #' @return matrix 3x3  for 2D transformation or matrix 4x4 for 3D transformation
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

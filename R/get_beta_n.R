@@ -5,6 +5,7 @@
 #'
 #' @return integer
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' get_beta_n(2, "euclidean") # should return 2
