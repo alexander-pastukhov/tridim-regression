@@ -5,6 +5,7 @@
 #'
 #' @return matrix 3x3
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' m2_translation(c(2, 3))
@@ -21,6 +22,7 @@ m2_translation <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 3x3
+#' @keywords internal
 #' @export
 #' @examples
 #' m2_euclidean(c(2, 3), c(1, 0.5))
@@ -37,6 +39,7 @@ m2_euclidean <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 3x3
+#' @keywords internal
 #' @export
 #' @examples
 #' m2_affine(c(2, 3), c(1, 0.5, 1, 5))
@@ -54,6 +57,7 @@ m2_affine <- function(a, b){
 #' @param b numeric, all other coefficients
 #'
 #' @return matrix 3x3
+#' @keywords internal
 #' @export
 #' @examples
 #' m2_projective(c(2, 3), c(1, 0.5, 1, 5, 2, 4))
