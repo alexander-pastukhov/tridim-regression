@@ -21,3 +21,4 @@ Returns number of free matrix parameters in addition to translation
 get_beta_n(2, "euclidean") # should return 2
 get_beta_n(3, "affine") # should return 9
 }
+\keyword{internal}

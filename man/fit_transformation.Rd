@@ -21,11 +21,15 @@
 
 \item{data}{a data frame containing variables for the model.}
 
-\item{transformation}{the transformation to be used, either \code{'euclidean'}, \code{'affine'}, or \code{'projective'}.}
+\item{transformation}{the transformation to be used: \code{"translation"} (both 2D and 3D), \code{"euclidean"} (2D),
+\code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (3D, rotation about, respectively, x, y, and z axis),
+\code{"affine"} (2D and 3D), or \code{"projective"} (2D and 3D).}
 
-\item{priors}{named list of parameters prior distribution. Except for \code{sigma} that uses exponential prior,
-all other parameters use normal or transformed normal prior and require parameter pairs. E.g.,
-\code{list("translation" = c(0, 10), "sigma"=1)}.}
+\item{priors}{named list of parameters for prior distributions of parameters \code{a}
+(translation, normal distribution), \code{b} (all other parameters, normal distribution),
+and \code{sigma} (residual variance, exponential). E.g., \code{list("a" = c(0, 10), "b"= c(0, 1), "sigma"=1)}.
+Default priors are \code{"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2)},
+\code{"b" = c(0, max_absolute_difference_in_means(d, iv)) / 2)}, \code{"sigma" = 1 * sd(dv)}.}
 
 \item{chains}{Number of chains for sampling.}
 
@@ -36,9 +40,9 @@ all other parameters use normal or transformed normal prior and require paramete
 \description{
 Fits Bidimensional or Tridimensional regression / geometric transformation models using
 Stan engine. The \code{formula} described dependent and independent numeric variables in the
-\code{data}.
+\code{data}. See also \code{\link{fit_transformation_df}}.
 
-For the 2D data, you can fit \code{"translation"} (2 for translation only), \code{"euclidean"}
+For the 2D data, you can fit \code{"translation"} (2 parameters for translation only), \code{"euclidean"}
 (4 parameters: 2 for translation, 1 for scaling, and 1 for rotation),
 \code{"affine"} (6 parameters: 2 for translation and 4 that jointly describe scaling, rotation and sheer),
 or \code{"projective"} (8 parameters: affine plus 2 additional parameters to account for projection).

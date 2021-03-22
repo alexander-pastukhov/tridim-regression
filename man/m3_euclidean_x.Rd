@@ -20,3 +20,4 @@ matrix 4x4
 \examples{
 m3_euclidean_x(c(2, 3, 1), c(0.5, 0.2))
 }
+\keyword{internal}

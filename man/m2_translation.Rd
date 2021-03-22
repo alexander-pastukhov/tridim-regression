@@ -20,3 +20,4 @@ matrix 3x3
 \examples{
 m2_translation(c(2, 3))
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ matrix 4x4
 \examples{
 m3_translation(c(2, 3, 1))
 }
+\keyword{internal}

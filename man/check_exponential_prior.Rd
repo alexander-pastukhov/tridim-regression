@@ -18,3 +18,4 @@ Stops execution with an error.
 \examples{
 check_exponential_prior(1, "sigma")
 }
+\keyword{internal}

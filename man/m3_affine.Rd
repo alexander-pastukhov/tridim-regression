@@ -20,3 +20,4 @@ matrix 4x4
 \examples{
 m3_affine(c(2, 3, 1), c(0.5, 0.2, 4, 2, 6, 3, 2, 5, 1))
 }
+\keyword{internal}

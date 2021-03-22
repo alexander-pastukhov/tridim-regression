@@ -10,6 +10,9 @@ A data frame with 64 landmarks on the following 3 variables:
 \item{x, y, z}{numeric vectors, coordinates of face landmarks}
 }
 }
+\source{
+Carbon, C. C. (2012). The Bamberg DADA Face Database (BaDADA). A standardized high quality Face Database with faces of Different Affective states from Different Angles. Unpublished databank. University of Bamberg, Bamberg.
+}
 \usage{
 Face3D_M101
 }

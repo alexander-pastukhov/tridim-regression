@@ -18,3 +18,4 @@ Stops execution with an error.
 \examples{
 check_normal_prior(c(0, 1), "scale")
 }
+\keyword{internal}

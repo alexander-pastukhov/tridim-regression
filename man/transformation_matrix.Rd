@@ -23,3 +23,4 @@ euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 transformation_matrix(euc2)
 }
 }
+\keyword{internal}
