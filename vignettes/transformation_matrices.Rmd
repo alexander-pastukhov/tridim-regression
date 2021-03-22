@@ -27,11 +27,11 @@ Number of parameters: 2
 * translation: $a_1$, $a_2$
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  1 & 0 & a_1 \\
  0 & 1 & a_2 \\
  0 & 0 & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ### Euclidean
@@ -43,11 +43,11 @@ Number of parameters: 4
 * rotation: $\theta$
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 & b_2 & a_1 \\
 -b_2 & b_1 & a_2 \\
  0   & 0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 The Euclidean transformation is a special case, where we can compute rotation ($\theta$) and the single scaling ($\phi$) coefficients, as follows:
@@ -64,11 +64,11 @@ Number of parameters: 6
 * scaling · rotation · sheer: $b_1$, $b_2$, $b_3$, $b_4$
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 & b_2 & a_1 \\
  b_3 & b_4 & a_2 \\
  0   & 0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ### Projective
@@ -79,11 +79,11 @@ Number of parameters: 8
 * scaling · rotation · sheer · projection: $b_1$...$b_6$
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 & b_2 & a_1 \\
  b_3 & b_4 & a_2 \\
  b_5 & b_6 & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ## Tridimensional regression
@@ -95,12 +95,12 @@ Number of parameters: 3
 * translation: $a_1$, $a_2$, $a_3$
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  1 & 0 & 0 & a_1 \\
  0 & 1 & 0 & a_2 \\
  0 & 0 & 1 & a_3 \\
  0 & 0 & 0 & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ### Euclidean
@@ -121,35 +121,35 @@ $$
 
 Note that during fitting $\phi$ is computed from $b_1$ and $b_2$ on the fly.
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  \phi & 0   & 0   & a_1 \\
  0    & b_1 &-b_2 & a_2 \\
  0    & b_2 & b_1 & a_3 \\
  0    & 0   & 0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 
 #### Euclidean, rotation about y axis
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 & 0    & b_2 & a_1 \\
  0   & \phi & 0   & a_2 \\
 -b_2 & 0    & b_1 & a_3 \\
  0   & 0    &  0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 #### Euclidean, rotation about z axis
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 &-b_2 & 0    & a_1 \\
  b_2 & b_1 & 0    & a_2 \\
  0   & 0   & \phi & a_3 \\
  0   & 0   &  0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ### Affine
@@ -161,12 +161,12 @@ Number of parameters: 12
 
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1 & b_2 & b_3 & a_1 \\
  b_4 & b_5 & b_6 & a_2 \\
  b_7 & b_8 & b_9 & a_3 \\
  0   & 0   &  0   & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
 ### Projective
@@ -178,11 +178,11 @@ Number of parameters: 15
 
 
 $$
-\begin{vmatrix}
+\begin{bmatrix}
  b_1    & b_2    & b_3    & a_1 \\
  b_4    & b_5    & b_6    & a_2 \\
  b_7    & b_8    & b_9    & a_3 \\
  b_{10} & b_{11} & b_{12} & 1
-\end{vmatrix}
+\end{bmatrix}
 $$
 
