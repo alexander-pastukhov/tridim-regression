@@ -4,7 +4,7 @@ author: "Alexander (Sasha) Pastukhov"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Eye gaze mapping}
+  %\VignetteIndexEntry{Comparing faces}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,12 +18,14 @@ knitr::opts_chunk$set(
 library(TriDimRegression)
 library(dplyr)
 library(ggplot2)
+library(tibble)
+library(tidyr)
 ```
 
 
 Tridimensional regression can be used to compare face similarity via R2 based on 3D landmarks. 
 
-```{r cache=TRUE}
+```{r}
 faces <- 
   list("M010"=Face3D_M010,
        "M101"=Face3D_M101,
