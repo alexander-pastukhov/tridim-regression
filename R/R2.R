@@ -44,4 +44,5 @@ R2.tridim_transformation <- function(object, summary=TRUE, probs=c(0.055, 0.945)
 }
 
 #' @export
+#' @keywords internal
 R2 <- function(object, ...) { UseMethod("R2") }
