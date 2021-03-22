@@ -9,9 +9,9 @@ data{
   vector<lower=0>[varsN] dv_sd; //standard deviation of dependent variables, used to scale sigma in loss function
 
   // priors
-  real translation_prior[2]; // mean and sigma for translation
-  real beta_prior[2];        // common mean and sigma for all betas
-  real<lower=0> sigma_prior;
+  real a_prior[2];           // mean and sigma for translation
+  real b_prior[2];           // common mean and sigma for all betas
+  real<lower=0> sigma_prior; // rate for residual variance
 }
 transformed data{
   int longN = rowsN * varsN;
@@ -141,9 +141,9 @@ model{
 
   // priors
   sigma ~ exponential(sigma_prior);
-  a ~ normal(translation_prior[1], translation_prior[2]);
+  a ~ normal(a_prior[1], a_prior[2]);
   if (transform != TRANSLATION){
-    b ~ normal(beta_prior[1], beta_prior[2]);
+    b ~ normal(b_prior[1], b_prior[2]);
   }
 }
 generated quantities{
