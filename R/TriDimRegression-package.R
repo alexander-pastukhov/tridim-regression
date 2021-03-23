@@ -59,7 +59,6 @@
 #' # Fitting via two tables
 #' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
 #'   'euclidean')
-#' euc3x <- fit_transformation_df(female_face_neutral,
-#'   female_face_happy, "euclidean_x")
+#' tr3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
 #' }
 NULL
