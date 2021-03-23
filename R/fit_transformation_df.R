@@ -48,7 +48,7 @@ fit_transformation_df <- function(iv, dv, transformation, priors=NULL, chains=1,
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")
   if (!is.data.frame(iv) && !is.matrix(iv)) stop("iv must be a data.frame or a matrix")
 
-  tridim <- tridim_transformation(transformation, as.matrix(iv), as.matrix(dv), formula=NULL, prior=priors)
+  tridim <- tridim_transformation(transformation, as.matrix(iv), as.matrix(dv), formula=NULL, priors=priors)
 
   # fitting function
   tridim$stanfit <- rstan::sampling(tridim$stanmodel,
