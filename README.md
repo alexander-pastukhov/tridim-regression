@@ -9,7 +9,9 @@ library("devtools"); install_github("alexander-pastukhov/tridim-regression", dep
 
 If you want vignettes, us 
 ```
-devtools::install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE, build_vignettes = TRUE)
+devtools::install_github("alexander-pastukhov/tridim-regression",
+                         dependencies=TRUE,
+                         build_vignettes = TRUE)
 ```
 
 ## Using TriDimRegression
