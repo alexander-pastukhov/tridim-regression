@@ -30,8 +30,8 @@ R2.tridim_transformation <- function(object, summary=TRUE, probs=c(0.055, 0.945)
   e <- -1 * sweep(dv_pred, 2, c(object$data$dv))
 
   # compute variances
-  var_dv_pred <- apply(dv_pred, 1, var)
-  var_e <- apply(e, 1, var)
+  var_dv_pred <- apply(dv_pred, 1, stats::var)
+  var_e <- apply(e, 1, stats::var)
 
   # compute R2
   r2s <- var_dv_pred / (var_dv_pred + var_e)
