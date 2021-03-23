@@ -1,10 +1,10 @@
 # TriDimRegression
 
-Package to calculate the bidimensional and tridimensional regression between two 3D configurations.
+Package to calculate the bidimensional and tridimensional regression between two 2D/3D configurations.
 
 ## Installation from Github
 ```
-library("devtools"); install_github("alexander-pastukhov/tridim-regression",dependencies=TRUE)
+library("devtools"); install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE)
 ```
 ## Using TriDimRegression
 
@@ -14,12 +14,15 @@ euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2, NakayaData, 'eucli
 ```
 whereas the latter is 
 ```
-euc3 <- fit_transformation_df(female_face_neutral, female_face_neutral, 'euclidean')
+euc3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
 ```
 
-For the 2D data, you can fit `"euclidean"` (scale, rotation, and translation), `"affine"` (+shear), or `"projective"` (+tilt). For 3D data, you can fit `"euclidean_x"`, `"euclidean_y"`, `"euclidean_z"` (scale, rotation around the specified axis, and translation), `"euclidean"` (scale, rotation around all three axes, and translation), `"affine"` (`"euclidean"` + shear for x-plane), and `"projective"` (+shear for y and z planes).
+See also `vignette("calibration", package="TriDimRegression")` for an example of using `TriDimRegression` for 2D eye gaze data and `vignette("comparing_faces", package="TriDimRegression")` for an example of working with 3D facial landmarks data.
 
-Once the data is fitted, you can extract the transformation coefficients via `coef()` function. Predicted data, either based on the original data or on the new data, can be generated via `predict()`. Posterior R-squared can be computed with or without adjustment via `R2()` funciton. In all three cases, you have choice between summary (mean + specified quantiles) or full posterior samples. `loo()` and `waic()` provide corresponding measures that can be used for comparison via `loo::loo_compare()` function.
+For the 2D data, you can fit `"translation"` (2 parameters for translation only), `"euclidean"`
+(4 parameters: 2 for translation, 1 for scaling, and 1 for rotation), `"affine"` (6 parameters: 2 for translation and 4 that jointly describe scaling, rotation and sheer), or `"projective"` (8 parameters: affine plus 2 additional parameters to account for projection). For 3D data, you can fit `"translation"` (3 for translation only), `"euclidean_x"`, `"euclidean_y"`, `"euclidean_z"` (5 parameters: 3 for translation scale, 1 for rotation, and 1 for scaling), `"affine"` (12 parameters: 3 for translation and 9 to account for scaling, rotation, and sheer), and `"projective"` (15 parameters: affine plus 3 additional parameters to account for projection). transformations. For details on how matrices are constructed, see `vignette("transformation_matrices", package="TriDimRegression")`.
+
+Once the data is fitted, you can extract the transformation coefficients via `coef()` function and the matrix itself via `transformation_matrix()`. Predicted data, either based on the original data or on the new data, can be generated via `predict()`. Bayesian R-squared can be computed with or without adjustment via `R2()` function. In all three cases, you have choice between summary (mean + specified quantiles) or full posterior samples. `loo()` and `waic()` provide corresponding measures that can be used for comparison via `loo::loo_compare()` function.
 
 ## References
 
