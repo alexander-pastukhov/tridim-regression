@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(TriDimRegression)
 library(dplyr)
 library(ggplot2)
+library(TriDimRegression)
 ```
 
 Bidimensional regression can be used to transform the eye gaze data into a the screen coordinate system using a calibration sequence. For this, we use known target coordinates as independent variables. Please note that the example below assumes that participants fixate faithfully for most of the time and that recording artifacts, such as blinks, were already removed. This example will use the \code{EyegazeData} example dataset.
