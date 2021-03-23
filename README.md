@@ -6,6 +6,12 @@ Package to calculate the bidimensional and tridimensional regression between two
 ```
 library("devtools"); install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE)
 ```
+
+If you want vignettes, us 
+```
+devtools::install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE, build_vignettes = TRUE)
+```
+
 ## Using TriDimRegression
 
 You can call the main function either via a formula that specifies dependent and independent variables with the `data` table or by supplying two tables one containing all independent variables and one containing all dependent variables. The former call is
