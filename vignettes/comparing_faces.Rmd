@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 library(TriDimRegression)
 library(dplyr)
 library(ggplot2)
-library(tibble)
 library(tidyr)
 ```
 
@@ -38,7 +37,7 @@ faces <-
 
 
 face_comparison <- 
-  as_tibble(t(combn(names(faces), 2))) %>%
+  dplyr::as_tibble(t(combn(names(faces), 2))) %>%
   rename(Face1 = V1, Face2 = V2 ) %>%
   group_by(Face1, Face2) %>%
   nest() %>%
