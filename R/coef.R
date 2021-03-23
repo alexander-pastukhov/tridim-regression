@@ -55,13 +55,13 @@ coef.tridim_transformation <- function(object,
                 ~data.frame(.x) %>% dplyr::rename(.y)) %>%
     dplyr::bind_cols()
 
-  # A special case of Eucledean transformation
+  # A special case of Euclidean transformation
   if (startsWith(object$transformation, "euclidean") && convert_euclidean){
     coef_samples <-
       coef_samples %>%
       dplyr::mutate(scale = sqrt(b1^2 + b2^2),
                     rotation = atan2(b2, b1)) %>%
-      dplyr::select(!c(b1, b2))
+      dplyr::select(-b1, -b2)
   }
 
   if (summary==FALSE){
