@@ -5,7 +5,8 @@
 #' via [loo][loo-package] library. It can be used for a model comparison via
 #' [loo::loo_compare()][loo::loo_compare] function.
 #'
-#' @param object A [tridim_transformation[[tridim_transformation-class()] object
+#' @param x A [tridim_transformation[[tridim_transformation-class()] object
+#' @param ... unused
 #'
 #' @return A named list, see [loo::waic()] for details.
 #' @export
@@ -18,8 +19,8 @@
 #'   NakayaData, transformation = 'affine')
 #' loo::loo_compare(waic(euc2), waic(aff2))
 #' }
-waic.tridim_transformation <- function(object) {
-  log_lik <- loo::extract_log_lik(object$stanfit, "log_lik", merge_chains = FALSE)
+waic.tridim_transformation <- function(x, ...) {
+  log_lik <- loo::extract_log_lik(x$stanfit, "log_lik", merge_chains = FALSE)
   loo::waic(log_lik)
 }
 

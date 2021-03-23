@@ -2,7 +2,8 @@
 #' cross-validation via loo library. It can be used
 #' for a model comparison via loo::loo_compare() function.
 #'
-#' @param object A [tridim_transformation][tridim_transformation-class()] object
+#' @param x A [tridim_transformation][tridim_transformation-class()] object
+#' @param ... unused
 #'
 #' @return A named list, see [loo::loo()] for details.
 #' @export
@@ -15,6 +16,6 @@
 #'   NakayaData, transformation = 'affine')
 #' loo::loo_compare(loo(euc2), loo(aff2))
 #' }
-loo.tridim_transformation <- function(object) {
-  rstan::loo(object$stanfit)
+loo.tridim_transformation <- function(x, ...) {
+  rstan::loo(x$stanfit)
 }
