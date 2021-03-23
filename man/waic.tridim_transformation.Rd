@@ -5,10 +5,12 @@
 \title{Computes widely applicable information criterion
 (WAIC).}
 \usage{
-\method{waic}{tridim_transformation}(object)
+\method{waic}{tridim_transformation}(x, ...)
 }
 \arguments{
-\item{object}{A [tridim_transformation[\code{\link[=tridim_transformation-class]{tridim_transformation-class()}} object}
+\item{x}{A [tridim_transformation[\code{\link[=tridim_transformation-class]{tridim_transformation-class()}} object}
+
+\item{...}{unused}
 }
 \value{
 A named list, see \code{\link[loo:waic]{loo::waic()}} for details.

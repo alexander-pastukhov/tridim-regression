@@ -6,10 +6,12 @@
 cross-validation via loo library. It can be used
 for a model comparison via loo::loo_compare() function.}
 \usage{
-\method{loo}{tridim_transformation}(object)
+\method{loo}{tridim_transformation}(x, ...)
 }
 \arguments{
-\item{object}{A \link[=tridim_transformation-class]{tridim_transformation} object}
+\item{x}{A \link[=tridim_transformation-class]{tridim_transformation} object}
+
+\item{...}{unused}
 }
 \value{
 A named list, see \code{\link[loo:loo]{loo::loo()}} for details.
