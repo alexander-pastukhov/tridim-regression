@@ -42,8 +42,6 @@ transformation_matrix.tridim_transformation <- function(object, summary=TRUE){
   else stop("Number of dimensions must be either 2 or 3")
   if (!object$transformation %in% names(mfun)) stop(sprintf("Unknown transformation %s", object$transformation))
 
-  testf <<- mfun[object$transformation]
-
   # generate matrices for each sample
   matrices <- purrr::map(1:nrow(param_samples$a),
                          ~mfun[[object$transformation]](param_samples$a[., ],
