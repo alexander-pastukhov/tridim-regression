@@ -10,7 +10,7 @@
 #' @examples
 #' m3_translation(c(2, 3, 1))
 m3_translation <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3)
+  stopifnot(all(is.finite(a)), length(a)==3)
   matrix(c(1,    0,    0,    0,
            0,    1,    0,    0,
            0,    0,    1,    0,
@@ -29,7 +29,7 @@ m3_translation <- function(a, b){
 #' @examples
 #' m3_euclidean_x(c(2, 3, 1), c(0.5, 0.2))
 m3_euclidean_x <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3 && is.finite(b) && length(b)==2)
+  stopifnot(all(is.finite(a)), length(a)==3, all(is.finite(b)), length(b)==2)
   # scaling
   phi <- sqrt(b[1]^2 + b[2]^2)
 
@@ -51,7 +51,7 @@ m3_euclidean_x <- function(a, b){
 #' @examples
 #' m3_euclidean_y(c(2, 3, 1), c(0.5, 0.2))
 m3_euclidean_y <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3 && is.finite(b) && length(b)==2)
+  stopifnot(all(is.finite(a)), length(a)==3, all(is.finite(b)), length(b)==2)
   # scaling
   phi <- sqrt(b[1]^2 + b[2]^2)
 
@@ -73,7 +73,7 @@ m3_euclidean_y <- function(a, b){
 #' @examples
 #' m3_euclidean_z(c(2, 3, 1), c(0.5, 0.2))
 m3_euclidean_z <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3 && is.finite(b) && length(b)==2)
+  stopifnot(all(is.finite(a)), length(a)==3, all(is.finite(b)), length(b)==2)
   # scaling
   phi <- sqrt(b[1]^2 + b[2]^2)
 
@@ -96,7 +96,7 @@ m3_euclidean_z <- function(a, b){
 #' @examples
 #' m3_affine(c(2, 3, 1), c(0.5, 0.2, 4, 2, 6, 3, 2, 5, 1))
 m3_affine <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3 && is.finite(b) && length(b)==9)
+  stopifnot(all(is.finite(a)), length(a)==3, all(is.finite(b)), length(b)==9)
 
   matrix(c(b[1], b[4], b[7], 0,
            b[2], b[5], b[8], 0,
@@ -117,7 +117,7 @@ m3_affine <- function(a, b){
 #' @examples
 #' m3_projective(c(2, 3, 1), c(0.5, 0.2, 4, 2, 6, 3, 2, 5, 1, 6, 8, 9))
 m3_projective <- function(a, b){
-  stopifnot(is.finite(a) && length(a)==3 && is.finite(b) && length(b)==12)
+  stopifnot(all(is.finite(a)), length(a)==3, all(is.finite(b)), length(b)==12)
 
   matrix(c(b[1], b[4], b[7], b[10],
            b[2], b[5], b[8], b[11],
