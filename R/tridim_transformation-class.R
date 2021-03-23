@@ -52,10 +52,10 @@ tridim_transformation <- function(transformation,
   }
   if (!transformation %in% names(valid_transformations)) stop(sprintf("Unknown or inapplicable transformation '%s'", transformation))
 
-  # if formula is given, we deduce it from data.frame names
+  # if formula not is given, we deduce it from data.frame names
   if (is.null(formula)) {
-    if (is.null(colnames(dv))) colnames(dv) <- c("xd", "yd", "zd")[1:ncol(transformed_face)]
-    if (is.null(colnames(iv))) colnames(iv) <- c("xi", "yi", "zi")[1:ncol(transformed_face)]
+    if (is.null(colnames(dv))) colnames(dv) <- c("xd", "yd", "zd")[1:ncol(dv)]
+    if (is.null(colnames(iv))) colnames(iv) <- c("xi", "yi", "zi")[1:ncol(iv)]
 
     formula <- as.Formula(paste(paste0(colnames(dv), collapse = " + "),
                                 paste0(colnames(iv), collapse = " + "),
@@ -74,7 +74,7 @@ tridim_transformation <- function(transformation,
                       varsN = ncol(dv),
                       dv = dv,
                       iv = iv,
-                      dv_sd = apply(dv, MARGIN=2, FUN=sd))
+                      dv_sd = apply(dv, MARGIN=2, FUN=stats::sd))
 
   # figuring out the number of parameters IN ADDITION to translation
   object$data[["betaN"]] <- get_beta_n(ncol(dv), transformation)
