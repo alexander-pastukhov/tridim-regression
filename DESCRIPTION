@@ -26,7 +26,6 @@ Imports:
     future,
     glue,
     purrr,
-    loo,
     tidyr,
     Formula,
     bayesplot
