@@ -2,7 +2,7 @@ context("Function inputs")
 test_that("Variables check", {
 
   # This should produce no error messages
-  expect_equal(check_variables(matrix(c(1, 2, 3, 4), ncol=2), "test matrix"), expected=NULL)
+  expect_equal(check_variables(matrix(c(1, 2, 3, 4), ncol=2), "test matrix"), expected=TRUE)
 
   # This should produce non-numeric data error message
   expect_error(check_variables(matrix(as.character(c(1, 2, 3, 4)), ncol=2), "test matrix"))

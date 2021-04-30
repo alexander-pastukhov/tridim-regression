@@ -1,7 +1,7 @@
 context("Priors")
 test_that("Priors check", {
   # This should produce no error messages
-  expect_equal(check_normal_prior(c(0, 2), "scale"), expected=NULL)
+  expect_equal(check_normal_prior(c(0, 2), "scale"), expected=TRUE)
 
   # Error: non-numeric data
   expect_error(check_normal_prior(c("0", "2"), "scale"))
@@ -16,7 +16,7 @@ test_that("Priors check", {
 
 
   # This should produce no error messages
-  expect_equal(check_exponential_prior(2, "sigma"), expected=NULL)
+  expect_equal(check_exponential_prior(2, "sigma"), expected=TRUE)
 
   # Error: non-numeric data
   expect_error(check_exponential_prior("0", "sigma"))
