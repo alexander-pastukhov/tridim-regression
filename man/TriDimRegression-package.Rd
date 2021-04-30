@@ -13,12 +13,23 @@ To fit transofmration, call the main function either via a formula that specifie
 dependent and independent variables with the \code{data} table or by supplying two tables
 one containing all independent variables and one containing all dependent variables.
 
-For the 2D data, you can fit \code{"euclidean"} (scale, rotation, and translation),
-\code{"affine"} (+shear), or \code{"projective"} (+tilt) transformations. For 3D data, you can fit
-\code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"} (scale, rotation around the
-specified axis, and translation), \code{"euclidean"} (scale, rotation around all three axes, and translation),
-\code{"affine"} (\code{"euclidean"} + shear for x-plane), and \code{"projective"} (+shear for y and z planes)
-transformations.
+For the 2D data, you can fit \code{"translation"} (2 parameters for translation only), \code{"euclidean"}
+(4 parameters: 2 for translation, 1 for scaling, and 1 for rotation),
+\code{"affine"} (6 parameters: 2 for translation and 4 that jointly describe scaling, rotation and sheer),
+or \code{"projective"} (8 parameters: affine plus 2 additional parameters to account for projection).
+For 3D data, you can fit \code{"translation"} (3 for translation only), \code{"euclidean_x"}, \code{"euclidean_y"},
+\code{"euclidean_z"} (5 parameters: 3 for translation scale, 1 for rotation, and 1 for scaling),
+\code{"affine"} (12 parameters: 3 for translation and 9 to account for scaling, rotation, and sheer),
+and \code{"projective"} (15 parameters: affine plus 3 additional parameters to account for projection).
+transformations. For details on transformation matrices and computation of scale and rotation parameters please
+see \code{vignette("transformation_matrices", package = "TriDimRegression")}
+
+Once the data is fitted, you can extract the transformation coefficients via \code{\link{coef}} function and the matrix
+itself via  \code{\link{transformation_matrix}}. Predicted data, either based on the original data or on the new data,
+can be generated via  \code{\link{predict}}. Bayesian R-squared can be computed with or without adjustment via
+\code{\link{R2}} function. In all three cases, you have choice between summary (mean + specified quantiles) or full
+posterior samples.  \code{\link{loo}} and  \code{\link{waic}} provide corresponding measures that can be used for comparison
+via \code{\link[loo:loo_compare]{loo::loo_compare()}} function.
 }
 \examples{
 \dontrun{
@@ -49,4 +60,7 @@ Stan Development Team (2020). RStan: the R interface to Stan. R package version 
 \code{\link[TriDimRegression:fit_transformation]{fit_transformation}}
 \code{\link[TriDimRegression:fit_transformation_df]{fit_transformation_df}}
 \code{\link[TriDimRegression:tridim_transformation-class]{tridim_transformation}}
+\code{vignette("transformation_matrices", package = "TriDimRegression")}
+\code{vignette("calibration", package = "TriDimRegression")}
+\code{vignette("comparing_faces", package = "TriDimRegression")}
 }

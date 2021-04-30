@@ -11,6 +11,9 @@ check_exponential_prior(values, parameter)
 
 \item{parameter}{Name of the parameter for which the prior is defined.}
 }
+\value{
+Logical TRUE, if none of the tests fail
+}
 \description{
 Should a single non-negative numeric value.
 Stops execution with an error.

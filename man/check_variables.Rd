@@ -13,6 +13,9 @@ check_variables(var, var_label)
 
 \item{ncol}{Expected number of columns}
 }
+\value{
+Logical TRUE, if none of the tests fail
+}
 \description{
 Checks whether the matrix is numeric,
 has expected number of columns (\code{ncol}),

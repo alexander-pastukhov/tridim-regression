@@ -12,7 +12,7 @@ get_beta_n(dimN, transformation)
 \item{transformation}{string, for 2D \code{"translation"}, \code{"euclidean"}, \code{"affine"}, \code{"projective"}. for 3D \code{"translation"}, \code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"}, \code{"affine"}, \code{"projective"}.}
 }
 \value{
-integer
+integer, number of free matrix parameters in addition to translation
 }
 \description{
 Returns number of free matrix parameters in addition to translation

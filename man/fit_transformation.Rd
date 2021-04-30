@@ -37,6 +37,9 @@ Default priors are \code{"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 
 \item{...}{Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.}
 }
+\value{
+A \link[=tridim_transformation-class]{tridim_transformation} object
+}
 \description{
 Fits Bidimensional or Tridimensional regression / geometric transformation models using
 Stan engine. The \code{formula} described dependent and independent numeric variables in the

@@ -11,6 +11,9 @@
 
 \item{...}{Unused}
 }
+\value{
+Nothing, console output only.
+}
 \description{
 Summary for a tridim_transformation object
 }

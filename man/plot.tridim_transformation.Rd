@@ -11,6 +11,9 @@
 
 \item{...}{Extra parameters to be passed to \code{\link[bayesplot:MCMC-intervals]{bayesplot::mcmc_intervals()}}}
 }
+\value{
+A ggplot object produced by \code{\link[bayesplot:MCMC-intervals]{bayesplot::mcmc_intervals()}}
+}
 \description{
 Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.
 }

@@ -19,7 +19,7 @@ See \code{methods(class = "tridim_transformation")} for an overview of available
 \describe{
 \item{\code{transformation}}{A \code{string} with the transformation name.}
 
-\item{\code{formula}}{A \code{\link[Formula:formula.Formula]{formula}} object.}
+\item{\code{formula}}{A \code{\link[Formula:Formula]{formula}} object.}
 
 \item{\code{Ndim}}{An \code{integer} with data dimension, either \code{2} or \code{3}.}
 

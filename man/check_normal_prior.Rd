@@ -11,6 +11,9 @@ check_normal_prior(values, parameter)
 
 \item{parameter}{Name of the parameter for which the prior is defined.}
 }
+\value{
+Logical TRUE, if none of the tests fail
+}
 \description{
 Should a pair of numeric values, second value should be non-zero.
 Stops execution with an error.
