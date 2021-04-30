@@ -33,6 +33,7 @@
 #' @param chains Number of chains for sampling.
 #' @param cores Number of CPU cores to use for sampling. If omitted, all available cores are used.
 #' @param ... Additional arguments passed to \code{\link[rstan:sampling]{sampling}} function.
+#' @return A [tridim_transformation][tridim_transformation-class()] object
 #' @export
 #' @seealso \code{\link{fit_transformation}}
 #' @examples

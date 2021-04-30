@@ -2,6 +2,7 @@
 #'
 #' @param x A [tridim_transformation][tridim_transformation-class()] object
 #' @param ... Unused
+#' @return Nothing, console output only.
 #'
 #' @export
 #'

@@ -8,7 +8,7 @@
 #' @param var Matrix N x ncol
 #' @param var_label Variable label for error messages
 #' @param ncol Expected number of columns
-#' @return NULL
+#' @return Logical TRUE, if none of the tests fail
 #' @keywords internal
 #' @export
 #'
@@ -17,4 +17,5 @@
 check_variables <- function(var, var_label){
   if (!is.numeric(var)) stop(sprintf("%s is not a numeric", var_label))
   if (sum(!is.finite(var)) > 0) stop(sprintf("%s has non-finite elements", var_label))
+  TRUE
 }

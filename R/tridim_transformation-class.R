@@ -13,7 +13,7 @@
 #' See \code{methods(class = "tridim_transformation")} for an overview of available methods.
 #'
 #' @slot transformation A \code{string} with the transformation name.
-#' @slot formula A \code{\link[Formula:formula.Formula]{formula}} object.
+#' @slot formula A \code{\link[Formula:Formula]{formula}} object.
 #' @slot Ndim An \code{integer} with data dimension, either \code{2} or \code{3}.
 #' @slot data A \code{list} containing variables used for the \code{\link[rstan:sampling]{sampling}}.
 #' @slot stanmodel A \code{\link[rstan:stanmodel-class]{stanmodel}} used for sampling.

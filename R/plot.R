@@ -2,6 +2,7 @@
 #'
 #' @param x A [tridim_transformation][tridim_transformation-class()] object
 #' @param ... Extra parameters to be passed to [bayesplot::mcmc_intervals()]
+#' @return A ggplot object produced by [bayesplot::mcmc_intervals()]
 #'
 #' @export
 #'

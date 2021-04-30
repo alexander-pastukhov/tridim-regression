@@ -3,7 +3,7 @@
 #' @param dimN integer, either 2 or 3
 #' @param transformation string, for 2D \code{"translation"}, \code{"euclidean"}, \code{"affine"}, \code{"projective"}. for 3D \code{"translation"}, \code{"euclidean_x"}, \code{"euclidean_y"}, \code{"euclidean_z"}, \code{"affine"}, \code{"projective"}.
 #'
-#' @return integer
+#' @return integer, number of free matrix parameters in addition to translation
 #' @export
 #' @keywords internal
 #'
