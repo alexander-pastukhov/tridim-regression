@@ -22,7 +22,7 @@
 #' itself via  \code{\link{transformation_matrix}}. Predicted data, either based on the original data or on the new data,
 #' can be generated via  \code{\link{predict}}. Bayesian R-squared can be computed with or without adjustment via
 #' \code{\link{R2}} function. In all three cases, you have choice between summary (mean + specified quantiles) or full
-#' posterior samples.  \code{\link{loo} and  \code{\link{waic}} provide corresponding measures that can be used for comparison
+#' posterior samples.  \code{\link{loo}} and  \code{\link{waic}} provide corresponding measures that can be used for comparison
 #' via [loo::loo_compare()] function.
 #'
 #' @docType package
