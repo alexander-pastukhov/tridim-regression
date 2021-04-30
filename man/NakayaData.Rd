@@ -11,6 +11,9 @@ A data frame with 19 observations on the following 4 variables:
 \item{indepV1, indepV2}{numeric vectors, independent variables}
 }
 }
+\source{
+\url{https://doi.org/10.1111/j.1538-4632.1997.tb00954.x}
+}
 \usage{
 NakayaData
 }

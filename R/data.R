@@ -2,6 +2,7 @@
 #'
 #' @description Nakaya, T. (1997) Statistical inferences in bidimensional regression models. Geographical Analysis, 29(2), 169-186.
 #'
+#' @source \url{https://doi.org/10.1111/j.1538-4632.1997.tb00954.x}
 #' @format A data frame with 19 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}
@@ -29,8 +30,9 @@
 #'
 #' @description Data from Friedman, A., & Kohler, B. (2003). Bidimensional regression: Assessing
 #' the configural similarity and accuracy of cognitive maps and other two-dimensional data sets.
-#' Psychological Methods, 8(4), 468-491.
+#' Psychological Methods, 8(4), 468-491. DOI: 10.1037/1082-989X.8.4.468
 #'
+#' @source \url{https://doi.org/10.1037/1082-989X.8.4.468}
 #' @format A data frame with 4 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}
@@ -42,8 +44,9 @@
 #'
 #' @description Data from Friedman, A., & Kohler, B. (2003). Bidimensional regression: Assessing
 #' the configural similarity and accuracy of cognitive maps and other two-dimensional data sets.
-#' Psychological Methods, 8(4), 468-491.
+#' Psychological Methods, 8(4), 468-491. DOI: 10.1037/1082-989X.8.4.468
 #'
+#' @source \url{https://doi.org/10.1037/1082-989X.8.4.468}
 #' @format A data frame with 4 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}
@@ -58,7 +61,7 @@
 #' for assessing the similarity of two portrayed persons, actually the Mona Lisa in the world
 #' famous Louvre version and the only recently re-discovered Prado version.
 #'
-#' @source \url{http://www.jstatsoft.org/v52/c01/}
+#' @source \url{https://dx.doi.org/10.18637/jss.v052.c01}
 #' @format A data frame with 36 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}
@@ -72,7 +75,7 @@
 #' different maps of the city of Paris which were created over the last 350 years as compared
 #' to a recent map.
 #'
-#' @source \url{http://www.jstatsoft.org/v52/c01/}
+#' @source \url{https://dx.doi.org/10.18637/jss.v052.c01}
 #' @format A data frame with 13 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}
@@ -85,7 +88,7 @@
 #' @description Example 3 focuses on demonstrating how good a cognitive map recalculated from
 #' averaged cognitive distance data fits with a related real map.
 #'
-#' @source \url{http://www.jstatsoft.org/v52/c01/}
+#' @source \url{https://dx.doi.org/10.18637/jss.v052.c01}
 #' @format A data frame with 10 observations on the following 4 variables:
 #' \describe{
 #'   \item{depV1, depV2}{numeric vectors, dependent variables}

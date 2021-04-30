@@ -11,12 +11,15 @@ A data frame with 4 observations on the following 4 variables:
 \item{indepV1, indepV2}{numeric vectors, independent variables}
 }
 }
+\source{
+\url{https://doi.org/10.1037/1082-989X.8.4.468}
+}
 \usage{
 FriedmanKohlerData2
 }
 \description{
 Data from Friedman, A., & Kohler, B. (2003). Bidimensional regression: Assessing
 the configural similarity and accuracy of cognitive maps and other two-dimensional data sets.
-Psychological Methods, 8(4), 468-491.
+Psychological Methods, 8(4), 468-491. DOI: 10.1037/1082-989X.8.4.468
 }
 \keyword{datasets}
