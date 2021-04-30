@@ -4,7 +4,7 @@ Version: 1.0.0.0
 Authors@R: c(
   person("Alexander (Sasha)", "Pastukhov", role = c("cre", "ctb"), email ="pastukhov.alexander@gmail.com"),
   person("Claus-Christian", "Carbon", role = c("aut"), email ="ccc@experimental-psychology.com"))
-Description: Fits 2D and 3D geometric transformations via 'Stan' probabilistic programming engine. Returns posterior distribution for individual parameters. Allows for computation of LOO and WAIC information criteria, as well as Bayesian R-squared. Carbon, C. C. (2013)
+Description: Fits 2D and 3D geometric transformations via 'Stan' probabilistic programming engine. Returns posterior distribution for individual parameters. Allows for computation of LOO and WAIC information criteria, as well as Bayesian R-squared.
 License: GPL-3
 URL: https://github.com/alexander-pastukhov/tridim-regression
 BugReports: https://github.com/alexander-pastukhov/tridim-regression/issues
