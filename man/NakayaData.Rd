@@ -12,7 +12,7 @@ A data frame with 19 observations on the following 4 variables:
 }
 }
 \source{
-\url{https://doi.org/10.1111/j.1538-4632.1997.tb00954.x}
+\doi{10.1111/j.1538-4632.1997.tb00954.x}
 }
 \usage{
 NakayaData

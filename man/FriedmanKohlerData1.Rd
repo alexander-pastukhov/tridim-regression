@@ -12,7 +12,7 @@ A data frame with 4 observations on the following 4 variables:
 }
 }
 \source{
-\url{https://doi.org/10.1037/1082-989X.8.4.468}
+\doi{10.1037/1082-989X.8.4.468}
 }
 \usage{
 FriedmanKohlerData1

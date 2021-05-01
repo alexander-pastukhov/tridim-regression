@@ -12,7 +12,7 @@ A data frame with 10 observations on the following 4 variables:
 }
 }
 \source{
-\url{https://dx.doi.org/10.18637/jss.v052.c01}
+\doi{10.18637/jss.v052.c01}
 }
 \usage{
 CarbonExample3Data
