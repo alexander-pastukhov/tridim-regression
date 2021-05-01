@@ -1,6 +1,6 @@
 #' Computes posterior samples for the posterior predictive distribution.
 #'
-#' Predicted values based on the bi/tridimensionsal regressional model object.
+#' Predicted values based on the bi/tridimensional regression model object.
 #'
 #' @param object An object of class [tridim_transformation][tridim_transformation-class()]
 #' @param newdata An optional two column data frame with independent variables.

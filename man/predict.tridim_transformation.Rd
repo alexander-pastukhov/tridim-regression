@@ -25,7 +25,7 @@ If summary=TRUE, a data.frame with columns "dv{index}" with mean for each depend
 variable plus optional quantiles columns with names "dv{index}_{quantile}".
 }
 \description{
-Predicted values based on the bi/tridimensionsal regressional model object.
+Predicted values based on the bi/tridimensional regression model object.
 }
 \examples{
 \dontrun{

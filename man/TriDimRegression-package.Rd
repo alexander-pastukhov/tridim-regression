@@ -9,7 +9,7 @@
 Fits 2D and 3D geometric transformations. Provides posterior via Stan.
 Includes computation of LOO and WAIC information criteria, R-squared.
 
-To fit transofmration, call the main function either via a formula that specifies
+To fit transformation, call the main function either via a formula that specifies
 dependent and independent variables with the \code{data} table or by supplying two tables
 one containing all independent variables and one containing all dependent variables.
 
