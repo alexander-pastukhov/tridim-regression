@@ -1,5 +1,5 @@
 Package: TriDimRegression
-Title: Bayesian Statistics For 2D/3D Transformations
+Title: Bayesian Statistics for 2D/3D Transformations
 Version: 1.0.0.0
 Authors@R: c(
   person("Alexander (Sasha)", "Pastukhov", role = c("cre", "ctb"), email ="pastukhov.alexander@gmail.com"),
