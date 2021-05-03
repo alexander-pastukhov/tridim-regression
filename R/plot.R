@@ -1,6 +1,7 @@
 #' Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.
 #'
 #' @param x A [tridim_transformation][tridim_transformation-class()] object
+#' @param convert_euclidean Whether to convert matrix coefficients to scale(phi) and rotation(theta). Defaults to \code{FALSE}.
 #' @param ... Extra parameters to be passed to [bayesplot::mcmc_intervals()]
 #' @return A ggplot object produced by [bayesplot::mcmc_intervals()]
 #'
@@ -11,16 +12,11 @@
 #'                            data = NakayaData,
 #'                            transformation = 'euclidean')
 #' plot(euc2)
-plot.tridim_transformation <- function(x, ...){
-  if (x$dimN == 2){
-    # bidimensional regression
-    coef_names <- c("scale", "shear", "rotation", "tilt", "translation")
-  }
-  else {
-    coef_names <- c("rotation", "scale", "translation", "shearX", "shearY", "shearZ")
-  }
-
-  bayesplot::mcmc_intervals(as.matrix(x$stanfit, pars = coef_names))
+#'
+#' # same but for converted coefficients
+#' plot(euc2, convert_euclidean=TRUE)
+plot.tridim_transformation <- function(x, convert_euclidean=FALSE, ...){
+  bayesplot::mcmc_intervals(coef(x, summary=FALSE, convert_euclidean=convert_euclidean))
 }
 
 # setMethod("plot", "tridim_transformation", plot.tridim_transformation)
