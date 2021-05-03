@@ -18,10 +18,8 @@ A ggplot object produced by \code{\link[bayesplot:MCMC-intervals]{bayesplot::mcm
 Posterior interval plots for key parameters. Uses bayesplot::mcmc_intervals.
 }
 \examples{
-\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
                            data = NakayaData,
                            transformation = 'euclidean')
 plot(euc2)
-}
 }

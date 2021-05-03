@@ -32,9 +32,7 @@ R-squared for Bayesian regression models. The American Statistician,
 doi:10.1080/00031305.2018.1549100.
 }
 \examples{
-\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
   NakayaData, transformation = 'euclidean')
 R2(euc2)
-}
 }

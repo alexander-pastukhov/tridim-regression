@@ -10,12 +10,10 @@
 #' @keywords internal
 #'
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'                            data = NakayaData,
 #'                            transformation = 'euclidean')
 #' transformation_matrix(euc2)
-#' }
 NULL
 
 #' @export

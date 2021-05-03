@@ -37,13 +37,9 @@
 #' @export
 #' @seealso \code{\link{fit_transformation}}
 #' @examples
-#' \donttest{
 #' # Geometric transformations of 2D data
-#' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
-#'   'euclidean')
-#' euc3x <- fit_transformation_df(female_face_neutral,
-#'   female_face_happy, "euclidean_x")
-#' }
+#' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4], 'euclidean')
+#' tr3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
 
 fit_transformation_df <- function(iv, dv, transformation, priors=NULL, chains=1, cores=NULL, ...) {
   if (!is.data.frame(dv) && !is.matrix(dv)) stop("dv must be a data.frame or a matrix")

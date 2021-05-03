@@ -60,7 +60,6 @@ For details on transformation matrices and computation of scale and rotation par
 see \code{vignette("transformation_matrices", package = "TriDimRegression")}
 }
 \examples{
-\donttest{
 # Geometric transformations of 2D data
 euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
                                      NakayaData, 'euclidean')
@@ -74,7 +73,6 @@ coef(euc2)
 
 # statistical comparison via WAIC criterion
 loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
-}
 }
 \seealso{
 \code{\link{fit_transformation_df}}

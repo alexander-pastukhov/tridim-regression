@@ -55,7 +55,6 @@
 #' Stan Development Team (2020). RStan: the R interface to Stan. R package version 2.19.3. https://mc-stan.org
 #'
 #' @examples
-#' \donttest{
 #' # Fitting via formula
 #' euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                            NakayaData, 'euclidean')
@@ -74,5 +73,4 @@
 #' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
 #'   'euclidean')
 #' tr3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
-#' }
 NULL

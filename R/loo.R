@@ -9,13 +9,11 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'euclidean')
 #' aff2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'affine')
 #' loo::loo_compare(loo(euc2), loo(aff2))
-#' }
 loo.tridim_transformation <- function(x, ...) {
   rstan::loo(x$stanfit)
 }

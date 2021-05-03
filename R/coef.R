@@ -16,7 +16,6 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'                            data = NakayaData,
 #'                            transformation = 'euclidean')
@@ -29,7 +28,6 @@
 #'
 #' # scale and rotation coefficients
 #' coef(euc2, convert_euclidean=TRUE)
-#' }
 coef.tridim_transformation <- function(object,
                                        summary=TRUE,
                                        probs=c(0.055, 0.945),

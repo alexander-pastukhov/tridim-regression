@@ -7,12 +7,10 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'                            data = NakayaData,
 #'                            transformation = 'euclidean')
 #' euc2
-#' }
 
 print.tridim_transformation <- function(x, ...){
   cat('Call: ')

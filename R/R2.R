@@ -16,11 +16,9 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'euclidean')
 #' R2(euc2)
-#' }
 R2.tridim_transformation <- function(object, summary=TRUE, probs=c(0.055, 0.945), ...){
   # extract predicted value from the posterior
   # they were generated during fitting they are in LONG format

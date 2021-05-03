@@ -17,7 +17,6 @@
 #'
 #' @seealso \code{\link{fit_transformation}}
 #' @examples
-#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'euclidean')
 #'
@@ -26,7 +25,6 @@
 #'
 #' # full posterior prediction samples
 #' predictions <- predict(euc2, summary=FALSE)
-#' }
 predict.tridim_transformation <-  function(object, newdata=NULL, summary=TRUE, probs=NULL, ...) {
   if (is.null(newdata)) {
     # we can reuse already computed predictions

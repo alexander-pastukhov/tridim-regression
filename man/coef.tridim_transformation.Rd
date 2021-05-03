@@ -36,7 +36,6 @@ Posterior distributions for transformation coefficients
 in full or summarized form.
 }
 \examples{
-\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
                            data = NakayaData,
                            transformation = 'euclidean')
@@ -49,5 +48,4 @@ coef(euc2)
 
 # scale and rotation coefficients
 coef(euc2, convert_euclidean=TRUE)
-}
 }

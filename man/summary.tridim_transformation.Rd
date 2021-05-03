@@ -18,10 +18,8 @@ Nothing, console output only.
 Summary for a tridim_transformation object
 }
 \examples{
-\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
                            data = NakayaData,
                            transformation = 'euclidean')
 summary(euc2)
-}
 }

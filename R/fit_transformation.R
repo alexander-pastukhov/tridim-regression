@@ -37,7 +37,6 @@
 #' @name fit_transformation
 #' @seealso \code{\link{fit_transformation_df}}
 #' @examples
-#' \donttest{
 #' # Geometric transformations of 2D data
 #' euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                                      NakayaData, 'euclidean')
@@ -51,7 +50,6 @@
 #'
 #' # statistical comparison via WAIC criterion
 #' loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
-#' }
 #' @export
 fit_transformation.formula <-  function(formula, data, transformation, priors=NULL, chains=1, cores=NULL, ...){
   ## --------------- Check that dependent and independent variables are valid  ---------------

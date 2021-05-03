@@ -28,7 +28,6 @@ variable plus optional quantiles columns with names "dv{index}_{quantile}".
 Predicted values based on the bi/tridimensional regression model object.
 }
 \examples{
-\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
   NakayaData, transformation = 'euclidean')
 
@@ -37,7 +36,6 @@ predictions <- predict(euc2)
 
 # full posterior prediction samples
 predictions <- predict(euc2, summary=FALSE)
-}
 }
 \seealso{
 \code{\link{fit_transformation}}

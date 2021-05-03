@@ -32,7 +32,6 @@ posterior samples.  \code{\link{loo}} and  \code{\link{waic}} provide correspond
 via \code{\link[loo:loo_compare]{loo::loo_compare()}} function.
 }
 \examples{
-\donttest{
 # Fitting via formula
 euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
                            NakayaData, 'euclidean')
@@ -51,7 +50,6 @@ loo::loo_compare(waic(euc2), waic(aff2), waic(prj2))
 euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
   'euclidean')
 tr3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
-}
 }
 \references{
 Stan Development Team (2020). RStan: the R interface to Stan. R package version 2.19.3. https://mc-stan.org
