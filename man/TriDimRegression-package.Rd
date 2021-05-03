@@ -32,7 +32,7 @@ posterior samples.  \code{\link{loo}} and  \code{\link{waic}} provide correspond
 via \code{\link[loo:loo_compare]{loo::loo_compare()}} function.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fitting via formula
 euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
                            NakayaData, 'euclidean')

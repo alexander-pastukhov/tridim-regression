@@ -36,7 +36,7 @@ Posterior distributions for transformation coefficients
 in full or summarized form.
 }
 \examples{
-\dontrun{
+\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
                            data = NakayaData,
                            transformation = 'euclidean')

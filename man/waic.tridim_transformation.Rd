@@ -21,7 +21,7 @@ via \link[=loo-package]{loo} library. It can be used for a model comparison via
 \link[loo:loo_compare]{loo::loo_compare()} function.
 }
 \examples{
-\dontrun{
+\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
   NakayaData, transformation = 'euclidean')
 aff2 <- fit_transformation(depV1+depV2~indepV1+indepV2,

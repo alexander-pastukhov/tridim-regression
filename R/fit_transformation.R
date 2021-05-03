@@ -37,7 +37,7 @@
 #' @name fit_transformation
 #' @seealso \code{\link{fit_transformation_df}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Geometric transformations of 2D data
 #' euc2 <- fit_transformation(depV1 + depV2 ~ indepV1 + indepV2,
 #'                                      NakayaData, 'euclidean')

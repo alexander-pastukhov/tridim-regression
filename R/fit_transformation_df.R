@@ -37,7 +37,7 @@
 #' @export
 #' @seealso \code{\link{fit_transformation}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Geometric transformations of 2D data
 #' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
 #'   'euclidean')

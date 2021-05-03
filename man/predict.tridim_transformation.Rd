@@ -28,7 +28,7 @@ variable plus optional quantiles columns with names "dv{index}_{quantile}".
 Predicted values based on the bi/tridimensional regression model object.
 }
 \examples{
-\dontrun{
+\donttest{
 euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
   NakayaData, transformation = 'euclidean')
 

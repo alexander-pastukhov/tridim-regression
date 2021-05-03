@@ -17,7 +17,7 @@
 #'
 #' @seealso \code{\link{fit_transformation}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' euc2 <- fit_transformation(depV1+depV2~indepV1+indepV2,
 #'   NakayaData, transformation = 'euclidean')
 #'
