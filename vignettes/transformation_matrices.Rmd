@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-````
+```
 
 For most transformation, we assume that we can compute only the translation coefficients ($a_i$). The only exception are Euclidean transformation around a _single_ axis of rotation that allow to compute a single scaling and a single rotation coefficient. In all other cases, values of computed coefficients would depend on the assumed order of individual transformation, making them no more than a potentially misleading guesses.
 
