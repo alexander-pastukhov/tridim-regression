@@ -1,4 +1,5 @@
 # TriDimRegression
+[![DOI](https://zenodo.org/badge/139134694.svg)](https://zenodo.org/badge/latestdoi/139134694)
 
 Package to calculate the bidimensional and tridimensional regression between two 2D/3D configurations.
 
