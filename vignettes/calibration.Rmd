@@ -25,8 +25,7 @@ Bidimensional regression can be used to transform the eye gaze data into a the s
 
 ## Plotting raw data
 
-```{r raw data, echo=TRUE, message=FALSE, warning=FALSE, fig.width= 5, out.width = "100%", fig.asp= 3/4, dpi = 200}
-
+```{r raw-data, echo=TRUE, message=FALSE, warning=FALSE, fig.width= 5, out.width = "100%", fig.asp= 3/4, dpi = 200}
 ggplot(data= EyegazeData, aes(x= x, y= y, color= target, fill= target)) +
   geom_point(data= EyegazeData %>% group_by(target, target_x, target_y) %>% summarise(.groups="drop"),
              aes(x= target_x, y= target_y), shape= 21, size= 10, fill= 'white') + 
@@ -36,7 +35,7 @@ ggplot(data= EyegazeData, aes(x= x, y= y, color= target, fill= target)) +
 
 ## Using lm2 to transform the eye gaze
 
-```{r Adjust gaze, fig.width= 5, out.width = "100%", fig.asp= 3/4, dpi = 200}
+```{r adjust-gaze, fig.width= 5, out.width = "100%", fig.asp= 3/4, dpi = 200}
 lm2aff <- fit_transformation(target_x + target_y ~ x + y,  EyegazeData, transformation = 'affine')
 adjusted_gaze <- predict(lm2aff, summary=TRUE, probs=NULL)
 colnames(adjusted_gaze) <- c('adjX', 'adjY')
