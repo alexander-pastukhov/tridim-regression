@@ -10,7 +10,8 @@ Description: Fits 2D and 3D geometric transformations via 'Stan' probabilistic p
     (Vehtari A, Gelman A, Gabry J (2017) <doi:10.1007/s11222-016-9696-4>) as well as Bayesian R-squared
     (Gelman A, Goodrich B, Gabry J, and Vehtari A (2018) <doi:10.1080/00031305.2018.1549100>).
 License: GPL-3
-URL: https://github.com/alexander-pastukhov/tridim-regression
+URL: https://github.com/alexander-pastukhov/tridim-regression,
+    https://alexander-pastukhov.github.io/tridim-regression
 BugReports: https://github.com/alexander-pastukhov/tridim-regression/issues
 Encoding: UTF-8
 LazyData: true
