@@ -20,7 +20,7 @@ library("devtools");
 install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE)
 ```
 
-If you want vignettes, us 
+If you want vignettes, use
 ```
 devtools::install_github("alexander-pastukhov/tridim-regression",
                          dependencies=TRUE,
