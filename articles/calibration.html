@@ -104,8 +104,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'tridim_transformation' NOW (CHAIN 1).</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1: Gradient evaluation took 0 seconds</span>
-<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.</span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 0.001 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.</span>
 <span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; Chain 1: </span>
@@ -122,9 +122,9 @@
 <span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1:  Elapsed Time: 3.675 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 1:                2.681 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 1:                6.356 seconds (Total)</span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 4.281 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                3.095 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                7.376 seconds (Total)</span>
 <span class="co">#&gt; Chain 1:</span>
 <span class="va">adjusted_gaze</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">lm2aff</span>, summary<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">adjusted_gaze</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'adjX'</span>, <span class="st">'adjY'</span><span class="op">)</span>
