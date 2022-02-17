@@ -57,7 +57,7 @@ via loo::loo_compare() function.'><!-- mathjax --><script src="https://cdnjs.clo
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -158,9 +158,9 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.09 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.087 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.177 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.1 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.112 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.212 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"><span class="va">aff2</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_transformation.html">fit_transformation</a></span><span class="op">(</span><span class="va">depV1</span> <span class="op">+</span> <span class="va">depV2</span> <span class="op">~</span> <span class="va">indepV1</span> <span class="op">+</span> <span class="va">indepV2</span>,</span>
 <span class="r-in">                           <span class="va">NakayaData</span>, <span class="st">'affine'</span><span class="op">)</span></span>
@@ -185,9 +185,9 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.102 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.095 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.197 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.123 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.111 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.234 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"><span class="va">prj2</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_transformation.html">fit_transformation</a></span><span class="op">(</span><span class="va">depV1</span> <span class="op">+</span> <span class="va">depV2</span> <span class="op">~</span> <span class="va">indepV1</span> <span class="op">+</span> <span class="va">indepV2</span>,</span>
 <span class="r-in">                           <span class="va">NakayaData</span>, <span class="st">'projective'</span><span class="op">)</span></span>
@@ -212,18 +212,18 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.163 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.099 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.262 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.168 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.105 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.273 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># summary of transformation coefficients</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">euc2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Coef        Mean          5.5       94.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   a1  0.14803382 -0.002642589  0.3018510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   a2 -0.01338136 -0.172698423  0.1411031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   b1  1.34675226  1.243918775  1.4491764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   b2 -0.56956200 -0.677277024 -0.4611687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Coef        Mean         5.5       94.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   a1  0.14474551 -0.01698905  0.3016206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   a2 -0.01325255 -0.19227430  0.1591502</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   b1  1.34549614  1.23949415  1.4527812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   b2 -0.57239627 -0.68942444 -0.4581651</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># statistical comparison via WAIC criterion</span></span>
 <span class="r-in"><span class="fu">loo</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="external-link">loo_compare</a></span><span class="op">(</span><span class="fu">waic</span><span class="op">(</span><span class="va">euc2</span><span class="op">)</span>, <span class="fu">waic</span><span class="op">(</span><span class="va">aff2</span><span class="op">)</span>, <span class="fu">waic</span><span class="op">(</span><span class="va">prj2</span><span class="op">)</span><span class="op">)</span></span>
@@ -235,8 +235,8 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> 18 (94.7%) p_waic estimates greater than 0.4. We recommend trying loo instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        elpd_diff se_diff</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model1     0.0       0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model3 -4041.2    2116.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -4746.7    2525.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -5102.6    2660.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model3 -5958.2    3070.8</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Fitting via two tables</span></span>
 <span class="r-in"><span class="va">euc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_transformation_df.html">fit_transformation_df</a></span><span class="op">(</span><span class="va">NakayaData</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="va">NakayaData</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
@@ -262,9 +262,9 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.097 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.096 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.193 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.106 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.1 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.206 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"><span class="va">tr3</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_transformation_df.html">fit_transformation_df</a></span><span class="op">(</span><span class="va">Face3D_W070</span>, <span class="va">Face3D_W097</span>, transformation <span class="op">=</span><span class="st">'translation'</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -288,10 +288,13 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.281 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.266 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.547 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.278 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.223 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.501 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> http://mc-stan.org/misc/warnings.html#bulk-ess</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -299,11 +302,11 @@ via <code><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="ex
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="https://alexander-pastukhov.github.io/" class="external-link">Alexander (Sasha) Pastukhov</a>, <a href="https://www.experimental-psychology.de/" class="external-link">Claus-Christian Carbon</a>.</p>
+  <p></p><p>Developed by Alexander Pastukhov, <a href="https://www.experimental-psychology.de/" class="external-link">Claus-Christian Carbon</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>

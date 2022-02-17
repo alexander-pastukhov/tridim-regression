@@ -43,7 +43,7 @@ see vignette("transformation_matrices", package = "TriDimRegression")'><!-- math
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -169,9 +169,9 @@ Default priors are <code>"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.097 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.094 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.191 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.107 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.11 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.217 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"><span class="va">aff2</span> <span class="op">&lt;-</span> <span class="fu">fit_transformation</span><span class="op">(</span><span class="va">depV1</span> <span class="op">+</span> <span class="va">depV2</span> <span class="op">~</span> <span class="va">indepV1</span> <span class="op">+</span> <span class="va">indepV2</span>,</span>
 <span class="r-in">                                     <span class="va">NakayaData</span>, <span class="st">'affine'</span><span class="op">)</span></span>
@@ -196,9 +196,9 @@ Default priors are <code>"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.112 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.109 seconds (Warm-up)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.107 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.219 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.216 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"><span class="va">prj2</span> <span class="op">&lt;-</span> <span class="fu">fit_transformation</span><span class="op">(</span><span class="va">depV1</span> <span class="op">+</span> <span class="va">depV2</span> <span class="op">~</span> <span class="va">indepV1</span> <span class="op">+</span> <span class="va">indepV2</span>,</span>
 <span class="r-in">                                     <span class="va">NakayaData</span>, <span class="st">'projective'</span><span class="op">)</span></span>
@@ -223,18 +223,18 @@ Default priors are <code>"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.149 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.106 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.255 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.169 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.105 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.274 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># summary of transformation coefficients</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">euc2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Coef         Mean         5.5       94.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   a1  0.140147692 -0.02199528  0.3092392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   a2 -0.007780058 -0.17321875  0.1492388</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   b1  1.348771869  1.22927663  1.4586710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   b2 -0.569107866 -0.67679114 -0.4611551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Coef        Mean         5.5       94.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   a1  0.14015737 -0.01221589  0.2962591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   a2 -0.01566129 -0.17835057  0.1352456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   b1  1.34337187  1.24191300  1.4465780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   b2 -0.57054672 -0.67193085 -0.4635589</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># statistical comparison via WAIC criterion</span></span>
 <span class="r-in"><span class="fu">loo</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="external-link">loo_compare</a></span><span class="op">(</span><span class="fu">waic</span><span class="op">(</span><span class="va">euc2</span><span class="op">)</span>, <span class="fu">waic</span><span class="op">(</span><span class="va">aff2</span><span class="op">)</span>, <span class="fu">waic</span><span class="op">(</span><span class="va">prj2</span><span class="op">)</span><span class="op">)</span></span>
@@ -246,8 +246,8 @@ Default priors are <code>"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> 18 (94.7%) p_waic estimates greater than 0.4. We recommend trying loo instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        elpd_diff se_diff</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model1     0.0       0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model3 -4659.9    2456.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -4660.5    2483.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model3 -5022.5    2647.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -5129.3    2708.9</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -255,11 +255,11 @@ Default priors are <code>"a" = c(0, max_absolute_difference_in_means(d, iv)) / 2
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="https://alexander-pastukhov.github.io/" class="external-link">Alexander (Sasha) Pastukhov</a>, <a href="https://www.experimental-psychology.de/" class="external-link">Claus-Christian Carbon</a>.</p>
+  <p></p><p>Developed by Alexander Pastukhov, <a href="https://www.experimental-psychology.de/" class="external-link">Claus-Christian Carbon</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>

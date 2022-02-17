@@ -1,11 +1,11 @@
 pandoc: 2.14.0.3
-pkgdown: 2.0.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   calibration: calibration.html
   comparing_faces: comparing_faces.html
   transformation_matrices: transformation_matrices.html
-last_built: 2022-01-14T14:27Z
+last_built: 2022-02-17T07:56Z
 urls:
   reference: https://alexander-pastukhov.github.io/tridim-regression/reference
   article: https://alexander-pastukhov.github.io/tridim-regression/articles
