@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![DOI](https://zenodo.org/badge/139134694.svg)](https://zenodo.org/badge/latestdoi/139134694)
+[![CRAN status](https://www.r-pkg.org/badges/version/TriDimRegression)](https://cran.r-project.org/package=TriDimRegression)
  <!-- badges: end -->
  
 Package to calculate the bidimensional and tridimensional regression between two 2D/3D configurations.
