@@ -1,11 +1,22 @@
 # TriDimRegression
-[![DOI](https://zenodo.org/badge/139134694.svg)](https://zenodo.org/badge/latestdoi/139134694)
 
+<!-- badges: start -->
+[![DOI](https://zenodo.org/badge/139134694.svg)](https://zenodo.org/badge/latestdoi/139134694)
+ <!-- badges: end -->
+ 
 Package to calculate the bidimensional and tridimensional regression between two 2D/3D configurations.
 
-## Installation from Github
+## Installation
+From CRAN
+
+```{r}
+install.packages("TriDimRegression")
 ```
-library("devtools"); install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE)
+
+From Github
+```
+library("devtools");
+install_github("alexander-pastukhov/tridim-regression", dependencies=TRUE)
 ```
 
 If you want vignettes, us 
