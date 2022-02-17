@@ -2,14 +2,16 @@ Package: TriDimRegression
 Title: Bayesian Statistics for 2D/3D Transformations
 Version: 1.0.1
 Authors@R: c(
-  person("Alexander (Sasha)", "Pastukhov",
-         role = c("cre", "ctb"),
+  person(given = "Alexander",
+         family = "Pastukhov",
+         role = c("aut", "cre"),
          email ="pastukhov.alexander@gmail.com",
          comment = c(ORCID = "0000-0002-8738-8591")),
-  person("Claus-Christian", "Carbon",
+  person(given = "Claus-Christian",
+         family = "Carbon",
          role = c("aut"),
-         email ="ccc@experimental-psychology.com"),
-         comment = c(ORCID = "0000-0002-3446-9347"))
+         email = "ccc@experimental-psychology.com",
+         comment = c(ORCID = "0000-0002-3446-9347")))
 Description: Fits 2D and 3D geometric transformations via 'Stan' probabilistic programming engine ( 
     Stan Development Team (2021) <https://mc-stan.org>). Returns posterior distribution for individual
     parameters of the fitted distribution. Allows for computation of LOO and WAIC information criteria 
