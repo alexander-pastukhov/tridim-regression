@@ -9,8 +9,8 @@ data{
   vector<lower=0>[varsN] dv_sd; //standard deviation of dependent variables, used to scale sigma in loss function
 
   // priors
-  real a_prior[2];           // mean and sigma for translation
-  real b_prior[2];           // common mean and sigma for all betas
+  array[2] real a_prior;           // mean and sigma for translation
+  array[2] real b_prior;           // common mean and sigma for all betas
   real<lower=0> sigma_prior; // rate for residual variance
 }
 transformed data{
@@ -48,8 +48,8 @@ transformed data{
 }
 parameters{
   // transformation
-  real a[varsN];
-  real b[betaN];
+  array[varsN] real a;
+  array[betaN] real b;
 
   // loss function parameter
   real<lower=0> sigma;
