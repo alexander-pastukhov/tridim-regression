@@ -21,8 +21,8 @@ raw sample values. Defaults to \code{TRUE}}
 }
 \value{
 If summary=FALSE, a numeric matrix iterationsN x observationsN x variablesN.
-If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
-variable plus optional quantiles columns with names "dv{index}_{quantile}".
+If summary=TRUE, a data.frame with columns with mean for each dependent
+variable plus optional quantiles columns.
 }
 \description{
 Predicted values based on the bi/tridimensional regression model object.

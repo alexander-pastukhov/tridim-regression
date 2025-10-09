@@ -15,8 +15,8 @@ variable_summary(var_name, var_matrix, probs)
 \item{probs}{A numeric vector of quantiles to compute.}
 }
 \value{
-data.frame with "{var_name}" column for the mean and
-"{var_name}_{prob}" columns for each probability.
+data.frame with "var_name" column for the mean and
+"var_name_prob" columns for each probability.
 }
 \description{
 Computes mean and optional probabilities for a given

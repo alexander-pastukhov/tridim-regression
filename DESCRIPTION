@@ -1,6 +1,6 @@
 Package: TriDimRegression
 Title: Bayesian Statistics for 2D/3D Transformations
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
   person(given = "Alexander (Sasha)",
          family = "Pastukhov",
@@ -24,7 +24,7 @@ BugReports: https://github.com/alexander-pastukhov/tridim-regression/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 VignetteBuilder:
     knitr
 Biarch: true

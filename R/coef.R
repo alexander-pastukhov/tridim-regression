@@ -10,8 +10,8 @@
 #'
 #' @return If summary=FALSE, a list with matrix iterationsN x dimensionsN for
 #' each variable.
-#' If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
-#' variable plus optional quantiles columns with names "dv{index}_{quantile}".
+#' If summary=TRUE, a data.frame with columns with mean for each
+#' variable plus optional quantiles columns.
 
 #' @export
 #'

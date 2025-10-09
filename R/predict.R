@@ -11,8 +11,8 @@
 #' @param ... Unused
 #'
 #' @return If summary=FALSE, a numeric matrix iterationsN x observationsN x variablesN.
-#' If summary=TRUE, a data.frame with columns "dv{index}" with mean for each dependent
-#' variable plus optional quantiles columns with names "dv{index}_{quantile}".
+#' If summary=TRUE, a data.frame with columns with mean for each dependent
+#' variable plus optional quantiles columns.
 #' @export
 #'
 #' @seealso \code{\link{fit_transformation}}
