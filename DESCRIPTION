@@ -1,8 +1,8 @@
 Package: TriDimRegression
 Title: Bayesian Statistics for 2D/3D Transformations
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
-  person(given = "Alexander",
+  person(given = "Alexander (Sasha)",
          family = "Pastukhov",
          role = c("aut", "cre"),
          email ="pastukhov.alexander@gmail.com",
@@ -19,24 +19,22 @@ Description: Fits 2D and 3D geometric transformations via 'Stan' probabilistic p
     (Gelman A, Goodrich B, Gabry J, and Vehtari A (2018) <doi:10.1080/00031305.2018.1549100>).
 License: GPL-3
 URL: https://github.com/alexander-pastukhov/tridim-regression,
-    https://alexander-pastukhov.github.io/tridim-regression
+    https://alexander-pastukhov.github.io/tridim-regression/
 BugReports: https://github.com/alexander-pastukhov/tridim-regression/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 VignetteBuilder:
     knitr
 Biarch: true
 Depends: 
-    R (>= 3.5.0),
+    R (>= 4.3.0),
     loo
 Imports: 
     methods,
     Rcpp (>= 0.12.0),
-    RcppParallel (>= 5.0.1),
     rstan (>= 2.26.0),
-    rstantools (>= 2.1.1),
     dplyr,
     future,
     glue,

@@ -1,3 +1,4 @@
+## usethis namespace: start
 #' The 'TriDimRegression' package.
 #'
 #' @description Fits 2D and 3D geometric transformations. Provides posterior via Stan.
@@ -73,4 +74,5 @@
 #' euc2 <- fit_transformation_df(NakayaData[, 1:2], NakayaData[, 3:4],
 #'   'euclidean')
 #' tr3 <- fit_transformation_df(Face3D_W070, Face3D_W097, transformation ='translation')
-NULL
+## usethis namespace: end
+"_PACKAGE"

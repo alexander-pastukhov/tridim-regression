@@ -1,0 +1,46 @@
+## ----setup, include = FALSE---------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(TriDimRegression)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+## -----------------------------------------------------------------------------
+faces <- 
+  list("M010"=Face3D_M010,
+       "M101"=Face3D_M101,
+       "M244"=Face3D_M244,
+       "M92"=Face3D_M92,
+       "W070"=Face3D_W070,
+       "W097"=Face3D_W097,
+       "W182"=Face3D_W182,
+       "W243"=Face3D_W243)
+
+
+face_comparison <- 
+  dplyr::as_tibble(t(combn(names(faces), 2))) %>%
+  rename(Face1 = V1, Face2 = V2 ) %>%
+  group_by(Face1, Face2) %>%
+  nest() %>%
+  mutate(Fit = purrr::map2(Face1, 
+                           Face2, 
+                           ~fit_transformation_df(faces[[.x]],
+                                                  faces[[.y]],
+                                                  transformation ='translation')))
+
+face_R2 <-
+  face_comparison %>%
+  mutate(R2 = purrr::map(Fit, ~R2(.))) %>%
+  select(Face1, Face2, R2) %>%
+  unnest(cols=c(R2)) %>%
+  arrange(desc(R2))
+
+knitr::kable(face_R2, digits = c(0, 0, 3, 3, 3))
+
+ggplot(data=face_R2, aes(x=Face1, y=Face2, size=R2, color=R2)) + 
+  geom_point()
+

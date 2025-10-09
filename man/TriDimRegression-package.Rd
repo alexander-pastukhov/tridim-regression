@@ -3,6 +3,7 @@
 \docType{package}
 \name{TriDimRegression-package}
 \alias{TriDimRegression-package}
+\alias{_PACKAGE}
 \alias{TriDimRegression}
 \title{The 'TriDimRegression' package.}
 \description{
@@ -61,4 +62,13 @@ Stan Development Team (2020). RStan: the R interface to Stan. R package version 
 \code{vignette("transformation_matrices", package = "TriDimRegression")}
 \code{vignette("calibration", package = "TriDimRegression")}
 \code{vignette("comparing_faces", package = "TriDimRegression")}
+}
+\author{
+\strong{Maintainer}: Alexander (Sasha) Pastukhov \email{pastukhov.alexander@gmail.com} (\href{https://orcid.org/0000-0002-8738-8591}{ORCID})
+
+Authors:
+\itemize{
+  \item Claus-Christian Carbon \email{ccc@experimental-psychology.com} (\href{https://orcid.org/0000-0002-3446-9347}{ORCID})
+}
+
 }

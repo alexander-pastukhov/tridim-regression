@@ -10,8 +10,6 @@ check_variables(var, var_label)
 \item{var}{Matrix N x ncol}
 
 \item{var_label}{Variable label for error messages}
-
-\item{ncol}{Expected number of columns}
 }
 \value{
 Logical TRUE, if none of the tests fail

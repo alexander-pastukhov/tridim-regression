@@ -7,7 +7,6 @@
 #'
 #' @param var Matrix N x ncol
 #' @param var_label Variable label for error messages
-#' @param ncol Expected number of columns
 #' @return Logical TRUE, if none of the tests fail
 #' @keywords internal
 #' @export
