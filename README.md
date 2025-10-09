@@ -56,4 +56,4 @@ Once the data is fitted, you can extract the transformation coefficients via `co
 
 ## License
 
-All code is licensed under the [GPL 3.0](https://opensource.org/license/gpl-3-0/) license.
+All code is licensed under the [GPL 3.0](https://opensource.org/license/gpl-3-0) license.
